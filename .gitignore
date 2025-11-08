@@ -1,0 +1,10 @@
+# Auto-generated state files
+state/installed.json
+
+# Backup files
+*.backup.*
+
+# Temporary files
+*.tmp
+*.swp
+*~

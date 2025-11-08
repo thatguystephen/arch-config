@@ -1,0 +1,12 @@
+{
+  "name": "base",
+  "description": "Core system packages for all machines",
+  "packages": [
+    "base-devel",
+    "git",
+    "vim",
+    "htop",
+    "fish",
+    "fastfetch"
+  ]
+}

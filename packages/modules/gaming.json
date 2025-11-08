@@ -1,0 +1,18 @@
+{
+  "name": "gaming",
+  "description": "Gaming packages and tools for Linux gaming",
+  "conflicts": [],
+  "packages": [
+    "steam",
+    "lutris",
+    "proton-ge-custom",
+    "gamescope",
+    "mangohud",
+    "gamemode",
+    "obs-studio",
+    "discord",
+    "piper",
+    "heroic-games-launcher-bin",
+    "protonup-qt"
+  ]
+}
