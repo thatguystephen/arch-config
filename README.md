@@ -3,7 +3,7 @@
 > **Note**: This is Don's personal arch-config repository, provided as an **example and reference** for others.
 > 
 > **For new users**: Do NOT clone this repository directly. Instead:
-> 1. Install [dcli](https://gitlab.com/yourname/dcli)
+> 1. Install [dcli](https://gitlab.com/theblackdon/dcli)
 > 2. Run `dcli init` to create your own fresh configuration
 > 3. Use this repo as a reference for creating your own modules and configurations
 
@@ -288,7 +288,7 @@ This is Don's personal configuration. Here's how to use it as inspiration for yo
 ### 1. Install dcli first
 
 ```bash
-git clone https://gitlab.com/yourname/dcli.git
+git clone https://gitlab.com/theblackdon/dcli.git
 cd dcli
 ./install.sh
 ```
