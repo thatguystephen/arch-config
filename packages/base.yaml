@@ -11,7 +11,7 @@ packages:
   - networkmanager
   - vim
   - git
-  - yq  # YAML processor for dcli
+  - go-yq # YAML processor for dcli
   - htop
   - tmux
   - man-db

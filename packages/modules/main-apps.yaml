@@ -1,0 +1,47 @@
+# Main applications
+# Essential applications for daily workflow
+
+description: Main applications and utilities for daily use
+
+packages:
+  # Terminal
+  - kitty # GPU-accelerated terminal emulator
+
+  # Application launcher
+  - fuzzel # Wayland-native application launcher
+
+  # File managers
+  - nemo # Cinnamon file manager
+  - thunar # XFCE file manager
+
+  # Clipboard utilities
+  - wl-clipboard # Wayland clipboard utilities
+  - cliphist # Clipboard history manager
+
+  # Theming
+  - python-pywal # Color scheme generator
+
+  # Wallpaper daemon
+  - swww # Wayland wallpaper daemon
+
+  # Messaging
+  - telegram-desktop # Telegram messaging client
+  - vesktop # Discord client
+
+  # Virtualization
+  - virt-manager # Virtual machine manager
+
+  # Media
+  - obs-studio # OBS Studio for streaming/recording
+
+  # Web browsers
+  - zen-browser-bin # Zen browser (AUR)
+
+  # Productivity
+  - obsidian # Obsidian notes app (AUR)
+
+  # Development
+  - zed # Zed code editor (AUR)
+
+conflicts: []
+post_install_hook: ""

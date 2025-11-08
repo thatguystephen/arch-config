@@ -2,17 +2,16 @@
 # This file defines the system configuration for don-eos
 
 # Hostname of this machine
-host: don-eos
-
+host: don-asus
 # List of enabled modules
 # Enable/disable modules with: dcli module enable/disable <name>
 enabled_modules:
-  - controller-support
-
+  - asus
+  - mangowc
+  - main-apps
 # Additional packages not in any module
 # Add one-off packages here without creating a module
 additional_packages: []
-
 # Automatically remove unmanaged packages during sync
 # Set to true to enable automatic pruning with dcli sync
 auto_prune: false
