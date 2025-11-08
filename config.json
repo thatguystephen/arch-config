@@ -1,8 +1,0 @@
-{
-  "host": "don-eos",
-  "enabled_modules": [
-    "controller-support"
-  ],
-  "additional_packages": [],
-  "auto_prune": false
-}

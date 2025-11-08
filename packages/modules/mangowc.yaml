@@ -1,0 +1,25 @@
+# MangoWC window manager
+# Custom Wayland compositor configuration
+
+description: MangoWC window manager and related tools
+
+packages:
+  - brightnessctl              # Brightness control
+  - cliphist                   # Clipboard history
+  - dms-shell-git              # Shell component
+  - foot                       # Terminal emulator
+  - grim                       # Screenshot tool
+  - matugen-bin                # Material color generation
+  - satty                      # Screenshot annotation
+  - slurp                      # Region selector
+  - sway-audio-idle-inhibit-git # Prevent idle during audio
+  - swaybg                     # Background manager
+  - wl-clip-persist            # Persistent clipboard
+  - wl-clipboard               # Clipboard utilities
+  - xdg-desktop-portal-wlr     # Desktop portal for wlroots
+
+# Conflicts with other window managers
+conflicts:
+  - hyprland
+
+post_install_hook: ""

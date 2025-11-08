@@ -1,6 +1,0 @@
-{
-  "name": "lazyvim",
-  "description": "LazyVim config and packages",
-  "conflicts": [],
-  "packages": ["neovim", "python-pynvim"]
-}

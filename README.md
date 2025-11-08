@@ -13,25 +13,25 @@ This directory contains a declarative package configuration for Arch Linux, insp
 
 ```
 arch-config/
-├── config.json              # Main configuration
+├── config.yaml              # Main configuration
 ├── packages/
-│   ├── base.json           # Core system packages (always installed)
+│   ├── base.yaml           # Core system packages (always installed)
 │   ├── modules/            # Optional package collections
-│   │   ├── mangowc.json
-│   │   ├── hyprland.json
-│   │   ├── gaming.json
-│   │   └── multimedia.json
+│   │   ├── mangowc.yaml
+│   │   ├── hyprland.yaml
+│   │   ├── gaming.yaml
+│   │   └── multimedia.yaml
 │   └── hosts/              # Host-specific packages
-│       └── <hostname>.json
+│       └── <hostname>.yaml
 └── state/
-    └── installed.json      # Tracked installed packages (auto-generated)
+    └── installed.yaml      # Tracked installed packages (auto-generated)
 ```
 
 ## Quick Start
 
 ### 1. Configure Your System
 
-Edit `config.json` to set your hostname and additional packages:
+Edit `config.yaml` to set your hostname and additional packages:
 
 ```json
 {
@@ -47,21 +47,19 @@ Edit `config.json` to set your hostname and additional packages:
 
 ### 2. Add Base Packages
 
-Edit `packages/base.json` to define packages that should be on all machines:
+Edit `packages/base.yaml` to define packages that should be on all machines:
 
 ```json
 {
-  "name": "base",
-  "description": "Core system packages for all machines",
-  "packages": [
-    "base-devel",
-    "git",
-    "vim",
-    "htop",
-    "fish",
-    "fastfetch"
-  ]
-}
+  description: Core system packages for all machines
+
+packages:
+  - base-devel
+  - git
+  - vim
+  - htop
+  - fish
+  - fastfetch
 ```
 
 ### 3. Enable Modules
@@ -124,15 +122,17 @@ Create a new module file in `packages/modules/`:
 
 ```json
 {
-  "name": "mymodule",
-  "description": "Description of what this module provides",
-  "conflicts": ["other-module"],
-  "packages": [
-    "package-one",
-    "package-two",
-    "package-three"
-  ]
-}
+  description: Description of what this module provides
+
+packages:
+  - package-one
+  - package-two
+  - package-three
+
+conflicts:
+  - other-module
+
+post_install_hook: ""
 ```
 
 ### Module Fields
@@ -144,7 +144,7 @@ Create a new module file in `packages/modules/`:
 
 ## Host-Specific Configuration
 
-Each host can have its own package file in `packages/hosts/<hostname>.json`:
+Each host can have its own package file in `packages/hosts/<hostname>.yaml`:
 
 ```json
 {
@@ -166,10 +166,10 @@ The `exclude` array removes packages from other sources (useful for avoiding lap
 ## Package Merge Order
 
 Packages are merged in this order:
-1. `base.json` - Core packages
-2. `hosts/<hostname>.json` - Host-specific packages
+1. `base.yaml` - Core packages
+2. `hosts/<hostname>.yaml` - Host-specific packages
 3. Enabled modules - All enabled module packages
-4. `additional_packages` from config.json
+4. `additional_packages` from config.yaml
 
 Duplicates are automatically removed, and excluded packages are filtered out.
 
@@ -184,7 +184,7 @@ The `dcli status` command will show warnings if conflicting modules are enabled.
 
 ## State Tracking
 
-The `state/installed.json` file tracks which packages are managed by dcli. This file is auto-generated and should not be manually edited. It's used to determine which packages are safe to remove with `--prune`.
+The `state/installed.yaml` file tracks which packages are managed by dcli. This file is auto-generated and should not be manually edited. It's used to determine which packages are safe to remove with `--prune`.
 
 ## Tips
 
@@ -193,7 +193,7 @@ The `state/installed.json` file tracks which packages are managed by dcli. This 
 - **Regular backups**: Use `dcli backup` before major changes
 - **Module conflicts**: Define conflicts to prevent incompatible packages
 - **Host files**: Use host files for machine-specific hardware packages
-- **Vertical lists**: All JSON arrays use vertical formatting for easy management
+- **Vertical lists**: All YAML arrays use vertical formatting for easy management
 
 ## Example Workflow
 
@@ -202,7 +202,7 @@ The `state/installed.json` file tracks which packages are managed by dcli. This 
 dcli init
 
 # Edit base packages
-vim ~/.config/arch-config/packages/base.json
+vim ~/.config/arch-config/packages/base.yaml
 
 # Enable modules for your use case
 dcli module enable mangowc
@@ -218,7 +218,7 @@ dcli sync
 dcli status
 
 # Later: add a package temporarily
-vim ~/.config/arch-config/config.json
+vim ~/.config/arch-config/config.yaml
 # Add to "additional_packages" array
 
 # Sync again
@@ -231,9 +231,9 @@ dcli sync
 
 **Conflicts**: Run `dcli status` to see conflict warnings
 
-**JSON errors**: Validate JSON syntax at https://jsonlint.com/
+**YAML errors**: Validate YAML syntax at https://jsonlint.com/
 
-**State issues**: Delete `state/installed.json` to reset tracking (will mark all packages as new)
+**State issues**: Delete `state/installed.yaml` to reset tracking (will mark all packages as new)
 
 ## Advanced: Using with Git
 
@@ -242,7 +242,7 @@ Track your configuration in git:
 ```bash
 cd ~/.config/arch-config
 git init
-git add config.json packages/
+git add config.yaml packages/
 git commit -m "Initial declarative config"
 ```
 
@@ -254,18 +254,18 @@ This lets you version control your system configuration and sync it across machi
 README.md
 
 ## Packages
-- `packages/base.json` - Core packages always installed
+- `packages/base.yaml` - Core packages always installed
 - `packages/modules/` - Optional module collections
-  - `controller-support.json` - Game controller support packages
-  - `gaming.json` - Gaming-related packages
-  - `hyprland.json` - Hyprland window manager and tools
-  - `mangowc.json` - MangoWC window manager (custom Wayland compositor)
-  - `multimedia.json` - Multimedia tools and codecs
-  - `development.json` - Development tools and IDEs
+  - `controller-support.yaml` - Game controller support packages
+  - `gaming.yaml` - Gaming-related packages
+  - `hyprland.yaml` - Hyprland window manager and tools
+  - `mangowc.yaml` - MangoWC window manager (custom Wayland compositor)
+  - `multimedia.yaml` - Multimedia tools and codecs
+  - `development.yaml` - Development tools and IDEs
 - `packages/hosts/` - Host-specific package configurations
 
 ## State
-- `state/installed.json` - Auto-generated tracking of installed packages
+- `state/installed.yaml` - Auto-generated tracking of installed packages
 
 ## Scripts
 - `scripts/` - Custom scripts and utilities
@@ -302,15 +302,15 @@ dcli init  # Creates fresh config at ~/.config/arch-config
 ### 3. Browse this repository for ideas
 
 - **Modules**: Check out `packages/modules/` for module examples:
-  - `controller-support.json` - Game controller setup with post-install hooks
-  - `gaming.json` - Gaming packages
-  - `hyprland.json` - Hyprland window manager setup
-  - `mangowc.json` - Custom Wayland compositor
+  - `controller-support.yaml` - Game controller setup with post-install hooks
+  - `gaming.yaml` - Gaming packages
+  - `hyprland.yaml` - Hyprland window manager setup
+  - `mangowc.yaml` - Custom Wayland compositor
   
 - **Scripts**: Look at `scripts/` for post-install hook examples:
   - `install-controller-udev-rules.sh` - How to install udev rules via hooks
 
-- **Host configs**: See `packages/hosts/don-eos.json` for host-specific package examples
+- **Host configs**: See `packages/hosts/don-eos.yaml` for host-specific package examples
 
 ### 4. Copy and adapt what you need
 

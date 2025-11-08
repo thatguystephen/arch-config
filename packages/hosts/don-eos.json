@@ -1,6 +1,0 @@
-{
-  "name": "don-eos",
-  "description": "Desktop machine with NVIDIA GPU and Intel CPU",
-  "packages": ["neovim", "python-pynvim"],
-  "exclude": []
-}

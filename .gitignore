@@ -1,5 +1,5 @@
 # Auto-generated state files
-state/installed.json
+state/installed.yaml
 
 # Backup files
 *.backup.*
@@ -8,3 +8,6 @@ state/installed.json
 *.tmp
 *.swp
 *~
+
+# Old JSON files (after YAML migration)
+*.json

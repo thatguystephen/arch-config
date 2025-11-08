@@ -1,0 +1,10 @@
+# Host-specific packages for don-eos
+# Add packages unique to this machine
+
+description: Packages specific to don-eos
+
+# Packages to install only on this host
+packages: []
+
+# Packages to exclude from base or modules on this host
+exclude: []
