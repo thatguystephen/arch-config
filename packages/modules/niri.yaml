@@ -1,7 +1,7 @@
-# MangoWC window manager
-# Custom Wayland compositor configuration
+# Niri window manager
+# Scrollable-tiling Wayland compositor
 
-description: MangoWC window manager and related tools
+description: Niri scrollable-tiling Wayland compositor and related tools
 
 packages:
   - brightnessctl # Brightness control
@@ -10,25 +10,28 @@ packages:
   - dms-shell-git # Shell component
   - fastfetch # System information tool
   - fish # Fish shell
-  - foot # Terminal emulator
+  - fuzzel # Application launcher
   - grim # Screenshot tool
   - gtk3 # GTK 3 libraries
   - gtk4 # GTK 4 libraries
   - kitty # Terminal emulator
-  - mangowc-git # MangoWC Wayland compositor
+  - mako # Notification daemon
   - matugen-bin # Material color generation
+  - niri # Niri Wayland compositor
   - qt5ct # Qt5 configuration tool
   - qt6ct # Qt6 configuration tool
   - satty # Screenshot annotation
   - slurp # Region selector
   - sway-audio-idle-inhibit-git # Prevent idle during audio
   - swaybg # Background manager
+  - waybar # Status bar
   - wl-clip-persist # Persistent clipboard
   - wl-clipboard # Clipboard utilities
-  - xdg-desktop-portal-wlr # Desktop portal for wlroots
+  - xdg-desktop-portal-gnome # Desktop portal for GNOME
 
 # Conflicts with other window managers
 conflicts:
   - hyprland
+  - mangowc
 
-post_install_hook: "scripts/install-mangowc-dotfiles.sh"
+post_install_hook: "scripts/install-niri-dotfiles.sh"
