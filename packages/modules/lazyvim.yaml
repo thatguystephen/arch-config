@@ -1,11 +1,21 @@
 # LazyVim Neovim distribution
 # Modern Neovim configuration with LSP, treesitter, etc.
+# Requires Neovim >= 0.11.2 built with LuaJIT
 
-description: LazyVim config and packages
+description: LazyVim Neovim IDE with all required dependencies
 
 packages:
-  - neovim        # Hyperextensible Vim-based text editor
+  - neovim # Neovim >= 0.11.2 (hyperextensible text editor)
+  - git # Version control (>= 2.19.0 for partial clones)
+  - gcc # C compiler for nvim-treesitter
+  - curl # Required for blink.cmp completion
+  - ripgrep # Fast search tool for live grep
+  - fd # Fast file finder
+  - fzf # Fuzzy finder (>= 0.25.1)
+  - lazygit # Terminal UI for git
+  - tree-sitter-cli # Tree-sitter parser generator
   - python-pynvim # Python support for Neovim
+  - ttf-nerd-fonts-symbols-mono # Nerd Font for icons (v3.0+)
 
 conflicts: []
-post_install_hook: ""
+post_install_hook: scripts/install-lazyvim.sh

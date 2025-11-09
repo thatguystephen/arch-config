@@ -9,6 +9,7 @@ enabled_modules:
   - asus
   - mangowc
   - main-apps
+  - lazyvim
 # Additional packages not in any module
 # Add one-off packages here without creating a module
 additional_packages: []
