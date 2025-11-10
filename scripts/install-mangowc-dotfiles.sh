@@ -57,7 +57,6 @@ MANGOWC_CONFIGS=(
 
 # Shared theming configs
 THEME_CONFIGS=(
-  "fish"
   "kitty"
   "fastfetch"
   "DankMaterialShell"
@@ -70,6 +69,11 @@ THEME_CONFIGS=(
 # Shared configs in home directory (not .config)
 HOME_CONFIGS=(
   ".crystal-dock-2"
+)
+
+# Optional configs (only install if they don't already exist)
+OPTIONAL_CONFIGS=(
+  "fish"
 )
 
 # Backup existing configurations
@@ -170,11 +174,60 @@ for config in "${HOME_CONFIGS[@]}"; do
 done
 
 echo ""
+
+# Handle optional configs with user prompts
+echo -e "${BLUE}Handling optional configurations...${NC}"
+echo ""
+
+for config in "${OPTIONAL_CONFIGS[@]}"; do
+  SOURCE="${DOTFILES_THEMES}/${config}"
+  TARGET="${USER_CONFIG_DIR}/${config}"
+
+  if [ ! -d "$SOURCE" ]; then
+    echo -e "${YELLOW}⚠ Skipping ${config} (not found in themes)${NC}"
+    continue
+  fi
+
+  # Check if config already exists
+  if [ -d "$TARGET" ] || [ -f "$TARGET" ]; then
+    echo -e "${YELLOW}Existing ${config} configuration detected${NC}"
+    echo -e "${BLUE}What would you like to do?${NC}"
+    echo "  1) Keep existing ${config} config (recommended)"
+    echo "  2) Replace with new ${config} config (backup will be created)"
+    echo ""
+    read -p "Enter your choice [1/2]: " choice
+
+    case $choice in
+      2)
+        echo -e "${YELLOW}Backing up existing ${config} configuration...${NC}"
+        BACKUP="${TARGET}${BACKUP_SUFFIX}"
+        sudo -u "$ACTUAL_USER" mv "$TARGET" "$BACKUP"
+        echo -e "${GREEN}✓ Backed up to: $BACKUP${NC}"
+
+        echo -e "${BLUE}Installing new ${config}...${NC}"
+        sudo -u "$ACTUAL_USER" cp -r "$SOURCE" "$TARGET"
+        chown -R "$ACTUAL_USER:$ACTUAL_USER" "$TARGET"
+        echo -e "${GREEN}✓ Installed ${config}${NC}"
+        ;;
+      1|*)
+        echo -e "${GREEN}✓ Keeping existing ${config} configuration${NC}"
+        ;;
+    esac
+    echo ""
+  else
+    # No existing config, just install
+    echo -e "${BLUE}Installing ${config}...${NC}"
+    sudo -u "$ACTUAL_USER" cp -r "$SOURCE" "$TARGET"
+    chown -R "$ACTUAL_USER:$ACTUAL_USER" "$TARGET"
+    echo -e "${GREEN}✓ Installed ${config}${NC}"
+    echo ""
+  fi
+done
+
 echo -e "${GREEN}✓ MangoWC dotfiles installed successfully!${NC}"
 echo ""
 echo -e "${BLUE}Installed configurations:${NC}"
 echo "  • MangoWC compositor settings (mango)"
-echo "  • Fish shell configuration"
 echo "  • Kitty terminal theme"
 echo "  • Fastfetch system info styling"
 echo "  • DankMaterialShell components"
