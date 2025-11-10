@@ -191,11 +191,19 @@ for config in "${OPTIONAL_CONFIGS[@]}"; do
   # Check if config already exists
   if [ -d "$TARGET" ] || [ -f "$TARGET" ]; then
     echo -e "${YELLOW}Existing ${config} configuration detected${NC}"
-    echo -e "${BLUE}What would you like to do?${NC}"
-    echo "  1) Keep existing ${config} config (recommended)"
-    echo "  2) Replace with new ${config} config (backup will be created)"
-    echo ""
-    read -p "Enter your choice [1/2]: " choice
+
+    # Check if running interactively
+    if [ -t 0 ]; then
+      echo -e "${BLUE}What would you like to do?${NC}"
+      echo "  1) Keep existing ${config} config (recommended)"
+      echo "  2) Replace with new ${config} config (backup will be created)"
+      echo ""
+      read -r -p "Enter your choice [1/2]: " choice || choice=1
+    else
+      # Non-interactive mode: default to keeping existing config
+      choice=1
+      echo -e "${BLUE}Non-interactive mode: keeping existing ${config} configuration${NC}"
+    fi
 
     case $choice in
       2)
