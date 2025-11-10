@@ -6,10 +6,10 @@ host: don-asus
 # List of enabled modules
 # Enable/disable modules with: dcli module enable/disable <name>
 enabled_modules:
-  - asus
   - mangowc
   - main-apps
   - lazyvim
+  - development
 # Additional packages not in any module
 # Add one-off packages here without creating a module
 additional_packages: []

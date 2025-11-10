@@ -1,0 +1,9 @@
+description: Development tools including IDEs and browsers
+
+packages:
+  - android-studio
+  - code
+  - zed
+  - chromium
+
+conflicts: []
