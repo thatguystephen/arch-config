@@ -4,6 +4,7 @@
 description: MangoWC window manager and related tools
 
 packages:
+  - bibata-cursor-theme # Mouse cursor theme
   - brightnessctl # Brightness control
   - cliphist # Clipboard history
   - crystal-dock # Application dock
@@ -23,12 +24,12 @@ packages:
   - slurp # Region selector
   - sway-audio-idle-inhibit-git # Prevent idle during audio
   - swaybg # Background manager
+  - tela-icon-theme-purple-git # Icon theme
   - wl-clip-persist # Persistent clipboard
   - wl-clipboard # Clipboard utilities
   - xdg-desktop-portal-wlr # Desktop portal for wlroots
 
 # Conflicts with other window managers
-conflicts:
-  - hyprland
+conflicts: []
 
 post_install_hook: "scripts/install-mangowc-dotfiles.sh"

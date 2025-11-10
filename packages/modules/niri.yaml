@@ -4,6 +4,7 @@
 description: Niri scrollable-tiling Wayland compositor and related tools
 
 packages:
+  - bibata-cursor-theme # Mouse cursor theme
   - brightnessctl # Brightness control
   - cliphist # Clipboard history
   - crystal-dock # Application dock
@@ -24,14 +25,13 @@ packages:
   - slurp # Region selector
   - sway-audio-idle-inhibit-git # Prevent idle during audio
   - swaybg # Background manager
+  - tela-icon-theme-purple-git # Icon theme
   - waybar # Status bar
   - wl-clip-persist # Persistent clipboard
   - wl-clipboard # Clipboard utilities
   - xdg-desktop-portal-gnome # Desktop portal for GNOME
 
 # Conflicts with other window managers
-conflicts:
-  - hyprland
-  - mangowc
+conflicts: []
 
 post_install_hook: "scripts/install-niri-dotfiles.sh"
