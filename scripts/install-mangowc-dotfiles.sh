@@ -36,6 +36,17 @@ if [ ! -d "$DOTFILES_THEMES" ]; then
   exit 1
 fi
 
+# Fix permissions on dotfiles (git doesn't track directory permissions)
+echo -e "${BLUE}Fixing dotfiles permissions...${NC}"
+if [ -d "${DOTFILES_THEMES}/fish" ]; then
+  chmod 755 "${DOTFILES_THEMES}/fish"
+  if [ -f "${DOTFILES_THEMES}/fish/fish_variables" ]; then
+    chmod 644 "${DOTFILES_THEMES}/fish/fish_variables"
+  fi
+  echo -e "${GREEN}✓ Fixed fish directory permissions${NC}"
+fi
+echo ""
+
 # Backup timestamp for all backups
 BACKUP_SUFFIX=".bak-$(date +%Y%m%d-%H%M%S)"
 
