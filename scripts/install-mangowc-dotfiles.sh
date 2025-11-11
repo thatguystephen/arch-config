@@ -160,16 +160,34 @@ echo -e "${BLUE}Installing home directory configs...${NC}"
 echo ""
 
 for config in "${HOME_CONFIGS[@]}"; do
-  SOURCE="${DOTFILES_THEMES}/${config}"
-  TARGET="${ACTUAL_HOME}/${config}"
+  # Crystal-dock has WM-specific subdirectories (mango/, niri/)
+  if [[ "$config" == ".crystal-dock-2" ]]; then
+    SOURCE="${DOTFILES_THEMES}/${config}/mango"
+    TARGET="${ACTUAL_HOME}/${config}"
 
-  if [ -d "$SOURCE" ]; then
-    echo -e "${BLUE}Installing ${config}...${NC}"
-    sudo -u "$ACTUAL_USER" cp -r "$SOURCE" "$TARGET"
-    chown -R "$ACTUAL_USER:$ACTUAL_USER" "$TARGET"
-    echo -e "${GREEN}✓ Installed ${config}${NC}"
+    if [ -d "$SOURCE" ]; then
+      echo -e "${BLUE}Installing ${config} (MangoWC-specific)...${NC}"
+      # Create target directory if it doesn't exist
+      sudo -u "$ACTUAL_USER" mkdir -p "$TARGET"
+      # Copy contents from mango subdirectory
+      sudo -u "$ACTUAL_USER" cp -r "$SOURCE"/* "$TARGET/"
+      chown -R "$ACTUAL_USER:$ACTUAL_USER" "$TARGET"
+      echo -e "${GREEN}✓ Installed ${config}${NC}"
+    else
+      echo -e "${YELLOW}⚠ Skipping ${config} (mango config not found in themes)${NC}"
+    fi
   else
-    echo -e "${YELLOW}⚠ Skipping ${config} (not found in themes)${NC}"
+    SOURCE="${DOTFILES_THEMES}/${config}"
+    TARGET="${ACTUAL_HOME}/${config}"
+
+    if [ -d "$SOURCE" ]; then
+      echo -e "${BLUE}Installing ${config}...${NC}"
+      sudo -u "$ACTUAL_USER" cp -r "$SOURCE" "$TARGET"
+      chown -R "$ACTUAL_USER:$ACTUAL_USER" "$TARGET"
+      echo -e "${GREEN}✓ Installed ${config}${NC}"
+    else
+      echo -e "${YELLOW}⚠ Skipping ${config} (not found in themes)${NC}"
+    fi
   fi
 done
 

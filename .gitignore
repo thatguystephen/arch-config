@@ -10,4 +10,7 @@ state/installed.yaml
 *~
 
 # Old JSON files (after YAML migration)
+# Exclude package.json, settings.json and other needed configs
 *.json
+!dotfiles/**/settings.json
+!**/package.json
