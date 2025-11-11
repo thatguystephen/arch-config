@@ -4,27 +4,26 @@
 description: Hyprland Wayland compositor and related tools
 
 packages:
-  - hyprland                      # Main compositor
-  - hyprpaper                     # Wallpaper utility
-  - hypridle                      # Idle daemon
-  - hyprlock                      # Screen locker
-  - waybar                        # Status bar
-  - wofi                          # Application launcher
-  - xdg-desktop-portal-hyprland   # Desktop portal
-  - qt5-wayland                   # Qt5 Wayland support
-  - qt6-wayland                   # Qt6 Wayland support
-  - wl-clipboard                  # Clipboard utilities
-  - grim                          # Screenshot tool
-  - slurp                         # Region selector
-  - swaybg                        # Background manager
-  - mako                          # Notification daemon
-  - dunst                         # Alternative notifications
-  - brightnessctl                 # Brightness control
-  - pavucontrol                   # Audio control
-  - network-manager-applet        # Network manager GUI
+  - hyprland # Main compositor
+  - hyprpaper # Wallpaper utility
+  - hypridle # Idle daemon
+  - hyprlock # Screen locker
+  - waybar # Status bar
+  - wofi # Application launcher
+  - xdg-desktop-portal-hyprland # Desktop portal
+  - qt5-wayland # Qt5 Wayland support
+  - qt6-wayland # Qt6 Wayland support
+  - wl-clipboard # Clipboard utilities
+  - grim # Screenshot tool
+  - slurp # Region selector
+  - swaybg # Background manager
+  - mako # Notification daemon
+  - dunst # Alternative notifications
+  - brightnessctl # Brightness control
+  - pavucontrol # Audio control
+  - network-manager-applet # Network manager GUI
 
 # Conflicts with other window managers
-conflicts:
-  - mangowc
+conflicts: []
 
 post_install_hook: ""

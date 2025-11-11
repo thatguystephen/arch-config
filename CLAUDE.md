@@ -68,6 +68,23 @@ dcli sync --force                # Skip prompts (still creates backup)
 dcli sync --no-backup            # Skip automatic Timeshift backup (not recommended)
 ```
 
+### System Updates
+```bash
+dcli update                      # Update system packages (respects version constraints)
+                                 # Pinned packages are automatically excluded from updates
+```
+
+**Note**: `dcli update` now respects version constraints. Packages with exact version pins or maximum constraints will NOT be updated. Use `dcli unpin <package>` to allow updates, or `dcli sync` to manage versions declaratively.
+
+### Version Pinning (NixOS-like)
+```bash
+dcli lock                        # Generate lockfile with all current package versions
+dcli pin <package> [version]     # Pin a package to specific version (current if omitted)
+dcli unpin <package>             # Remove version constraint
+dcli versions <package>          # Show version info (installed, available, cached)
+dcli outdated                    # Show packages that don't match constraints
+```
+
 ### Status
 ```bash
 dcli status                      # Show current configuration and sync status
@@ -111,6 +128,203 @@ exclude:
 ```
 
 This is useful when a package appears in base.yaml or modules but shouldn't be installed on specific machines.
+
+### Version Pinning (NixOS-Inspired)
+
+**Overview**: dcli now supports version pinning similar to NixOS, allowing you to lock packages to specific versions for reproducibility.
+
+#### Package Syntax
+
+Packages can be declared in two formats:
+
+**Simple format** (always uses latest version):
+```yaml
+packages:
+  - vim
+  - git
+  - firefox
+```
+
+**Object format** (with version constraints):
+```yaml
+packages:
+  - name: vim
+    version: "9.0.1234-1"           # Exact version (epoch:version-release)
+  - name: git
+    version: ">=2.40.0-1"           # Minimum version
+  - name: curl
+    version: "<8.0.0-1"             # Maximum version
+  - firefox                         # Can mix with simple format
+```
+
+#### Version Constraint Types
+
+1. **Exact version**: `"9.0.1234-1"` - Package must be exactly this version
+2. **Minimum version**: `">=2.40.0-1"` - Package must be at least this version
+3. **Maximum version**: `"<8.0.0-1"` - Package must be below this version
+4. **Latest** (no constraint): Omit version field or use simple string format
+
+#### Version Format
+
+Arch Linux uses the format: `[epoch:]version-release`
+
+- **epoch** (optional): Integer used when versioning scheme changes (e.g., `1:2.40.1-1`)
+- **version**: Upstream version number (e.g., `2.40.1`)
+- **release**: Arch packaging release number (e.g., `-1`, `-2`)
+
+**Examples**:
+- `vim` package: `2:9.0.1234-1` (epoch 2, version 9.0.1234, release 1)
+- `git` package: `2.40.1-1` (no explicit epoch = epoch 0)
+- `linux` package: `6.6.1.arch1-1`
+
+#### Rolling Packages (-git)
+
+Packages ending in `-git` (e.g., `neovim-git`, `mangowc-git`) build from HEAD of their git repository and **cannot be pinned** to specific versions. These are rolling releases by nature.
+
+**Best practice**: Use stable releases instead of `-git` packages when version pinning is important.
+
+#### Workflow Examples
+
+**Pin current system state** (like NixOS flake.lock):
+```bash
+dcli lock                           # Generates state/locked-versions.yaml
+git add state/locked-versions.yaml
+git commit -m "Lock package versions"
+```
+
+**Pin a specific package**:
+```bash
+dcli versions firefox               # Check available versions
+dcli pin firefox 131.0-1            # Pin to specific version
+dcli sync                           # Apply the constraint
+```
+
+**Pin package to currently installed version**:
+```bash
+dcli pin vim                        # Uses current version automatically
+```
+
+**Upgrade with constraints respected**:
+```bash
+dcli outdated                       # Check version mismatches
+dcli sync                           # Upgrades/downgrades to meet constraints
+```
+
+#### Downgrades
+
+When `dcli sync` detects a package needs downgrading to meet constraints, it:
+
+1. Shows all packages requiring downgrades with current → target versions
+2. Prompts for selection: all, none, or specific packages (comma-separated)
+3. Attempts downgrade from local cache (`/var/cache/pacman/pkg/`)
+4. Falls back to Arch Linux Archive if not in cache
+5. Skips package if version unavailable
+
+**Arch Linux Archive**: Historical package versions are available at `https://archive.archlinux.org`
+
+#### Example Configurations
+
+**Base packages with some pinned** (`packages/base.yaml`):
+```yaml
+packages:
+  - base
+  - linux
+  - name: linux-firmware
+    version: "20231030-1"           # Pin firmware to tested version
+  - networkmanager
+  - name: vim
+    version: ">=9.0.0-1"            # Require at least vim 9
+  - git
+  - go-yq
+```
+
+**Module with version constraints** (`packages/modules/development.yaml`):
+```yaml
+description: Development tools with version control
+
+packages:
+  - name: python
+    version: "3.11.5-1"             # Pin Python version for compatibility
+  - name: nodejs
+    version: ">=20.0.0-1"           # Require Node 20 or higher
+  - rust                            # Latest Rust always
+  - docker
+```
+
+**Host-specific pins** (`packages/hosts/don-asus.yaml`):
+```yaml
+packages:
+  - name: nvidia
+    version: "545.29.06-1"          # Pin GPU driver to stable version
+  - name: linux
+    version: "6.6.1.arch1-1"        # Pin kernel with tested driver
+```
+
+#### Lockfile Structure
+
+The lockfile (`state/locked-versions.yaml`) generated by `dcli lock` tracks exact versions:
+
+```yaml
+# Lockfile generated by dcli lock
+# Generated: 2025-01-15T10:30:00Z
+
+packages:
+  - name: vim
+    version: "2:9.0.1234-1"
+  - name: firefox
+    version: "131.0-1"
+  - name: neovim-git
+    version: "r8942.abc1234"
+    rolling: true                   # Marked as rolling release
+```
+
+**Usage**:
+- Commit lockfile to git for reproducible deployments
+- Use to restore exact package state on new machines
+- Compare lockfiles across systems with `git diff`
+
+#### Limitations
+
+1. **Repository retention**: Arch repos only keep latest versions; older versions require Arch Archive
+2. **AUR packages**: Version pinning works but archive availability varies by package
+3. **Rolling packages**: Cannot pin `-git` packages to specific commits
+4. **Dependencies**: Pinning a package doesn't pin its dependencies (Arch Linux limitation)
+
+#### System Updates with Version Constraints
+
+When running `dcli update`, the system automatically respects version constraints:
+
+```bash
+dcli update  # Updates all packages EXCEPT those with constraints
+```
+
+**Behavior**:
+- Packages with **exact version pins** (`version: "1.2.3-1"`) are excluded from updates
+- Packages with **maximum constraints** (`version: "<2.0.0-1"`) are excluded from updates
+- Packages with **minimum constraints** (`version: ">=1.0.0-1"`) CAN be updated (they meet the minimum)
+- Packages with **no constraints** are updated normally
+
+**Example Output**:
+```
+Checking for version constraints...
+
+The following packages have version constraints and will NOT be updated:
+  • linux (6.6.1.arch1-1)
+  • nvidia (545.29.06-1)
+
+These packages are pinned. Use 'dcli unpin <package>' to allow updates.
+
+Running system update (respecting version constraints)...
+```
+
+#### Best Practices
+
+1. **Test before pinning**: Let packages update naturally, test, then pin working versions
+2. **Pin strategically**: Don't pin everything; focus on critical packages (kernel, drivers, toolchains)
+3. **Use `dcli update` freely**: It respects your pins automatically - no manual intervention needed
+4. **Regular lockfiles**: Run `dcli lock` and commit after successful updates
+5. **Document reasons**: Add comments in YAML explaining why specific versions are pinned
+6. **Monitor constraints**: Run `dcli outdated` regularly to check version mismatches
 
 ## YAML Format Requirements
 
