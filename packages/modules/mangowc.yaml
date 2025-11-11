@@ -6,6 +6,7 @@ description: MangoWC window manager and related tools
 packages:
   - bibata-cursor-theme # Mouse cursor theme
   - brightnessctl # Brightness control
+  - catppuccin-gtk-theme-mocha # Catppuccin Mocha GTK theme
   - cliphist # Clipboard history
   - crystal-dock # Application dock
   - dms-shell-git # Shell component
@@ -24,7 +25,7 @@ packages:
   - slurp # Region selector
   - sway-audio-idle-inhibit-git # Prevent idle during audio
   - swaybg # Background manager
-  - tela-icon-theme-purple-git # Icon theme
+  - tela-icon-theme-purple-git # Tela purple icon theme
   - wl-clip-persist # Persistent clipboard
   - wl-clipboard # Clipboard utilities
   - xdg-desktop-portal-wlr # Desktop portal for wlroots
