@@ -1,0 +1,13 @@
+# Homelab module
+# Container orchestration and homelab services
+
+description: Homelab server tools and container management
+
+packages:
+  # Container management
+  - docker
+  - docker-compose
+  - portainer
+
+conflicts: []
+post_install_hook: "scripts/setup-immich.sh"
