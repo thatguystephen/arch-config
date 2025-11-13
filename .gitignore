@@ -1,5 +1,9 @@
+# Host-specific configuration (each machine has its own)
+config.yaml
+
 # Auto-generated state files
 state/installed.yaml
+state/hooks-executed.yaml
 
 # Backup files
 *.backup.*

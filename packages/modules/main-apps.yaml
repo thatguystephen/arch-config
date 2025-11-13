@@ -6,6 +6,7 @@ description: Main applications and utilities for daily use
 packages:
   # Terminal
   - kitty # GPU-accelerated terminal emulator
+  - fastfetch # System information utility
 
   # Application launcher
   - fuzzel # Wayland-native application launcher
@@ -27,6 +28,7 @@ packages:
   # Messaging
   - telegram-desktop # Telegram messaging client
   - vesktop # Discord client
+  - discord # Discord client
 
   # Virtualization
   - virt-manager # Virtual machine manager

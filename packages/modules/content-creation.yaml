@@ -1,0 +1,15 @@
+# Content Creation
+# Apps for content creation
+
+description: Content Creation Packages
+
+# List of packages in this module
+packages:
+  - lightworks
+  - flatpak:com.obsproject.Studio
+
+# Modules that conflict with this one
+conflicts: []
+
+# Script to run after installing packages (optional)
+post_install_hook: ""

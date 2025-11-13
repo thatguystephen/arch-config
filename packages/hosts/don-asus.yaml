@@ -4,10 +4,7 @@
 description: Packages specific to don-asus
 
 # Packages to install only on this host
-packages:
-  - asusctl # ASUS control utilities
-  - rog-control-center # GUI for ASUS controls
-  - supergfxctl # GPU switching for hybrid graphics
+packages: []
 
 # Packages to exclude from base or modules on this host
 exclude: []
