@@ -1,0 +1,21 @@
+# Archcraft BSPWM window manager configuration
+# Custom BSPWM setup with Archcraft theming and configurations
+
+description: Archcraft BSPWM window manager with custom configuration
+
+packages:
+  - bspwm
+  - sxhkd
+  - tela-circle-icon-theme-purple
+  - polybar
+  - dunst
+  - picom
+  - rofi
+  - feh
+  - alacritty
+  - kitty
+
+conflicts: []
+
+# Script to install custom BSPWM configuration
+post_install_hook: scripts/install-bspwm-config.sh

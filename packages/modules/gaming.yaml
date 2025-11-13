@@ -4,17 +4,13 @@
 description: Gaming packages and tools for Linux gaming
 
 packages:
-  - steam                      # Steam gaming platform
-  - lutris                     # Open gaming platform
-  - proton-ge-custom           # Proton GE for better game compatibility
-  - gamescope                  # Gaming compositor
-  - mangohud                   # Performance overlay
-  - gamemode                   # Optimize system for gaming
-  - obs-studio                 # Streaming and recording
-  - discord                    # Voice and chat
-  - piper                      # Gaming mouse configuration
-  - heroic-games-launcher-bin  # Epic Games and GOG launcher
-  - protonup-qt                # Proton version manager
+  - steam # Steam gaming platform
+  - gamescope # Gaming compositor
+  - mangohud # Performance overlay
+  - gamemode # Optimize system for gaming
+  - obs-studio # Streaming and recording
+  - discord # Voice and chat
+  - protonup-qt # Proton version manager
 
 conflicts: []
 post_install_hook: ""

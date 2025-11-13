@@ -2,12 +2,14 @@
 # This file defines the system configuration for don-eos
 
 # Hostname of this machine
-host: don-asus
+host: don-desktop
 # List of enabled modules
 # Enable/disable modules with: dcli module enable/disable <name>
 enabled_modules:
-  - mangowc
   - main-apps
+  - gaming
+  - controller-support
+  - lazyvim
 # Additional packages not in any module
 # Add one-off packages here without creating a module
 additional_packages:
