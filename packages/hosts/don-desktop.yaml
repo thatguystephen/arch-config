@@ -4,7 +4,9 @@
 description: Packages specific to don-eos
 
 # Packages to install only on this host
-packages: []
+packages:
+  - uptime-kuma
+  - ly
 
 # Packages to exclude from base or modules on this host
 exclude: []
