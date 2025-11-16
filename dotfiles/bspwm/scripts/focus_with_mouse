@@ -7,6 +7,12 @@ direction="$1"
 # Focus the node
 bspc node -f "$direction"
 
+# Check if maim (screenshot tool) is running
+if pgrep -x maim > /dev/null; then
+    # Don't move mouse if screenshot is in progress
+    exit 0
+fi
+
 # Get the focused window ID
 window_id=$(bspc query -N -n focused)
 
