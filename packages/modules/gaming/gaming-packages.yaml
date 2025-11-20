@@ -8,8 +8,6 @@ packages:
   - gamescope # Gaming compositor
   - mangohud # Performance overlay
   - gamemode # Optimize system for gaming
-  - obs-studio # Streaming and recording
-  - discord # Voice and chat
   - protonup-qt # Proton version manager
 
 conflicts: []
