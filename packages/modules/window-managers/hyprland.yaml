@@ -1,25 +1,21 @@
 # Hyprland Wayland compositor
 # Dynamic tiling Wayland compositor with smooth animations
+# Uses DankMaterialShell (DMS) for bar, notifications, launcher, and lock screen
 
-description: Hyprland Wayland compositor and related tools
+description: Hyprland Wayland compositor with DankMaterialShell
 
 packages:
   - hyprland # Main compositor
   - hyprpaper # Wallpaper utility
-  - hypridle # Idle daemon
-  - hyprlock # Screen locker
-  - nwg-displays # Display configuration
-  - waybar # Status bar
-  - wofi # Application launcher
+  - dms-shell-git # DankMaterialShell (bar, notifications, launcher, lock)
+  - quickshell # DMS dependency
   - xdg-desktop-portal-hyprland # Desktop portal
   - qt5-wayland # Qt5 Wayland support
   - qt6-wayland # Qt6 Wayland support
   - wl-clipboard # Clipboard utilities
   - grim # Screenshot tool
   - slurp # Region selector
-  - swaybg # Background manager
-  - mako # Notification daemon
-  - dunst # Alternative notifications
+  - nwg-displays # Display configuration
   - brightnessctl # Brightness control
   - pavucontrol # Audio control
   - network-manager-applet # Network manager GUI
@@ -27,4 +23,4 @@ packages:
 # Conflicts with other window managers
 conflicts: []
 
-post_install_hook: ""
+post_install_hook: "scripts/install-hyprland-dotfiles.sh"
