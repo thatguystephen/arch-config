@@ -7,6 +7,7 @@ description: Packages specific to don-eos
 packages:
   - uptime-kuma
   - ly
+  - ytmdesktop-git
 
 # Packages to exclude from base or modules on this host
 exclude: []

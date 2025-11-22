@@ -8,6 +8,7 @@ packages:
   - hyprpaper # Wallpaper utility
   - hypridle # Idle daemon
   - hyprlock # Screen locker
+  - nwg-displays # Display configuration
   - waybar # Status bar
   - wofi # Application launcher
   - xdg-desktop-portal-hyprland # Desktop portal
