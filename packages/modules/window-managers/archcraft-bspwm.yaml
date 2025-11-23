@@ -14,7 +14,6 @@ packages:
   - feh
   - alacritty
   - kitty
-  - picom-pijulius-next-git
   - go
 
 conflicts: []
