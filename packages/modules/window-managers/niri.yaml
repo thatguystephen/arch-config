@@ -4,10 +4,10 @@
 description: Niri scrollable-tiling Wayland compositor and related tools
 
 packages:
-  - bibata-cursor-theme # Mouse cursor theme
+  - bibata-cursor-theme-bin # Mouse cursor theme
   - brightnessctl # Brightness control
   - cliphist # Clipboard history
-  - crystal-dock # Application dock
+  - crystal-dock-bin # Application dock
   - dms-shell-git # Shell component
   - fastfetch # System information tool
   - fish # Fish shell
