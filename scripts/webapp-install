@@ -110,12 +110,36 @@ else
   fi
 fi
 
+# Create profile directory for this webapp
+PROFILE_DIR="$HOME/.local/share/chromium-webapps/$ICON_NAME"
+mkdir -p "$PROFILE_DIR"
+
+# Set up enterprise policy to force-install extensions
+POLICY_DIR="$PROFILE_DIR/policies/managed"
+mkdir -p "$POLICY_DIR"
+
+# Create policy file for extension auto-installation
+POLICY_FILE="$POLICY_DIR/extensions.json"
+if [ ! -f "$POLICY_FILE" ]; then
+  echo "Configuring uBlock Origin + SponsorBlock auto-install policy..."
+  cat >"$POLICY_FILE" <<'POLICY_EOF'
+{
+  "ExtensionInstallForcelist": [
+    "cjpalhdlnbpafiamejdnhcphjbkeiagm;https://clients2.google.com/service/update2/crx",
+    "mnjggcdmjocbbbhaepdhchncahnbgone;https://clients2.google.com/service/update2/crx"
+  ]
+}
+POLICY_EOF
+fi
+
 # Use custom exec if provided, otherwise use Chromium in app mode
 if [[ -n $CUSTOM_EXEC ]]; then
   EXEC_COMMAND="$CUSTOM_EXEC"
 else
-  # Chromium browser in app mode - creates a standalone window without browser UI
-  EXEC_COMMAND="chromium --app=\"$APP_URL\""
+  # Chromium browser in app mode with separate profile
+  # Each webapp gets its own isolated profile in ~/.local/share/chromium-webapps/
+  # uBlock Origin is force-installed via enterprise policy
+  EXEC_COMMAND="chromium --user-data-dir=\"$PROFILE_DIR\" --app=\"$APP_URL\""
 fi
 
 # Create applications directory if needed

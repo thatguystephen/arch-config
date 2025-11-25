@@ -250,6 +250,5 @@ packages:
   - xorg-xrandr
   - yelp
   - google-chrome
-  - flatpak:io.freetubeapp.FreeTube
 # Packages to exclude from base or modules on this host
 exclude: []
