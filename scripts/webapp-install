@@ -133,7 +133,7 @@ Comment=$APP_NAME
 Exec=$EXEC_COMMAND
 Terminal=false
 Type=Application
-Icon=$ICON_FILE
+Icon=$ICON_NAME
 StartupNotify=true
 Categories=WebApp;Network;
 EOF
