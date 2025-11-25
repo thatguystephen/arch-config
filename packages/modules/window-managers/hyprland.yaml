@@ -20,6 +20,11 @@ packages:
   - pavucontrol # Audio control
   - network-manager-applet # Network manager GUI
   - pyprland # Python bindings for Hyprland
+  - noctalia-shell # A beautiful, minimal desktop shell for Wayland
+  - gtk3 # GTK 3 libraries
+  - gtk4 # GTK 4 libraries
+  - catppuccin-gtk-theme-mocha # Catppuccin Mocha GTK theme
+  - tela-icon-theme-purple-git # Tela purple icon theme
 
 # Conflicts with other window managers
 conflicts: []

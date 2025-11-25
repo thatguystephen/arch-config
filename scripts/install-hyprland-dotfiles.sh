@@ -96,6 +96,74 @@ install_config "$HYPR_SOURCE" "$HYPR_TARGET" "Hyprland"
 # Install DankMaterialShell configuration (shared theme)
 install_config "$DMS_SOURCE" "$DMS_TARGET" "DankMaterialShell"
 
+# Create keybinds-active.conf symlink
+echo -e "${BLUE}Creating keybinds-active.conf symlink...${NC}"
+if [ -f "${HYPR_TARGET}/keybinds-dms.conf" ]; then
+  ln -sf "${HYPR_TARGET}/keybinds-dms.conf" "${HYPR_TARGET}/keybinds-active.conf"
+  if [ "$EUID" -eq 0 ]; then
+    chown -h "$TARGET_USER:$TARGET_USER" "${HYPR_TARGET}/keybinds-active.conf"
+  fi
+  echo -e "${GREEN}Symlink created: keybinds-active.conf -> keybinds-dms.conf${NC}"
+  echo ""
+fi
+
+# Apply GTK theming
+echo -e "${BLUE}Applying GTK theme configuration...${NC}"
+
+GTK3_SETTINGS="${CONFIG_DIR}/gtk-3.0/settings.ini"
+GTK4_SETTINGS="${CONFIG_DIR}/gtk-4.0/settings.ini"
+
+# Create GTK config directories
+mkdir -p "${CONFIG_DIR}/gtk-3.0"
+mkdir -p "${CONFIG_DIR}/gtk-4.0"
+
+if [ "$EUID" -eq 0 ]; then
+  chown "$TARGET_USER:$TARGET_USER" "${CONFIG_DIR}/gtk-3.0"
+  chown "$TARGET_USER:$TARGET_USER" "${CONFIG_DIR}/gtk-4.0"
+fi
+
+# GTK3 settings
+cat > "$GTK3_SETTINGS" << 'EOF'
+[Settings]
+gtk-theme-name=catppuccin-mocha-mauve-standard+default
+gtk-icon-theme-name=Tela-purple
+gtk-font-name=Sans 10
+gtk-cursor-theme-name=Adwaita
+gtk-cursor-theme-size=24
+gtk-toolbar-style=GTK_TOOLBAR_BOTH
+gtk-toolbar-icon-size=GTK_ICON_SIZE_LARGE_TOOLBAR
+gtk-button-images=1
+gtk-menu-images=1
+gtk-enable-event-sounds=1
+gtk-enable-input-feedback-sounds=1
+gtk-xft-antialias=1
+gtk-xft-hinting=1
+gtk-xft-hintstyle=hintfull
+EOF
+
+if [ "$EUID" -eq 0 ]; then
+  chown "$TARGET_USER:$TARGET_USER" "$GTK3_SETTINGS"
+fi
+
+# GTK4 settings
+cat > "$GTK4_SETTINGS" << 'EOF'
+[Settings]
+gtk-theme-name=catppuccin-mocha-mauve-standard+default
+gtk-icon-theme-name=Tela-purple
+gtk-font-name=Sans 10
+gtk-cursor-theme-name=Adwaita
+gtk-cursor-theme-size=24
+EOF
+
+if [ "$EUID" -eq 0 ]; then
+  chown "$TARGET_USER:$TARGET_USER" "$GTK4_SETTINGS"
+fi
+
+echo -e "${GREEN}GTK theme configured:${NC}"
+echo "  - Theme: catppuccin-mocha-mauve-standard+default"
+echo "  - Icons: Tela-purple"
+echo ""
+
 echo -e "${GREEN}Hyprland configuration installed successfully!${NC}"
 echo ""
 echo -e "${BLUE}Installed:${NC}"
@@ -103,6 +171,8 @@ echo "  - $HYPR_TARGET"
 if [ -d "$DMS_SOURCE" ]; then
   echo "  - $DMS_TARGET"
 fi
+echo "  - GTK3 theme: $GTK3_SETTINGS"
+echo "  - GTK4 theme: $GTK4_SETTINGS"
 echo ""
 echo -e "${BLUE}Note:${NC} To use the new configuration:"
 echo "  1. Log out of your current session"

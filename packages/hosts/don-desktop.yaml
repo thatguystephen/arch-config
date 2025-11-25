@@ -249,5 +249,6 @@ packages:
   - xorg-xkill
   - xorg-xrandr
   - yelp
+  - google-chrome
 # Packages to exclude from base or modules on this host
 exclude: []
