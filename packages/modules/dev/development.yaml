@@ -5,5 +5,17 @@ packages:
   - code
   - zed
   - chromium
+  - clang
+  - cmake
+  - ninja
+  - pkg-config
+  - gtk3
+  - libstdc++5
+  - curl
+  - git
+  - unzip
+  - xz
+  - zip
+  - glu
 
 conflicts: []

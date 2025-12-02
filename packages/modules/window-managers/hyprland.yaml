@@ -25,6 +25,12 @@ packages:
   - gtk4 # GTK 4 libraries
   - catppuccin-gtk-theme-mocha # Catppuccin Mocha GTK theme
   - tela-icon-theme-purple-git # Tela purple icon theme
+  - cmake # Build system
+  - meson # Build system
+  - cpio # Archiving tool
+  - pkg-config # Package configuration helper
+  - git # Version control
+  - gcc # C and C++ compilers
 
 # Conflicts with other window managers
 conflicts: []
