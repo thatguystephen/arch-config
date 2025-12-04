@@ -28,7 +28,6 @@ packages:
   - cmake # Build system
   - meson # Build system
   - cpio # Archiving tool
-  - pkg-config # Package configuration helper
   - git # Version control
   - gcc # C and C++ compilers
 

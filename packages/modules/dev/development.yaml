@@ -8,7 +8,6 @@ packages:
   - clang
   - cmake
   - ninja
-  - pkg-config
   - gtk3
   - libstdc++5
   - curl
@@ -17,5 +16,6 @@ packages:
   - xz
   - zip
   - glu
+  - cargo
 
 conflicts: []

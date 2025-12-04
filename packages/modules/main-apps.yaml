@@ -8,9 +8,6 @@ packages:
   - kitty # GPU-accelerated terminal emulator
   - fastfetch # System information utility
 
-  # Application launcher
-  - fuzzel # Wayland-native application launcher
-
   # File managers
   - nemo # Cinnamon file manager
   - thunar # XFCE file manager
@@ -21,9 +18,6 @@ packages:
 
   # Theming
   - python-pywal # Color scheme generator
-
-  # Wallpaper daemon
-  - swww # Wayland wallpaper daemon
 
   # Messaging
   - telegram-desktop # Telegram messaging client

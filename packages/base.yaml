@@ -13,6 +13,5 @@ packages:
   - git
   - go-yq # YAML processor for dcli
   - htop
-  - tmux
   - man-db
   - man-pages
