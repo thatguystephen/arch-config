@@ -145,6 +145,45 @@ if [ -f "${HYPR_TARGET}/keybinds-dms.conf" ]; then
   echo ""
 fi
 
+# Apply GTK theme settings with gsettings
+echo -e "${BLUE}Applying GTK theme settings...${NC}"
+
+# Run gsettings as the target user
+apply_gsettings() {
+  if [ "$EUID" -eq 0 ]; then
+    sudo -u "$TARGET_USER" DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$(id -u $TARGET_USER)/bus" gsettings "$@" 2>/dev/null || true
+  else
+    gsettings "$@" 2>/dev/null || true
+  fi
+}
+
+# Apply theme settings
+apply_gsettings set org.gnome.desktop.interface gtk-theme 'catppuccin-mocha-mauve-standard+default'
+apply_gsettings set org.gnome.desktop.interface icon-theme 'Tela-purple-dark'
+apply_gsettings set org.gnome.desktop.interface cursor-theme 'Bibata-Modern-Ice'
+apply_gsettings set org.gnome.desktop.interface font-name 'Inter Variable 10'
+apply_gsettings set org.gnome.desktop.interface cursor-size 24
+
+echo -e "${GREEN}GTK theme settings applied via gsettings${NC}"
+echo ""
+
+# Create .gtkrc-2.0 for GTK2 applications
+echo -e "${BLUE}Creating GTK2 configuration...${NC}"
+cat > "${TARGET_HOME}/.gtkrc-2.0" << 'EOF'
+gtk-theme-name="catppuccin-mocha-mauve-standard+default"
+gtk-icon-theme-name="Tela-purple-dark"
+gtk-font-name="Inter Variable 10"
+gtk-cursor-theme-name="Bibata-Modern-Ice"
+gtk-cursor-theme-size=24
+EOF
+
+if [ "$EUID" -eq 0 ]; then
+  chown "$TARGET_USER:$TARGET_USER" "${TARGET_HOME}/.gtkrc-2.0"
+fi
+
+echo -e "${GREEN}GTK2 configuration created${NC}"
+echo ""
+
 
 
 echo -e "${GREEN}Hyprland configuration installed successfully!${NC}"
