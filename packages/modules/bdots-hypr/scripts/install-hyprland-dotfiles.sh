@@ -23,10 +23,24 @@ MODULE_DIR="${ARCH_CONFIG_DIR}/packages/modules/bdots-hypr"
 # Source directories
 HYPR_SOURCE="${MODULE_DIR}/dotfiles/hypr"
 DMS_SOURCE="${MODULE_DIR}/themes-hypr/DankMaterialShell"
+FISH_SOURCE="${MODULE_DIR}/themes-hypr/fish"
+KITTY_SOURCE="${MODULE_DIR}/themes-hypr/kitty"
+FASTFETCH_SOURCE="${MODULE_DIR}/themes-hypr/fastfetch"
+QT5CT_SOURCE="${MODULE_DIR}/themes-hypr/qt5ct"
+QT6CT_SOURCE="${MODULE_DIR}/themes-hypr/qt6ct"
+GTK3_SOURCE="${MODULE_DIR}/themes-hypr/gtk-3.0"
+GTK4_SOURCE="${MODULE_DIR}/themes-hypr/gtk-4.0"
 
 # Target directories
 HYPR_TARGET="${CONFIG_DIR}/hypr"
 DMS_TARGET="${CONFIG_DIR}/DankMaterialShell"
+FISH_TARGET="${CONFIG_DIR}/fish"
+KITTY_TARGET="${CONFIG_DIR}/kitty"
+FASTFETCH_TARGET="${CONFIG_DIR}/fastfetch"
+QT5CT_TARGET="${CONFIG_DIR}/qt5ct"
+QT6CT_TARGET="${CONFIG_DIR}/qt6ct"
+GTK3_TARGET="${CONFIG_DIR}/gtk-3.0"
+GTK4_TARGET="${CONFIG_DIR}/gtk-4.0"
 
 # Backup suffix
 BACKUP_SUFFIX=".backup.$(date +%Y%m%d_%H%M%S)"
@@ -99,6 +113,27 @@ install_config "$HYPR_SOURCE" "$HYPR_TARGET" "Hyprland"
 # Install DankMaterialShell configuration (shared theme)
 install_config "$DMS_SOURCE" "$DMS_TARGET" "DankMaterialShell"
 
+# Install Fish shell configuration
+install_config "$FISH_SOURCE" "$FISH_TARGET" "Fish shell"
+
+# Install Kitty terminal configuration
+install_config "$KITTY_SOURCE" "$KITTY_TARGET" "Kitty terminal"
+
+# Install Fastfetch configuration
+install_config "$FASTFETCH_SOURCE" "$FASTFETCH_TARGET" "Fastfetch"
+
+# Install Qt5 configuration
+install_config "$QT5CT_SOURCE" "$QT5CT_TARGET" "Qt5ct"
+
+# Install Qt6 configuration
+install_config "$QT6CT_SOURCE" "$QT6CT_TARGET" "Qt6ct"
+
+# Install GTK3 configuration
+install_config "$GTK3_SOURCE" "$GTK3_TARGET" "GTK3"
+
+# Install GTK4 configuration
+install_config "$GTK4_SOURCE" "$GTK4_TARGET" "GTK4"
+
 # Create keybinds-active.conf symlink
 echo -e "${BLUE}Creating keybinds-active.conf symlink...${NC}"
 if [ -f "${HYPR_TARGET}/keybinds-dms.conf" ]; then
@@ -110,72 +145,36 @@ if [ -f "${HYPR_TARGET}/keybinds-dms.conf" ]; then
   echo ""
 fi
 
-# Apply GTK theming
-echo -e "${BLUE}Applying GTK theme configuration...${NC}"
 
-GTK3_SETTINGS="${CONFIG_DIR}/gtk-3.0/settings.ini"
-GTK4_SETTINGS="${CONFIG_DIR}/gtk-4.0/settings.ini"
-
-# Create GTK config directories
-mkdir -p "${CONFIG_DIR}/gtk-3.0"
-mkdir -p "${CONFIG_DIR}/gtk-4.0"
-
-if [ "$EUID" -eq 0 ]; then
-  chown "$TARGET_USER:$TARGET_USER" "${CONFIG_DIR}/gtk-3.0"
-  chown "$TARGET_USER:$TARGET_USER" "${CONFIG_DIR}/gtk-4.0"
-fi
-
-# GTK3 settings
-cat > "$GTK3_SETTINGS" << 'EOF'
-[Settings]
-gtk-theme-name=catppuccin-mocha-mauve-standard+default
-gtk-icon-theme-name=Tela-purple
-gtk-font-name=Sans 10
-gtk-cursor-theme-name=Adwaita
-gtk-cursor-theme-size=24
-gtk-toolbar-style=GTK_TOOLBAR_BOTH
-gtk-toolbar-icon-size=GTK_ICON_SIZE_LARGE_TOOLBAR
-gtk-button-images=1
-gtk-menu-images=1
-gtk-enable-event-sounds=1
-gtk-enable-input-feedback-sounds=1
-gtk-xft-antialias=1
-gtk-xft-hinting=1
-gtk-xft-hintstyle=hintfull
-EOF
-
-if [ "$EUID" -eq 0 ]; then
-  chown "$TARGET_USER:$TARGET_USER" "$GTK3_SETTINGS"
-fi
-
-# GTK4 settings
-cat > "$GTK4_SETTINGS" << 'EOF'
-[Settings]
-gtk-theme-name=catppuccin-mocha-mauve-standard+default
-gtk-icon-theme-name=Tela-purple
-gtk-font-name=Sans 10
-gtk-cursor-theme-name=Adwaita
-gtk-cursor-theme-size=24
-EOF
-
-if [ "$EUID" -eq 0 ]; then
-  chown "$TARGET_USER:$TARGET_USER" "$GTK4_SETTINGS"
-fi
-
-echo -e "${GREEN}GTK theme configured:${NC}"
-echo "  - Theme: catppuccin-mocha-mauve-standard+default"
-echo "  - Icons: Tela-purple"
-echo ""
 
 echo -e "${GREEN}Hyprland configuration installed successfully!${NC}"
 echo ""
-echo -e "${BLUE}Installed:${NC}"
-echo "  - $HYPR_TARGET"
+echo -e "${BLUE}Installed configurations:${NC}"
+echo "  - Hyprland: $HYPR_TARGET"
 if [ -d "$DMS_SOURCE" ]; then
-  echo "  - $DMS_TARGET"
+  echo "  - DankMaterialShell: $DMS_TARGET"
 fi
-echo "  - GTK3 theme: $GTK3_SETTINGS"
-echo "  - GTK4 theme: $GTK4_SETTINGS"
+if [ -d "$FISH_SOURCE" ]; then
+  echo "  - Fish shell: $FISH_TARGET"
+fi
+if [ -d "$KITTY_SOURCE" ]; then
+  echo "  - Kitty: $KITTY_TARGET"
+fi
+if [ -d "$FASTFETCH_SOURCE" ]; then
+  echo "  - Fastfetch: $FASTFETCH_TARGET"
+fi
+if [ -d "$QT5CT_SOURCE" ]; then
+  echo "  - Qt5ct: $QT5CT_TARGET"
+fi
+if [ -d "$QT6CT_SOURCE" ]; then
+  echo "  - Qt6ct: $QT6CT_TARGET"
+fi
+if [ -d "$GTK3_SOURCE" ]; then
+  echo "  - GTK3: $GTK3_TARGET"
+fi
+if [ -d "$GTK4_SOURCE" ]; then
+  echo "  - GTK4: $GTK4_TARGET"
+fi
 echo ""
 echo -e "${BLUE}Note:${NC} To use the new configuration:"
 echo "  1. Log out of your current session"

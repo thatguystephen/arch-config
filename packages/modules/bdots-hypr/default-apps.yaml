@@ -10,5 +10,6 @@ packages:
   - fastfetch
   - zen-browser-bin
   - zed
+  - fish
 # Conflicts with other window managers
 conflicts: []
