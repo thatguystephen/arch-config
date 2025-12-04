@@ -184,6 +184,49 @@ fi
 echo -e "${GREEN}GTK2 configuration created${NC}"
 echo ""
 
+# Set default cursor theme
+echo -e "${BLUE}Setting default cursor theme...${NC}"
+mkdir -p "${TARGET_HOME}/.icons/default"
+cat > "${TARGET_HOME}/.icons/default/index.theme" << 'EOF'
+[Icon Theme]
+Inherits=Bibata-Modern-Ice
+EOF
+
+if [ "$EUID" -eq 0 ]; then
+  chown -R "$TARGET_USER:$TARGET_USER" "${TARGET_HOME}/.icons"
+fi
+
+echo -e "${GREEN}Default cursor theme set${NC}"
+echo ""
+
+# Set cursor in Xresources
+echo -e "${BLUE}Creating Xresources for cursor...${NC}"
+cat > "${TARGET_HOME}/.Xresources" << 'EOF'
+Xcursor.theme: Bibata-Modern-Ice
+Xcursor.size: 24
+EOF
+
+if [ "$EUID" -eq 0 ]; then
+  chown "$TARGET_USER:$TARGET_USER" "${TARGET_HOME}/.Xresources"
+fi
+
+echo -e "${GREEN}Xresources created${NC}"
+echo ""
+
+# Fix DankMaterialShell settings.json to use correct paths
+echo -e "${BLUE}Fixing DankMaterialShell paths...${NC}"
+if [ -f "${DMS_TARGET}/settings.json" ]; then
+  # Replace $USER with actual username in the logo path
+  sed -i "s|\$USER|${TARGET_USER}|g" "${DMS_TARGET}/settings.json"
+
+  if [ "$EUID" -eq 0 ]; then
+    chown "$TARGET_USER:$TARGET_USER" "${DMS_TARGET}/settings.json"
+  fi
+
+  echo -e "${GREEN}DankMaterialShell paths fixed${NC}"
+  echo ""
+fi
+
 
 
 echo -e "${GREEN}Hyprland configuration installed successfully!${NC}"
@@ -215,10 +258,18 @@ if [ -d "$GTK4_SOURCE" ]; then
   echo "  - GTK4: $GTK4_TARGET"
 fi
 echo ""
-echo -e "${BLUE}Note:${NC} To use the new configuration:"
-echo "  1. Log out of your current session"
-echo "  2. Select 'Hyprland' from your display manager"
-echo "  3. Log in to start using Hyprland"
+echo -e "${BLUE}Note:${NC} To apply all changes:"
+echo "  1. Reload Hyprland: Press SUPER+SHIFT+R or run 'hyprctl reload'"
+echo "  2. For full effect, log out and log back in"
+echo ""
+echo -e "${YELLOW}For cursor to apply:${NC}"
+echo "  - The cursor should now be Bibata-Modern-Ice"
+echo "  - If not, try: hyprctl setcursor Bibata-Modern-Ice 24"
+echo "  - Or log out and log back in"
+echo ""
+echo -e "${YELLOW}For DankMaterialShell settings:${NC}"
+echo "  - Settings have been updated in ~/.config/DankMaterialShell/settings.json"
+echo "  - Restart DMS or reload Hyprland to apply"
 echo ""
 echo -e "${YELLOW}Tip:${NC} monitors.conf and workspaces.conf may need adjustment for your specific hardware."
 echo ""
