@@ -12,3 +12,4 @@ package_files:
   - hypr-packages.yaml
   - theming.yaml
   - dependencies.yaml
+  - default-apps.yaml
