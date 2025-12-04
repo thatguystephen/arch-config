@@ -7,11 +7,7 @@ description: Hyprland Wayland compositor with DankMaterialShell
 packages:
   - hyprland # Main compositor
   - hyprpaper # Wallpaper utility
-  - dms-shell-git # DankMaterialShell (bar, notifications, launcher, lock)
-  - quickshell # DMS dependency
   - xdg-desktop-portal-hyprland # Desktop portal
-  - qt5-wayland # Qt5 Wayland support
-  - qt6-wayland # Qt6 Wayland support
   - wl-clipboard # Clipboard utilities
   - grim # Screenshot tool
   - slurp # Region selector
@@ -20,18 +16,6 @@ packages:
   - pavucontrol # Audio control
   - network-manager-applet # Network manager GUI
   - pyprland # Python bindings for Hyprland
-  - noctalia-shell # A beautiful, minimal desktop shell for Wayland
-  - gtk3 # GTK 3 libraries
-  - gtk4 # GTK 4 libraries
-  - catppuccin-gtk-theme-mocha # Catppuccin Mocha GTK theme
-  - tela-icon-theme-purple-git # Tela purple icon theme
-  - cmake # Build system
-  - meson # Build system
-  - cpio # Archiving tool
-  - git # Version control
-  - gcc # C and C++ compilers
 
 # Conflicts with other window managers
 conflicts: []
-
-post_install_hook: "scripts/install-hyprland-dotfiles.sh"

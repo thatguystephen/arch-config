@@ -1,0 +1,14 @@
+description: "Main Module to source other yaml files for bdots-hypr"
+
+# Optional: Modules that conflict with this one
+conflicts: []
+
+# Optional: Post-install hook script (relative to module directory)
+post_install_hook: "scripts/install-hyprland-dotfiles.sh"
+
+# Optional: Explicit list of package files to load (empty = auto-discover)
+package_files:
+  - quickshells.yaml
+  - hypr-packages.yaml
+  - theming.yaml
+  - dependencies.yaml

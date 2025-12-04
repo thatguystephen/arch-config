@@ -17,9 +17,12 @@ TARGET_HOME="/home/${TARGET_USER}"
 CONFIG_DIR="${TARGET_HOME}/.config"
 ARCH_CONFIG_DIR="${ARCH_CONFIG_DIR:-${TARGET_HOME}/.config/arch-config}"
 
+# Module directory (relative to ARCH_CONFIG_DIR)
+MODULE_DIR="${ARCH_CONFIG_DIR}/packages/modules/bdots-hypr"
+
 # Source directories
-HYPR_SOURCE="${ARCH_CONFIG_DIR}/dotfiles/hyprland/hypr"
-DMS_SOURCE="${ARCH_CONFIG_DIR}/dotfiles/themes/DankMaterialShell"
+HYPR_SOURCE="${MODULE_DIR}/dotfiles/hypr"
+DMS_SOURCE="${MODULE_DIR}/themes-hypr/DankMaterialShell"
 
 # Target directories
 HYPR_TARGET="${CONFIG_DIR}/hypr"

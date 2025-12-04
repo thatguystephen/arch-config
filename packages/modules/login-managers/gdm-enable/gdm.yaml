@@ -1,0 +1,4 @@
+description: "GDM login manager packages"
+
+packages:
+  - gdm
