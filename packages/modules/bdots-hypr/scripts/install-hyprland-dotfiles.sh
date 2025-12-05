@@ -227,7 +227,27 @@ if [ -f "${DMS_TARGET}/settings.json" ]; then
   echo ""
 fi
 
+# Set up wallpaper directory and default wallpaper
+echo -e "${BLUE}Setting up wallpaper...${NC}"
+WALLPAPER_DIR="${HYPR_TARGET}/wallpapers"
+DEFAULT_WALLPAPER="${ARCH_CONFIG_DIR}/wallpapers/37.png"
 
+# Create wallpapers directory
+mkdir -p "$WALLPAPER_DIR"
+
+# Create symlink to default wallpaper if it exists
+if [ -f "$DEFAULT_WALLPAPER" ]; then
+  ln -sf "$DEFAULT_WALLPAPER" "${WALLPAPER_DIR}/wallpaper.png"
+  if [ "$EUID" -eq 0 ]; then
+    chown -h "$TARGET_USER:$TARGET_USER" "${WALLPAPER_DIR}/wallpaper.png"
+    chown "$TARGET_USER:$TARGET_USER" "$WALLPAPER_DIR"
+  fi
+  echo -e "${GREEN}Wallpaper symlink created: ${WALLPAPER_DIR}/wallpaper.png -> ${DEFAULT_WALLPAPER}${NC}"
+else
+  echo -e "${YELLOW}Warning: Default wallpaper not found at ${DEFAULT_WALLPAPER}${NC}"
+  echo -e "${YELLOW}Please manually set wallpaper.png in ${WALLPAPER_DIR}${NC}"
+fi
+echo ""
 
 echo -e "${GREEN}Hyprland configuration installed successfully!${NC}"
 echo ""
