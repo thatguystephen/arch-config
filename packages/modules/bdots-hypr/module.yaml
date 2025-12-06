@@ -10,6 +10,6 @@ post_install_hook: "scripts/install-hyprland-dotfiles.sh"
 package_files:
   - quickshells.yaml
   - hypr-packages.yaml
-  - theming.yaml
+  - hypr-themes.yaml
   - dependencies.yaml
   - default-apps.yaml

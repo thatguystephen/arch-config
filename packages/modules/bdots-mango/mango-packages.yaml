@@ -6,31 +6,17 @@ description: MangoWC window manager and related tools
 packages:
   - bibata-cursor-theme-bin # Mouse cursor theme
   - brightnessctl # Brightness control
-  - catppuccin-gtk-theme-mocha # Catppuccin Mocha GTK theme
   - cliphist # Clipboard history
   - crystal-dock-bin # Application dock
-  - dms-shell-git # Shell component
-  - fastfetch # System information tool
-  - fish # Fish shell
-  - foot # Terminal emulator
   - grim # Screenshot tool
-  - gtk3 # GTK 3 libraries
-  - gtk4 # GTK 4 libraries
-  - kitty # Terminal emulator
   - mangowc-git # MangoWC Wayland compositor
-  - matugen-bin # Material color generation
-  - qt5ct # Qt5 configuration tool
-  - qt6ct # Qt6 configuration tool
   - satty # Screenshot annotation
   - slurp # Region selector
   - sway-audio-idle-inhibit-git # Prevent idle during audio
   - swaybg # Background manager
-  - tela-icon-theme-purple-git # Tela purple icon theme
   - wl-clip-persist # Persistent clipboard
   - wl-clipboard # Clipboard utilities
   - xdg-desktop-portal-wlr # Desktop portal for wlroots
 
 # Conflicts with other window managers
 conflicts: []
-
-post_install_hook: "scripts/install-mangowc-dotfiles.sh"
