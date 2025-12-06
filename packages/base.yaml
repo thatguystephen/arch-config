@@ -6,12 +6,11 @@ description: Base packages for all machines
 packages:
   - base
   - base-devel
-  - linux
   - linux-firmware
   - networkmanager
   - vim
   - git
-  - go-yq # YAML processor for dcli
+  - rustup
   - htop
   - man-db
   - man-pages

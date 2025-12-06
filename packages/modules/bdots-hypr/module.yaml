@@ -1,7 +1,8 @@
 description: "Main Module to source other yaml files for bdots-hypr"
 
 # Optional: Modules that conflict with this one
-conflicts: []
+conflicts:
+  - bdots-kde
 
 # Optional: Post-install hook script (relative to module directory)
 post_install_hook: "scripts/install-hyprland-dotfiles.sh"
