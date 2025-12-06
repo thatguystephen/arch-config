@@ -1,0 +1,12 @@
+# ASUS ROG laptop compatibility tools
+# Provides GPU switching, keyboard control, and other ASUS-specific features
+
+description: ASUS ROG laptop compatibility tools (asusctl, GPU switching, keyboard control)
+
+packages:
+  - asusctl # ASUS control utilities
+  - rog-control-center # GUI for ASUS controls
+  - supergfxctl # GPU switching for hybrid graphics
+
+conflicts: []
+post_install_hook: ""
