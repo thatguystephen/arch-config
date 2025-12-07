@@ -15,6 +15,7 @@ packages:
   - cool-retro-term
   - lolcat
   - micro
+  - pipes.sh
 
 # Modules that conflict with this one
 conflicts: []

@@ -16,6 +16,5 @@ packages:
   - xz
   - zip
   - glu
-  - cargo
 
 conflicts: []
