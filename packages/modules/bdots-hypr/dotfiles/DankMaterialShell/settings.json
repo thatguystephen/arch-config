@@ -171,20 +171,20 @@
   "qtThemingEnabled": false,
   "syncModeWithPortal": true,
   "terminalsAlwaysDark": false,
-  "showDock": false,
+  "showDock": true,
   "dockAutoHide": false,
-  "dockGroupByApp": false,
+  "dockGroupByApp": true,
   "dockOpenOnOverview": false,
   "dockPosition": 1,
-  "dockSpacing": 4,
-  "dockBottomGap": 0,
-  "dockMargin": 0,
-  "dockIconSize": 40,
-  "dockIndicatorStyle": "circle",
-  "dockBorderEnabled": false,
-  "dockBorderColor": "surfaceText",
-  "dockBorderOpacity": 1,
-  "dockBorderThickness": 1,
+  "dockSpacing": 7,
+  "dockBottomGap": -20,
+  "dockMargin": 9,
+  "dockIconSize": 48,
+  "dockIndicatorStyle": "line",
+  "dockBorderEnabled": true,
+  "dockBorderColor": "primary",
+  "dockBorderOpacity": 0.58,
+  "dockBorderThickness": 2,
   "notificationOverlayEnabled": false,
   "modalDarkenBackground": true,
   "lockScreenShowPowerActions": true,
@@ -229,8 +229,17 @@
   "updaterCustomCommand": "paru -Syu --noconfirm",
   "updaterTerminalAdditionalParams": "",
   "displayNameMode": "system",
-  "screenPreferences": {},
-  "showOnLastDisplay": {},
+  "screenPreferences": {
+    "dock": [
+      {
+        "name": "DP-1",
+        "model": "CU34G2XP"
+      }
+    ]
+  },
+  "showOnLastDisplay": {
+    "dock": true
+  },
   "barConfigs": [
     {
       "id": "default",
