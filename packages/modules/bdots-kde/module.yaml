@@ -1,14 +1,14 @@
 description: "KDE Plasma desktop with Catppuccin Mocha Mauve theme, Tela purple icons, and Krohnkite tiling"
 
-# Optional: Modules that conflict with this one
+# Modules that conflict with this one
 conflicts:
   - bdots-hypr
   - bdots-mango
 
-# Optional: Post-install hook script (relative to module directory)
+# Post-install hook script (relative to module directory)
 post_install_hook: "scripts/install-kde-dotfiles.sh"
 
-# Optional: Explicit list of package files to load (empty = auto-discover)
+# Explicit list of package files to load (empty = auto-discover)
 package_files:
   - kde-packages.yaml
   - kde-themes.yaml

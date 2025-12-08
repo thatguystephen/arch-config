@@ -226,7 +226,7 @@
   "customPowerActionReboot": "",
   "customPowerActionPowerOff": "",
   "updaterUseCustomCommand": true,
-  "updaterCustomCommand": "paru -Syu --noconfirm",
+  "updaterCustomCommand": "dcli update",
   "updaterTerminalAdditionalParams": "",
   "displayNameMode": "system",
   "screenPreferences": {
