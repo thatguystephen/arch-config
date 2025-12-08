@@ -7,7 +7,7 @@ packages:
   # Container management
   - docker
   - docker-compose
-  - portainer
+  - portainer-bin
 
   # Monitoring
   - uptime-kuma
