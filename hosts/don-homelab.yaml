@@ -1,10 +1,26 @@
-# Host-specific packages for don-homelab
-# Homelab server machine
+# Host configuration for don-homelab
+# Migrated from old config.yaml
 
+host: don-homelab
 description: Packages specific to don-homelab
 
-# Packages to install only on this host
-packages: []
+# Import shared configurations (optional)
+# Example:
+# import:
+#   - hosts/shared/laptop-common.yaml
 
-# Packages to exclude from base or modules on this host
+# Enabled modules
+enabled_modules:
+  - homelab
+
+# Host-specific packages
+packages:
+
+# Exclude packages from base or modules
 exclude: []
+
+# Settings
+flatpak_scope: user
+auto_prune: false
+backup_tool: timeshift
+snapper_config: root
