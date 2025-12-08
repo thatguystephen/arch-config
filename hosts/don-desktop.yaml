@@ -1,0 +1,35 @@
+# Host configuration for don-desktop
+# Migrated from old structure
+
+host: don-desktop
+description: Packages specific to don-eos
+
+# Import shared configurations (optional)
+# Example:
+# import:
+#   - hosts/shared/common.yaml
+
+# Enabled modules
+enabled_modules:
+  - package-mods/main-apps
+  - cli-tools/chaotic-aur
+  - package-mods/content-creation
+  - gaming/controller-support
+  - gaming/gaming-packages
+  - cli-tools/webapp-tools
+  - dev/development
+  - cli-tools/cli-apps
+  - dev/lazyvim
+  - bdots-hypr
+
+# Host-specific packages
+packages:
+
+# Exclude packages from base or modules
+exclude: []
+
+# Settings
+flatpak_scope: user
+auto_prune: true
+backup_tool: snapper
+snapper_config: root

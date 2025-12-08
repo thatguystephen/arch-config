@@ -2,6 +2,7 @@
 config.yaml
 
 # Auto-generated state files
+system-packages.yaml
 state/installed.yaml
 state/hooks-executed.yaml
 
