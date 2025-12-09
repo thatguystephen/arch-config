@@ -2,6 +2,7 @@
 config.yaml
 
 # Auto-generated state files
+system-packages.yaml
 state/installed.yaml
 state/hooks-executed.yaml
 
@@ -17,4 +18,5 @@ state/hooks-executed.yaml
 # Exclude package.json, settings.json and other needed configs
 !dotfiles/**/settings.json
 !packages/modules/bdots-hypr/themes-hypr/**/settings.json
+!packages/modules/bdots-hypr/dotfiles/**/settings.json
 !**/package.json
