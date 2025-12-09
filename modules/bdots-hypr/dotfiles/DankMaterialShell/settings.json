@@ -125,7 +125,7 @@
   "vpnLastConnected": "",
   "iconTheme": "Tela-purple-dark",
   "launcherLogoMode": "custom",
-  "launcherLogoCustomPath": "/home/don/.config/arch-config/packages/modules/bdots-hypr/blackdonlogo.png",
+  "launcherLogoCustomPath": "/home/don/.config/arch-config/modules/bdots-hypr/blackdonlogo.png",
   "launcherLogoColorOverride": "primary",
   "launcherLogoColorInvertOnMode": false,
   "launcherLogoBrightness": 0.5,
