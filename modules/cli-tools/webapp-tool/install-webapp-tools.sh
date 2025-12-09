@@ -22,7 +22,7 @@ fi
 echo -e "${GREEN}Installing webapp tools...${NC}"
 
 # Install webapp-install
-WEBAPP_INSTALL_SRC="${ARCH_CONFIG_DIR}/scripts/webapp-install"
+WEBAPP_INSTALL_SRC="${ARCH_CONFIG_DIR}/modules/cli-tools/webapp-tool/webapp-install"
 WEBAPP_INSTALL_DEST="/usr/local/bin/webapp-install"
 
 if [ -f "$WEBAPP_INSTALL_SRC" ]; then
@@ -35,7 +35,7 @@ else
 fi
 
 # Install webapp-remove
-WEBAPP_REMOVE_SRC="${ARCH_CONFIG_DIR}/scripts/webapp-remove"
+WEBAPP_REMOVE_SRC="${ARCH_CONFIG_DIR}/modules/cli-tools/webapp-tool/webapp-remove"
 WEBAPP_REMOVE_DEST="/usr/local/bin/webapp-remove"
 
 if [ -f "$WEBAPP_REMOVE_SRC" ]; then
