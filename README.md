@@ -13,66 +13,65 @@ This directory contains a declarative package configuration for Arch Linux, insp
 
 ```
 arch-config/
-├── config.yaml              # Main configuration
-├── packages/
-│   ├── base.yaml           # Core system packages (always installed)
-│   ├── modules/            # Optional package collections
-│   │   ├── mangowc.yaml
-│   │   ├── hyprland.yaml
-│   │   ├── gaming.yaml
-│   │   └── multimedia.yaml
-│   └── hosts/              # Host-specific packages
-│       └── <hostname>.yaml
-└── state/
-    └── installed.yaml      # Tracked installed packages (auto-generated)
+├── config.yaml              # Pointer to active host configuration
+├── hosts/                   # Host-specific configurations
+│   ├── don-asus.yaml
+│   ├── don-desktop.yaml
+│   └── don-deck.yaml
+├── modules/                 # Module collections
+│   ├── base.yaml           # Core packages (always installed)
+│   ├── bdots-hypr/         # Hyprland environment module
+│   │   ├── module.yaml
+│   │   └── *.yaml          # Package files
+│   ├── bdots-niri/         # Niri environment module
+│   ├── gaming/             # Gaming packages
+│   ├── cli-tools/          # CLI utilities
+│   └── package-mods/       # Additional package modules
+├── scripts/                 # Post-install hooks and utilities
+└── state/                   # Auto-generated tracking files
 ```
 
 ## Quick Start
 
-### 1. Configure Your System
+### 1. Set Active Host
 
-Edit `config.yaml` to set your hostname and additional packages:
+Edit `config.yaml` to point to your host:
 
-```json
-{
-  "host": "your-hostname",
-  "enabled_modules": [],
-  "additional_packages": [
-    "firefox",
-    "discord"
-  ],
-  "auto_prune": false
-}
+```yaml
+host: your-hostname
 ```
 
-### 2. Add Base Packages
+### 2. Configure Your Host
 
-Edit `packages/base.yaml` to define packages that should be on all machines:
+Edit `hosts/your-hostname.yaml`:
 
-```json
-{
-  description: Core system packages for all machines
+```yaml
+host: your-hostname
+description: Your machine configuration
+
+enabled_modules:
+  - cli-tools/cli-apps
+  - gaming/gaming
+
+packages:
+  - firefox
+  - discord
+
+exclude: []
+auto_prune: false
+```
+
+### 3. Add Base Packages
+
+Edit `modules/base.yaml` for packages on all machines:
+
+```yaml
+description: Base packages for all machines
 
 packages:
   - base-devel
   - git
   - vim
-  - htop
-  - fish
-  - fastfetch
-```
-
-### 3. Enable Modules
-
-```bash
-# See available modules
-dcli module list
-
-# Enable a module
-dcli module enable gaming
-
-# Disable a module
-dcli module disable gaming
 ```
 
 ### 4. Sync Packages
@@ -99,12 +98,6 @@ dcli sync --no-backup
 
 ## Commands
 
-### Module Management
-
-- `dcli module list` - Show all available modules and their status
-- `dcli module enable <name>` - Enable a module
-- `dcli module disable <name>` - Disable a module
-
 ### Package Synchronization
 
 - `dcli sync` - Install packages to match configuration
@@ -118,69 +111,81 @@ dcli sync --no-backup
 
 ## Creating Modules
 
-Create a new module file in `packages/modules/`:
+### Simple Module
 
-```json
-{
-  description: Description of what this module provides
+Create `modules/my-module.yaml`:
+
+```yaml
+description: Description of what this module provides
 
 packages:
   - package-one
   - package-two
-  - package-three
 
-conflicts:
-  - other-module
-
+conflicts: []
 post_install_hook: ""
 ```
 
-### Module Fields
+### Nested Module (Multiple Package Files)
 
-- **name**: Module identifier (must match filename)
-- **description**: Human-readable description
-- **conflicts** (optional): Array of module names that conflict with this one
-- **packages**: Array of package names to install
+Create `modules/my-module/module.yaml`:
 
-## Host-Specific Configuration
+```yaml
+description: Multi-file module with submodules
 
-Each host can have its own package file in `packages/hosts/<hostname>.yaml`:
+conflicts:
+  - conflicting-module
 
-```json
-{
-  "name": "desktop",
-  "description": "Desktop machine specific packages",
-  "packages": [
-    "nvidia-dkms",
-    "nvidia-utils"
-  ],
-  "exclude": [
-    "tlp",
-    "laptop-mode-tools"
-  ]
-}
+post_install_hook: "scripts/setup.sh"
+
+package_files:
+  - packages.yaml
+  - optional-packages.yaml
 ```
 
-The `exclude` array removes packages from other sources (useful for avoiding laptop-only packages on desktop).
+Then create `modules/my-module/packages.yaml` with the package list.
 
-## Package Merge Order
+## Host Configuration
 
-Packages are merged in this order:
-1. `base.yaml` - Core packages
-2. `hosts/<hostname>.yaml` - Host-specific packages
-3. Enabled modules - All enabled module packages
-4. `additional_packages` from config.yaml
+Hosts are defined in `hosts/<hostname>.yaml` and contain all machine-specific settings:
 
-Duplicates are automatically removed, and excluded packages are filtered out.
+```yaml
+host: my-desktop
+description: Desktop configuration
 
-## Conflict Detection
+enabled_modules:
+  - bdots-hypr
+  - gaming/gaming
 
-When enabling a module that conflicts with an already-enabled module, you'll be prompted with options:
-1. Disable the conflicting module and enable the new one
-2. Enable both anyway (not recommended)
-3. Cancel
+packages:
+  - nvidia-dkms
 
-The `dcli status` command will show warnings if conflicting modules are enabled.
+exclude:
+  - tlp
+
+auto_prune: false
+backup_tool: snapper
+```
+
+The `config.yaml` file at the root is a pointer to the active host:
+
+```yaml
+host: my-desktop
+```
+
+This allows quick switching between host configurations.
+
+## Module Conflicts
+
+Modules can declare conflicts in their `module.yaml`:
+
+```yaml
+conflicts:
+  - bdots-kde
+  - hyprland
+```
+
+dcli will warn if conflicting modules are enabled in a host configuration.
 
 ## State Tracking
 
@@ -188,25 +193,36 @@ The `state/installed.yaml` file tracks which packages are managed by dcli. This 
 
 ## Tips
 
-- **Start small**: Begin with just base packages and one module
+- **Start small**: Begin with `modules/base.yaml` and a simple host config
 - **Use dry-run**: Always test with `-d` before syncing
-- **Regular backups**: Use `dcli backup` before major changes
-- **Module conflicts**: Define conflicts to prevent incompatible packages
-- **Host files**: Use host files for machine-specific hardware packages
-- **Vertical lists**: All YAML arrays use vertical formatting for easy management
+- **Organize modules**: Use nested modules for complex setups (desktop environments, dev tools)
+- **Module conflicts**: Declare conflicts to prevent incompatible packages
+- **Host pointer**: `config.yaml` just points to active host - all settings in host file
 
 ## Example Workflow
 
 ```bash
-# Initialize (if not already done)
+# Initialize
 dcli init
 
-# Edit base packages
-vim ~/.config/arch-config/packages/base.yaml
+# Set active host in config.yaml
+echo "host: my-laptop" > ~/.config/arch-config/config.yaml
 
-# Enable modules for your use case
-dcli module enable mangowc
-dcli module enable development
+# Create host configuration
+cat > ~/.config/arch-config/hosts/my-laptop.yaml << EOF
+host: my-laptop
+description: Laptop configuration
+
+enabled_modules:
+  - bdots-hypr
+  - cli-tools/cli-apps
+
+packages:
+  - firefox
+
+exclude: []
+auto_prune: false
+EOF
 
 # Preview changes
 dcli sync -d
@@ -216,24 +232,17 @@ dcli sync
 
 # Check status
 dcli status
-
-# Later: add a package temporarily
-vim ~/.config/arch-config/config.yaml
-# Add to "additional_packages" array
-
-# Sync again
-dcli sync
 ```
 
 ## Troubleshooting
 
-**Module not found**: Run `dcli module list` to see available modules
+**Module not found**: Check `modules/` directory structure
 
-**Conflicts**: Run `dcli status` to see conflict warnings
+**Conflicts**: Review module `conflicts` arrays in `module.yaml` files
 
-**YAML errors**: Validate YAML syntax at https://jsonlint.com/
+**YAML errors**: Validate YAML syntax
 
-**State issues**: Delete `state/installed.yaml` to reset tracking (will mark all packages as new)
+**State issues**: Delete `state/installed.yaml` to reset tracking
 
 ## Advanced: Using with Git
 
@@ -242,42 +251,11 @@ Track your configuration in git:
 ```bash
 cd ~/.config/arch-config
 git init
-git add config.yaml packages/
+git add config.yaml hosts/ modules/
 git commit -m "Initial declarative config"
 ```
 
 This lets you version control your system configuration and sync it across machines!
-
-
-```
-```
-README.md
-
-## Packages
-- `packages/base.yaml` - Core packages always installed
-- `packages/modules/` - Optional module collections
-  - `controller-support.yaml` - Game controller support packages
-  - `gaming.yaml` - Gaming-related packages
-  - `hyprland.yaml` - Hyprland window manager and tools
-  - `mangowc.yaml` - MangoWC window manager (custom Wayland compositor)
-  - `multimedia.yaml` - Multimedia tools and codecs
-  - `development.yaml` - Development tools and IDEs
-- `packages/hosts/` - Host-specific package configurations
-
-## State
-- `state/installed.yaml` - Auto-generated tracking of installed packages
-
-## Scripts
-- `scripts/` - Custom scripts and utilities
-  - `backup.sh` - Backup script
-  - `restore.sh` - Restore script
-
-## Udev Rules
-- `udev-rules/` - Custom udev rules for device management
-
-## Automation & Backups
-- `AUTOMATIC_BACKUPS.md` - Information about automatic backup functionality
-- `CONTROLLER_SUPPORT.md` - Guide for controller support packages and configuration
 
 ---
 
@@ -285,7 +263,7 @@ README.md
 
 This is Don's personal configuration. Here's how to use it as inspiration for your own setup:
 
-### 1. Install dcli first
+### 1. Install dcli
 
 ```bash
 git clone https://gitlab.com/theblackdon/dcli.git
@@ -301,36 +279,23 @@ dcli init  # Creates fresh config at ~/.config/arch-config
 
 ### 3. Browse this repository for ideas
 
-- **Modules**: Check out `packages/modules/` for module examples:
-  - `controller-support.yaml` - Game controller setup with post-install hooks
-  - `gaming.yaml` - Gaming packages
-  - `hyprland.yaml` - Hyprland window manager setup
-  - `mangowc.yaml` - Custom Wayland compositor
+- **Modules**: Check `modules/` for examples:
+  - `bdots-hypr/` - Hyprland desktop environment (nested module)
+  - `gaming/` - Gaming packages
+  - `cli-tools/` - CLI utilities
   
-- **Scripts**: Look at `scripts/` for post-install hook examples:
-  - `install-controller-udev-rules.sh` - How to install udev rules via hooks
+- **Scripts**: Look at `scripts/` for post-install hooks
+- **Host configs**: See `hosts/` for multi-machine setups
 
-- **Host configs**: See `packages/hosts/don-eos.yaml` for host-specific package examples
+### 4. Copy and adapt
 
-### 4. Copy and adapt what you need
-
-Feel free to copy module structures, package lists, or scripts from this repo and adapt them to your needs.
+Feel free to copy module structures, package lists, or scripts and adapt them to your needs.
 
 ### Don's Setup
 
-This configuration is for a system running:
-- **Hostname**: don-eos
-- **Enabled modules**: controller-support
-- **Use case**: Gaming, development, and daily use on Arch-based EndeavourOS
-
-### Key Modules in This Config
-
-- **controller-support**: Xbox/PlayStation controller support with automatic udev rules installation
-- **gaming**: Steam, Lutris, and gaming tools
-- **hyprland**: Hyprland Wayland compositor
-- **mangowc**: Custom Wayland compositor configuration
-- **asus**: ASUS laptop-specific tools
-- **lazyvim**: LazyVim Neovim distribution dependencies
+- **Active host**: don-asus (set in `config.yaml`)
+- **Available hosts**: don-asus, don-desktop, don-deck, don-homelab
+- **Key modules**: bdots-hypr, bdots-niri, gaming, cli-tools
 
 ---
 
