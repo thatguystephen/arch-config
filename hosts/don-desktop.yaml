@@ -2,17 +2,17 @@ host: don-desktop
 description: Packages specific to don-eos
 import: []
 enabled_modules:
-- package-mods/main-apps
-- cli-tools/chaotic-aur
-- package-mods/content-creation
-- gaming/controller-support
-- gaming/gaming-packages
-- cli-tools/webapp-tools
-- dev/development
-- cli-tools/cli-apps
-- dev/lazyvim
-- bdots-hypr
-- login-managers/sysc-greet
+  - package-mods/main-apps
+  - cli-tools/chaotic-aur
+  - package-mods/content-creation
+  - gaming/controller-support
+  - gaming/gaming-packages
+  - cli-tools/webapp-tool
+  - dev/development
+  - cli-tools/cli-apps
+  - dev/lazyvim
+  - bdots-hypr
+  - login-managers/sysc-greet
 packages: []
 exclude: []
 additional_packages: []

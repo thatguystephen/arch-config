@@ -7,7 +7,7 @@
 {
   "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
   "logo": {
-    "source": "/home/don/.config/arch-config/logos/blackdontrans.png",
+    "source": "/home/don/.config/arch-config/modules/bdots-hypr/blackdonlogo.png",
     "width": 20,
     "height": 10,
   },

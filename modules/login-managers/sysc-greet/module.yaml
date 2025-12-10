@@ -1,10 +1,11 @@
-description: "SDDM login manager with auto-enable service"
+description: "Sysc-greet login manager with Hyprland support"
 
 conflicts:
   - login-managers/gdm-enable
   - login-managers/lightdm-enable
+  - login-managers/sddm-enable
 
-post_install_hook: "scripts/enable-sddm.sh"
+post_install_hook:
 
 package_files:
-  - sddm.yaml
+  - sysc-greet.yaml
