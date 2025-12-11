@@ -9,8 +9,6 @@ packages:
   - docker-compose
   - portainer-bin
 
-  # Monitoring
-  - uptime-kuma
-
 conflicts: []
 post_install_hook: "scripts/setup-immich.sh"
+hooks_behavior: skip # or "always", "skip", "once" (default)

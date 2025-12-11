@@ -12,10 +12,13 @@ description: Packages specific to don-homelab
 
 # Enabled modules
 enabled_modules:
-  - homelab
+  - home-lab/immich-setup
+  - cli-tools/chaotic-aur
+  - cli-tools/cachyos-repos
 
 # Host-specific packages
-packages: []
+packages:
+  - cosmic-session
 
 # Exclude packages from base or modules
 exclude: []

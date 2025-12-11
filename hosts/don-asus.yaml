@@ -17,6 +17,7 @@ enabled_modules:
 # Host-specific packages
 packages:
   - fish
+  - cosmic-session
 
 # Exclude packages from base or modules
 exclude: []
