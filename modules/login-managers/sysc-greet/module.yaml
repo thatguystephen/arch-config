@@ -5,7 +5,7 @@ conflicts:
   - login-managers/lightdm-enable
   - login-managers/sddm-enable
 
-post_install_hook:
+post_install_hook: "scripts/install-sysc-greet.sh"
 
 package_files:
   - sysc-greet.yaml

@@ -5,6 +5,7 @@ config.yaml
 system-packages.yaml
 state/installed.yaml
 state/hooks-executed.yaml
+modules/declared-packages.yaml
 
 # Backup files
 *.backup.*
