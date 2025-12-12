@@ -1,0 +1,3 @@
+description: Packages for cosmic-xero module
+packages:
+  - cosmic-session

@@ -15,10 +15,12 @@ enabled_modules:
   - home-lab/immich-setup
   - cli-tools/chaotic-aur
   - cli-tools/cachyos-repos
+  - cosmic-xero
 
 # Host-specific packages
 packages:
   - cosmic-session
+  - discord
 
 # Exclude packages from base or modules
 exclude: []
