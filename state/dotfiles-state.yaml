@@ -1,1 +1,5 @@
-backed_up: []
+backed_up:
+- target: /home/don/.config/mango
+  backup: /home/don/.config/mango.backup.20251215_115155
+  module: bdots-mango
+  backed_up_at: 2025-12-15T16:51:55.529289547+00:00

@@ -1,0 +1,15 @@
+last_updated: 2025-12-16T23:45:10.535548199Z
+enabled_services:
+- NetworkManager
+- NetworkManager-dispatcher
+- NetworkManager-wait-online
+- ananicy-cpp
+- avahi-daemon
+- bluetooth
+- getty@
+- greetd
+- nvidia-hibernate
+- nvidia-resume
+- nvidia-suspend
+- ufw
+disabled_services: []

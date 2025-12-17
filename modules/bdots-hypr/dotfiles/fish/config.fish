@@ -14,3 +14,12 @@ fish_add_path $HOME/Dev/flutter/bin
 
 # Set Chrome executable for Flutter web development
 set -gx CHROME_EXECUTABLE /usr/bin/google-chrome-stable
+
+# Helix editor alias
+alias hx helix
+
+# Claude Code alias
+alias cc claude
+
+# Configure sudo askpass helper
+set -gx SUDO_ASKPASS $HOME/.askpass.sh

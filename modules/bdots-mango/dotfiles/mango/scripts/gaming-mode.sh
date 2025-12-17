@@ -4,22 +4,24 @@
 
 STATE_FILE="${XDG_RUNTIME_DIR:-/tmp}/mango-gaming-mode-state"
 
-# Normal positions (from your config)
-NORMAL_DP1_X=2740
-NORMAL_DP1_Y=1455
-NORMAL_DP2_X=820
-NORMAL_DP2_Y=1714
-NORMAL_DP3_X=6180
-NORMAL_DP3_Y=1714
+# Normal positions (from niri config)
+NORMAL_DP1_X=2560
+NORMAL_DP1_Y=0
+NORMAL_DP2_X=0
+NORMAL_DP2_Y=0
+NORMAL_DP3_X=7920
+NORMAL_DP3_Y=0
+NORMAL_HDMI_X=6000
+NORMAL_HDMI_Y=180
 
 # Gaming positions (adds large gaps to prevent cursor movement)
 # DP-1 stays in same position, but DP-2 and DP-3 move far away
-GAMING_DP1_X=2740
-GAMING_DP1_Y=1455
+GAMING_DP1_X=2560
+GAMING_DP1_Y=0
 GAMING_DP2_X=-10000   # Move left monitor far to the left
-GAMING_DP2_Y=1714
+GAMING_DP2_Y=0
 GAMING_DP3_X=20000    # Move right monitor far to the right
-GAMING_DP3_Y=1714
+GAMING_DP3_Y=0
 
 # Check if wlr-randr is available
 if ! command -v wlr-randr &> /dev/null; then
@@ -30,8 +32,9 @@ fi
 if [ -f "$STATE_FILE" ]; then
     # Gaming mode is ON, switch to NORMAL
     echo "Switching to NORMAL mode - monitors adjacent"
-    wlr-randr --output DP-1 --pos ${NORMAL_DP1_X},${NORMAL_DP1_Y} 2>/dev/null
     wlr-randr --output DP-2 --pos ${NORMAL_DP2_X},${NORMAL_DP2_Y} 2>/dev/null
+    wlr-randr --output DP-1 --pos ${NORMAL_DP1_X},${NORMAL_DP1_Y} 2>/dev/null
+    wlr-randr --output HDMI-A-1 --pos ${NORMAL_HDMI_X},${NORMAL_HDMI_Y} 2>/dev/null
     wlr-randr --output DP-3 --pos ${NORMAL_DP3_X},${NORMAL_DP3_Y} 2>/dev/null
     rm "$STATE_FILE"
     notify-send "Gaming Mode OFF" "Monitors restored to normal positions" -i input-gaming 2>/dev/null || notify-send "Gaming Mode OFF" "Monitors restored to normal positions"

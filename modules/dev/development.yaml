@@ -16,5 +16,9 @@ packages:
   - xz
   - zip
   - glu
+  - helix
+  - claude-code
+  - yazi
+  - opencode
 
 conflicts: []

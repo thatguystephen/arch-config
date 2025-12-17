@@ -9,7 +9,7 @@ packages:
   - hyprpaper # Wallpaper utility
   - xdg-desktop-portal-hyprland # Desktop portal
   - wl-clipboard # Clipboard utilities
-  - grimblast
+  - grimblast-git # Screenshot tool
   - grim # Screenshot tool
   - slurp # Region selector
   - nwg-displays # Display configuration

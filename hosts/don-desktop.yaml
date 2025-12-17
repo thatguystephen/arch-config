@@ -13,6 +13,8 @@ enabled_modules:
 - bdots-hypr
 - login-managers/sysc-greet
 - gaming/controller-support
+- bdots-mango
+- editors/helix-catppuccin-mocha
 packages: []
 exclude: []
 additional_packages: []
@@ -20,3 +22,21 @@ backup_tool: snapper
 snapper_config: root
 flatpak_scope: user
 auto_prune: true
+config_backups:
+  enabled: true
+  max_backups: 5
+services:
+  enabled:
+  - NetworkManager
+  - NetworkManager-dispatcher
+  - NetworkManager-wait-online
+  - ananicy-cpp
+  - avahi-daemon
+  - bluetooth
+  - getty@
+  - greetd
+  - nvidia-hibernate
+  - nvidia-resume
+  - nvidia-suspend
+  - ufw
+  disabled: []

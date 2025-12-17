@@ -1,10 +1,13 @@
 #!/bin/bash
-# 自启动脚本 仅作参考
+
 
 set +e
 
 # obs
 dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=wlroots >/dev/null 2>&1
+
+# xdg desktop portal for wlroots
+systemctl --user start xdg-desktop-portal-wlr.service >/dev/null 2>&1 &
 
 # xwayland dpi scale
 echo "Xft.dpi: 96" | xrdb -merge #dpi缩放
@@ -24,10 +27,3 @@ wl-paste --type text --watch cliphist store >/dev/null 2>&1 &
 
 # inhibit by audio
 sway-audio-idle-inhibit >/dev/null 2>&1 &
-
-# crystal dock
-crystal-dock -d >/dev/null 2>&1 &
-
-# vesktop and telegram on DP-2
-vesktop >/dev/null 2>&1 &
-Telegram >/dev/null 2>&1 &

@@ -11,5 +11,6 @@ packages:
   - zen-browser-bin
   - zed
   - fish
+  - helix
 # Conflicts with other window managers
 conflicts: []
