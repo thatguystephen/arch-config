@@ -9,6 +9,7 @@ packages:
   - mangohud # Performance overlay
   - gamemode # Optimize system for gaming
   - protonup-qt # Proton version manager
+  - sunshine # Remote Gaming
 
 conflicts: []
 post_install_hook: ""

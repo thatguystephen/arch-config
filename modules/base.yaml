@@ -10,7 +10,6 @@ packages:
   - networkmanager
   - vim
   - git
-  - rust
   - htop
   - man-db
   - man-pages

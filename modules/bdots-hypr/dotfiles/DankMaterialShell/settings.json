@@ -147,8 +147,8 @@
   "soundNewNotification": true,
   "soundVolumeChanged": true,
   "soundPluggedIn": true,
-  "acMonitorTimeout": 1800,
-  "acLockTimeout": 1200,
+  "acMonitorTimeout": 0,
+  "acLockTimeout": 0,
   "acSuspendTimeout": 0,
   "acSuspendBehavior": 0,
   "acProfileName": "",
@@ -157,9 +157,9 @@
   "batterySuspendTimeout": 0,
   "batterySuspendBehavior": 0,
   "batteryProfileName": "",
-  "lockBeforeSuspend": true,
+  "lockBeforeSuspend": false,
   "loginctlLockIntegration": true,
-  "fadeToLockEnabled": true,
+  "fadeToLockEnabled": false,
   "fadeToLockGracePeriod": 5,
   "launchPrefix": "",
   "brightnessDevicePins": {},
@@ -262,6 +262,7 @@
   "showOnLastDisplay": {
     "dock": true
   },
+  "niriOutputSettings": {},
   "barConfigs": [
     {
       "id": "default",

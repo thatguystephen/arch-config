@@ -15,6 +15,7 @@ enabled_modules:
 - gaming/controller-support
 - bdots-mango
 - editors/helix-catppuccin-mocha
+- gaming/sunshine
 packages: []
 exclude: []
 additional_packages: []
@@ -40,3 +41,4 @@ services:
   - nvidia-suspend
   - ufw
   disabled: []
+editor: helix

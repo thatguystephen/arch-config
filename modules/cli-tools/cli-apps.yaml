@@ -16,6 +16,7 @@ packages:
   - lolcat
   - micro
   - pipes.sh
+  - fresh-editor-bin
 
 # Modules that conflict with this one
 conflicts: []

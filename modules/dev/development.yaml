@@ -20,5 +20,6 @@ packages:
   - claude-code
   - yazi
   - opencode
+  - tmux
 
 conflicts: []
