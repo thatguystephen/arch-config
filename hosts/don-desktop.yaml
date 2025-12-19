@@ -39,6 +39,7 @@ services:
   - nvidia-hibernate
   - nvidia-resume
   - nvidia-suspend
+  - tailscaled
   - ufw
   disabled: []
 editor: helix
