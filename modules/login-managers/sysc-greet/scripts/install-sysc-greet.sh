@@ -25,12 +25,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 MODULE_DIR="$(dirname "$SCRIPT_DIR")"
 CONFIG_DIR="$MODULE_DIR/config"
 
-# Run the official sysc-greet install script
-echo -e "${BLUE}Fetching and running sysc-greet installer...${NC}"
-curl -fsSL https://raw.githubusercontent.com/Nomadcxx/sysc-greet/master/install.sh | bash
-
-echo ""
-echo -e "${BLUE}Applying custom configuration...${NC}"
+echo -e "${BLUE}Applying custom sysc-greet configuration...${NC}"
 
 # Backup existing configs if they exist
 if [ -f /etc/greetd/hyprland-greeter-config.conf ]; then
