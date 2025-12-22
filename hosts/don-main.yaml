@@ -1,0 +1,24 @@
+host: don-main
+description: ''
+import: []
+enabled_modules:
+- bdots-hypr
+- package-mods/main-apps
+- editors/helix-catppuccin-mocha
+- gaming/gaming-packages
+- gaming/controller-support
+packages: []
+exclude: []
+additional_packages: []
+backup_tool: snapper
+snapper_config: root
+flatpak_scope: user
+auto_prune: false
+config_backups:
+  enabled: true
+  max_backups: 5
+services:
+  enabled: []
+  disabled: []
+editor: helix
+aur_helper: yay
