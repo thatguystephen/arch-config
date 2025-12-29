@@ -1,0 +1,26 @@
+host: don-flow
+description: Packages specific to don-eos
+import: []
+enabled_modules:
+- bdots-hypr
+- asus/asus
+- login-managers/sddm-enable
+- package-mods/main-apps
+- package-mods/content-creation
+- editors/helix-catppuccin-mocha
+- bdots-hypr/qs-hyprview
+packages: []
+exclude: []
+additional_packages: []
+backup_tool: snapper
+snapper_config: root
+flatpak_scope: user
+auto_prune: true
+config_backups:
+  enabled: true
+  max_backups: 5
+services:
+  enabled: []
+  disabled: []
+editor: helix
+aur_helper: yay

@@ -1,4 +1,4 @@
-description: "SDDM login manager with auto-enable service"
+description: "SDDM login manager with Catppuccin theme (12-hour time)"
 
 conflicts:
   - login-managers/gdm-enable
