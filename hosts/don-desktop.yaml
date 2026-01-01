@@ -1,4 +1,4 @@
-host: don-main
+host: don-desktop
 description: ''
 import: []
 enabled_modules:
@@ -7,6 +7,11 @@ enabled_modules:
 - editors/helix-catppuccin-mocha
 - gaming/gaming-packages
 - gaming/controller-support
+- cli-tools/cli-apps
+- login-managers/sddm-enable
+- package-mods/content-creation
+- zen-catppuccin
+- dev/development
 packages: []
 exclude: []
 additional_packages: []

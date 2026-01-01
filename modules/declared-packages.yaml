@@ -1,8 +1,5 @@
 description: Packages installed via dcli install or dcli search commands
 packages:
-- fish
-- rustup
-- yay-bin
 - github-cli
 - qt5-base
 - claude-code
@@ -10,3 +7,4 @@ packages:
 - moonlight-qt
 - flatpak
 - zoom
+- niri
