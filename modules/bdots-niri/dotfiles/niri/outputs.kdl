@@ -1,0 +1,11 @@
+// Left ultrawide monitor
+output "DP-2" {
+    mode "3440x1440@59.97"
+    position x=0 y=0
+}
+
+// Right ultrawide monitor
+output "DP-1" {
+    mode "3440x1440@59.97"
+    position x=3440 y=0
+}
