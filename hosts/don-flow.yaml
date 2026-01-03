@@ -9,6 +9,7 @@ enabled_modules:
 - package-mods/content-creation
 - editors/helix-catppuccin-mocha
 - bdots-hypr/qs-hyprview
+- dev/development
 packages: []
 exclude: []
 additional_packages: []
