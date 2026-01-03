@@ -12,13 +12,15 @@ enabled_modules:
 - package-mods/content-creation
 - zen-catppuccin
 - dev/development
+- bdots-niri
+- gaming/sunshine
 packages: []
 exclude: []
 additional_packages: []
 backup_tool: snapper
 snapper_config: root
 flatpak_scope: user
-auto_prune: false
+auto_prune: true
 config_backups:
   enabled: true
   max_backups: 5

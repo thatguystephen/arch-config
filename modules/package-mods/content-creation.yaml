@@ -6,10 +6,11 @@ description: Content Creation Packages
 # List of packages in this module
 packages:
   - lightworks
+  - mpv
   - flatpak:com.obsproject.Studio
   - flatpak:com.obsproject.Studio.Plugin.AitumMultistream
   - flatpak:com.obsproject.Studio.Plugin.VerticalCanvas
-
+  # - flatpak:com.obsproject.Studio.Plugin.AitumStreamSuite
 # Modules that conflict with this one
 conflicts: []
 

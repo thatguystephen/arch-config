@@ -17,4 +17,3 @@ tab_title_template          {title}{' :{}:'.format(num_windows) if num_windows >
 # repaint_delay 2
 # sync_to_monitor no
 # wayland_enable_ime no
-map shift+enter send_text all \e\r

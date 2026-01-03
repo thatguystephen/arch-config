@@ -6,6 +6,5 @@ description: Shell components for Niri
 packages:
   - dms-shell-git # DankMaterialShell (bar, notifications, launcher, lock)
   - quickshell # DMS dependency
-  - crystal-dock-bin # Application dock
 
 conflicts: []

@@ -15,3 +15,7 @@ backed_up:
   backup: /home/don/.config/gtk-4.0.backup.20251226_195353
   module: bdots-hypr
   backed_up_at: 2025-12-27T00:54:07.678345264Z
+- target: /home/don/.config/niri
+  backup: /home/don/.config/niri.backup.20260102_194516
+  module: bdots-niri
+  backed_up_at: 2026-01-03T00:45:16.581132301+00:00
