@@ -15,14 +15,7 @@ backed_up:
   backup: /home/don/.config/gtk-4.0.backup.20251226_195353
   module: bdots-hypr
   backed_up_at: 2025-12-27T00:54:07.678345264Z
-<<<<<<< HEAD
-- target: /home/don/.config/niri
-  backup: /home/don/.config/niri.backup.20260102_194516
-  module: bdots-niri
-  backed_up_at: 2026-01-03T00:45:16.581132301+00:00
-=======
 - target: /home/don/.config/zed
   backup: /home/don/.config/zed.backup.20251230_223703
   module: bdots-hypr
   backed_up_at: 2025-12-31T03:37:03.674676999+00:00
->>>>>>> 7163101 (flow changes)

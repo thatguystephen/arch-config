@@ -7,8 +7,4 @@ packages:
 - moonlight-qt
 - flatpak
 - zoom
-<<<<<<< HEAD
-- niri
-=======
 - 📦 [    Library for accessing a shoutcast] icecast
->>>>>>> 7163101 (flow changes)
