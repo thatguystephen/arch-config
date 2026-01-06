@@ -35,9 +35,10 @@ if [ ! -d "$ZEN_PROFILE_DIR" ]; then
   exit 0
 fi
 
-# Find the default profile (usually ends with .default-release)
+# Find the default profile (usually ends with .default-release or .Default)
 PROFILE_PATH=""
-for profile in "$ZEN_PROFILE_DIR"/*.default* "$ZEN_PROFILE_DIR"/*.default-release; do
+# Try multiple patterns for different Zen Browser profile naming conventions
+for profile in "$ZEN_PROFILE_DIR"/*.default* "$ZEN_PROFILE_DIR"/*.default-release "$ZEN_PROFILE_DIR"/*.Default*; do
   if [ -d "$profile" ]; then
     PROFILE_PATH="$profile"
     break
@@ -71,23 +72,108 @@ if ! sudo -u "$ACTUAL_USER" git clone --depth 1 https://github.com/catppuccin/ze
 fi
 
 # Copy Mocha theme files
-MOCHA_DIR="$TEMP_DIR/catppuccin-zen/themes/mocha"
-
-if [ ! -d "$MOCHA_DIR" ]; then
-  echo -e "${RED}Error: Mocha theme directory not found${NC}" >&2
-  echo -e "${YELLOW}Available themes:${NC}"
+# Try multiple possible directory structures
+if [ -d "$TEMP_DIR/catppuccin-zen/themes/mocha" ]; then
+  MOCHA_DIR="$TEMP_DIR/catppuccin-zen/themes/mocha"
+elif [ -d "$TEMP_DIR/catppuccin-zen/Mocha" ]; then
+  MOCHA_DIR="$TEMP_DIR/catppuccin-zen/Mocha"
+elif [ -d "$TEMP_DIR/catppuccin-zen/themes" ]; then
+  # Check what's in the themes directory
+  echo -e "${YELLOW}Checking themes directory structure...${NC}"
   ls -la "$TEMP_DIR/catppuccin-zen/themes/" || true
+
+  # Try to find mocha in subdirectories (case-insensitive)
+  MOCHA_FOUND=$(find "$TEMP_DIR/catppuccin-zen/themes" -maxdepth 2 -type d -iname "*mocha*" | head -1)
+  if [ -n "$MOCHA_FOUND" ]; then
+    MOCHA_DIR="$MOCHA_FOUND"
+    echo -e "${GREEN}Found Mocha theme at: $MOCHA_DIR${NC}"
+  else
+    echo -e "${RED}Error: Mocha theme directory not found${NC}" >&2
+    echo -e "${YELLOW}Available content in themes/:${NC}"
+    find "$TEMP_DIR/catppuccin-zen/themes" -maxdepth 2 -type d || true
+    exit 1
+  fi
+else
+  echo -e "${RED}Error: Could not find themes directory${NC}" >&2
+  echo -e "${YELLOW}Repository structure:${NC}"
+  ls -la "$TEMP_DIR/catppuccin-zen/" || true
   exit 1
 fi
 
 echo -e "${BLUE}Installing theme files to: $CHROME_DIR${NC}"
 
-# Copy theme files
-sudo -u "$ACTUAL_USER" cp "$MOCHA_DIR/userChrome.css" "$CHROME_DIR/"
-sudo -u "$ACTUAL_USER" cp "$MOCHA_DIR/userContent.css" "$CHROME_DIR/"
-sudo -u "$ACTUAL_USER" cp "$MOCHA_DIR/zen-logo.svg" "$CHROME_DIR/"
+# Check what files are available in the theme directory
+echo -e "${YELLOW}Available files in theme directory:${NC}"
+ls -la "$MOCHA_DIR/" || true
+echo ""
+
+# Copy theme files (check for different possible filenames)
+COPIED_FILES=0
+
+# Try to copy userChrome.css (or alternatives)
+if [ -f "$MOCHA_DIR/userChrome.css" ]; then
+  sudo -u "$ACTUAL_USER" cp "$MOCHA_DIR/userChrome.css" "$CHROME_DIR/"
+  echo -e "${GREEN}✓ Copied userChrome.css${NC}"
+  COPIED_FILES=$((COPIED_FILES + 1))
+elif [ -f "$MOCHA_DIR/chrome/userChrome.css" ]; then
+  sudo -u "$ACTUAL_USER" cp "$MOCHA_DIR/chrome/userChrome.css" "$CHROME_DIR/"
+  echo -e "${GREEN}✓ Copied userChrome.css from chrome/ subdirectory${NC}"
+  COPIED_FILES=$((COPIED_FILES + 1))
+else
+  echo -e "${YELLOW}Warning: userChrome.css not found${NC}"
+fi
+
+# Try to copy userContent.css (or alternatives)
+if [ -f "$MOCHA_DIR/userContent.css" ]; then
+  sudo -u "$ACTUAL_USER" cp "$MOCHA_DIR/userContent.css" "$CHROME_DIR/"
+  echo -e "${GREEN}✓ Copied userContent.css${NC}"
+  COPIED_FILES=$((COPIED_FILES + 1))
+elif [ -f "$MOCHA_DIR/chrome/userContent.css" ]; then
+  sudo -u "$ACTUAL_USER" cp "$MOCHA_DIR/chrome/userContent.css" "$CHROME_DIR/"
+  echo -e "${GREEN}✓ Copied userContent.css from chrome/ subdirectory${NC}"
+  COPIED_FILES=$((COPIED_FILES + 1))
+fi
+
+# Try to copy logo
+if [ -f "$MOCHA_DIR/zen-logo.svg" ]; then
+  sudo -u "$ACTUAL_USER" cp "$MOCHA_DIR/zen-logo.svg" "$CHROME_DIR/"
+  echo -e "${GREEN}✓ Copied zen-logo.svg${NC}"
+  COPIED_FILES=$((COPIED_FILES + 1))
+fi
+
+# Copy all CSS and SVG files if specific files weren't found
+if [ $COPIED_FILES -eq 0 ]; then
+  echo -e "${YELLOW}Attempting to copy all CSS and SVG files...${NC}"
+  find "$MOCHA_DIR" -maxdepth 2 -type f \( -name "*.css" -o -name "*.svg" \) -exec sudo -u "$ACTUAL_USER" cp {} "$CHROME_DIR/" \;
+  COPIED_FILES=$(find "$CHROME_DIR" -type f \( -name "*.css" -o -name "*.svg" \) | wc -l)
+  echo -e "${GREEN}✓ Copied $COPIED_FILES theme files${NC}"
+fi
+
+if [ $COPIED_FILES -eq 0 ]; then
+  echo -e "${RED}Error: No theme files were copied${NC}" >&2
+  exit 1
+fi
 
 echo -e "${GREEN}✓ Theme files installed successfully${NC}"
+echo ""
+
+# Replace blue accent color with mauve
+echo -e "${BLUE}Customizing theme: Replacing blue accent with mauve...${NC}"
+BLUE_COLOR="#89b4fa"
+MAUVE_COLOR="#cba6f7"
+
+# Replace in userChrome.css if it exists
+if [ -f "$CHROME_DIR/userChrome.css" ]; then
+  sudo -u "$ACTUAL_USER" sed -i "s/$BLUE_COLOR/$MAUVE_COLOR/g" "$CHROME_DIR/userChrome.css"
+  echo -e "${GREEN}✓ Updated userChrome.css to use mauve accent${NC}"
+fi
+
+# Replace in userContent.css if it exists
+if [ -f "$CHROME_DIR/userContent.css" ]; then
+  sudo -u "$ACTUAL_USER" sed -i "s/$BLUE_COLOR/$MAUVE_COLOR/g" "$CHROME_DIR/userContent.css"
+  echo -e "${GREEN}✓ Updated userContent.css to use mauve accent${NC}"
+fi
+
 echo ""
 
 # Update user.js to enable legacy stylesheets

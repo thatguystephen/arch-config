@@ -10,20 +10,24 @@ enabled_modules:
 - cli-tools/cli-apps
 - login-managers/sddm-enable
 - package-mods/content-creation
-- zen-catppuccin
 - dev/development
 - bdots-niri
 - gaming/sunshine
+- zen-catppuccin
 packages: []
 exclude: []
 additional_packages: []
-backup_tool: snapper
-snapper_config: root
 flatpak_scope: user
 auto_prune: true
 config_backups:
   enabled: true
   max_backups: 5
+system_backups:
+  enabled: true
+  backup_on_sync: true
+  backup_on_update: true
+  tool: snapper
+  snapper_config: root
 services:
   enabled: []
   disabled: []

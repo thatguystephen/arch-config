@@ -20,6 +20,7 @@ binds {
     Mod+Space hotkey-overlay-title="Open DMS Launcher" { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
     Mod+D hotkey-overlay-title="Open Discord" { spawn "vesktop"; }
     Mod+F hotkey-overlay-title="Open Discord" { spawn "dolphin"; }
+    Mod+Shift+N hotkey-overlay-title="Open Obsidian" { spawn "obsidian"; }
     Mod+G hotkey-overlay-title="Open Telegram" { spawn "Telegram"; }
     Mod+B hotkey-overlay-title="Open Zen Browser" { spawn "zen-browser"; }
     Mod+Shift+Z hotkey-overlay-title="Open Zed Editor" { spawn "sh" "-c" "$HOME/.config/niri/Scripts/zed-resize-fix.sh"; }

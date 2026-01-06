@@ -10,6 +10,7 @@ packages:
   - gamemode # Optimize system for gaming
   - protonup-qt # Proton version manager
   - sunshine # Remote Gaming
+  - joyshockmapper-git
 
 conflicts: []
 post_install_hook: ""

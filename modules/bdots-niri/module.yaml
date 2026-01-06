@@ -2,12 +2,14 @@ description: "Main Module to source other yaml files for bdots-niri"
 
 # Optional: Modules that conflict with this one
 conflicts:
-  - bdots-hypr
   - bdots-kde
 
 # Optional: Post-install hook script (relative to module directory)
 post_install_hook: "scripts/install-niri-dotfiles.sh"
 hooks_behavior: skip # or "always", "skip", "once" (default)
+
+# Optional: Dotfiles Sync
+dotfiles_sync: true
 
 # Optional: Explicit list of package files to load (empty = auto-discover)
 package_files:

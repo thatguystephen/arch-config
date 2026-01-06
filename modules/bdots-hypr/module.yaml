@@ -8,6 +8,9 @@ conflicts:
 post_install_hook: "scripts/install-hyprland-dotfiles.sh"
 hooks_behavior: once # or "always", "skip", "once" (default)
 
+# Optional: Dotfiles Sync
+dotfiles_sync: false
+
 # Optional: Explicit list of package files to load (empty = auto-discover)
 package_files:
   - quickshells.yaml
