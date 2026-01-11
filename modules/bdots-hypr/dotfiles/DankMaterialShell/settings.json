@@ -1,8 +1,7 @@
 {
-  "currentThemeName": "custom",
-  "currentThemeCategory": "registry",
+  "currentThemeName": "cat-mauve",
+  "currentThemeCategory": "catppuccin",
   "customThemeFile": "/home/don/.config/DankMaterialShell/themes/catppuccin/theme.json",
-  "registryThemeVariants": {},
   "matugenScheme": "scheme-content",
   "runUserMatugenTemplates": true,
   "matugenTargetMonitor": "",
@@ -104,13 +103,11 @@
   "maxWorkspaceIcons": 2,
   "workspacesPerMonitor": true,
   "showOccupiedWorkspacesOnly": false,
-  "reverseScrolling": false,
   "dwlShowAllTags": true,
   "workspaceNameIcons": {},
   "waveProgressEnabled": true,
   "scrollTitleEnabled": true,
   "audioVisualizerEnabled": true,
-  "audioScrollEnabled": true,
   "clockCompactMode": false,
   "focusedWindowCompactMode": false,
   "runningAppsCompactMode": true,
@@ -188,7 +185,6 @@
   "matugenTemplateQt6ct": true,
   "matugenTemplateFirefox": true,
   "matugenTemplatePywalfox": true,
-  "matugenTemplateZenBrowser": true,
   "matugenTemplateVesktop": true,
   "matugenTemplateEquibop": true,
   "matugenTemplateGhostty": true,
@@ -244,7 +240,13 @@
   "osdAudioOutputEnabled": true,
   "powerActionConfirm": true,
   "powerActionHoldDuration": 0.5,
-  "powerMenuActions": ["reboot", "logout", "poweroff", "lock", "restart"],
+  "powerMenuActions": [
+    "reboot",
+    "logout",
+    "poweroff",
+    "lock",
+    "restart"
+  ],
   "powerMenuDefaultAction": "logout",
   "powerMenuGridLayout": false,
   "customPowerActionLock": "",
@@ -277,10 +279,20 @@
       "name": "Main Bar",
       "enabled": true,
       "position": 0,
-      "screenPreferences": ["all"],
+      "screenPreferences": [
+        "all"
+      ],
       "showOnLastDisplay": true,
-      "leftWidgets": ["launcherButton", "workspaceSwitcher", "focusedWindow"],
-      "centerWidgets": ["music", "clock", "weather"],
+      "leftWidgets": [
+        "launcherButton",
+        "workspaceSwitcher",
+        "focusedWindow"
+      ],
+      "centerWidgets": [
+        "music",
+        "clock",
+        "weather"
+      ],
       "rightWidgets": [
         {
           "id": "systemUpdate",
@@ -347,7 +359,10 @@
       ],
       "showOnLastDisplay": false,
       "leftWidgets": [],
-      "centerWidgets": ["clock", "weather"],
+      "centerWidgets": [
+        "clock",
+        "weather"
+      ],
       "rightWidgets": [
         {
           "id": "powerMenuButton",
@@ -467,7 +482,9 @@
   "desktopClockY": -1,
   "desktopClockWidth": 280,
   "desktopClockHeight": 180,
-  "desktopClockDisplayPreferences": ["all"],
+  "desktopClockDisplayPreferences": [
+    "all"
+  ],
   "systemMonitorEnabled": true,
   "systemMonitorShowHeader": true,
   "systemMonitorTransparency": 0.8,
@@ -504,7 +521,9 @@
   "systemMonitorY": -1,
   "systemMonitorWidth": 320,
   "systemMonitorHeight": 480,
-  "systemMonitorDisplayPreferences": ["all"],
+  "systemMonitorDisplayPreferences": [
+    "all"
+  ],
   "systemMonitorVariants": [],
   "desktopWidgetPositions": {
     "desktopClock": {
@@ -551,7 +570,9 @@
         "showDate": true,
         "showAnalogNumbers": false,
         "showAnalogSeconds": true,
-        "displayPreferences": ["all"]
+        "displayPreferences": [
+          "all"
+        ]
       },
       "positions": {
         "DP-2": {
@@ -561,6 +582,10 @@
         "DP-1": {
           "x": 15.66015625,
           "y": 56.6328125
+        },
+        "eDP-1": {
+          "x": 10.5859375,
+          "y": 50.859375
         }
       }
     },
@@ -601,7 +626,9 @@
         "topProcessSortBy": "cpu",
         "layoutMode": "auto",
         "graphInterval": 60,
-        "displayPreferences": ["all"]
+        "displayPreferences": [
+          "all"
+        ]
       },
       "positions": {
         "DP-2": {
@@ -611,6 +638,10 @@
         "DP-1": {
           "x": 3071.8828125,
           "y": 53.01171875
+        },
+        "eDP-1": {
+          "x": 1207.01171875,
+          "y": 54.12109375
         }
       }
     }
