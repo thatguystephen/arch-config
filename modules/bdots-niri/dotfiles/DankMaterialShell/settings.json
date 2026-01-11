@@ -205,7 +205,7 @@
   "matugenTemplateDgop": true,
   "matugenTemplateKcolorscheme": true,
   "matugenTemplateVscode": true,
-  "showDock": false,
+  "showDock": true,
   "dockAutoHide": false,
   "dockGroupByApp": true,
   "dockOpenOnOverview": false,
@@ -274,6 +274,15 @@
       {
         "name": "DP-1",
         "model": "CU34G2XP"
+      },
+      {
+        "name": "DP-2",
+        "model": "CU34G2XP",
+        "modelIndex": 0
+      },
+      {
+        "name": "DP-3",
+        "model": "LG ULTRAGEAR"
       }
     ]
   },
@@ -298,6 +307,10 @@
           "name": "DP-2",
           "model": "CU34G2XP",
           "modelIndex": 0
+        },
+        {
+          "name": "DP-3",
+          "model": "LG ULTRAGEAR"
         }
       ],
       "showOnLastDisplay": true,

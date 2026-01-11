@@ -13,11 +13,18 @@ binds {
     // shows a list of important hotkeys.
     Mod+Shift+Slash { show-hotkey-overlay; }
 
+    // Shell Commands
+    //
+    // Noctalia Shell
+    //Mod+Space hotkey-overlay-title="Open Noctalia Launcher" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
+    // Dank Material Shell
+    Mod+Space hotkey-overlay-title="Open DMS Launcher" { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
+    Mod+Ctrl+Space hotkey-overlay-title="Open DMS Overview" { spawn "dms" "ipc" "call" "dash" "open" "overview"; }
+
     // Suggested binds for running programs: terminal, app launcher, screen locker.
+
     Mod+T hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
     Mod+Return hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
-    //Mod+Space hotkey-overlay-title="Open Noctalia Launcher" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
-    Mod+Space hotkey-overlay-title="Open DMS Launcher" { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
     Mod+D hotkey-overlay-title="Open Discord" { spawn "vesktop"; }
     Mod+F hotkey-overlay-title="Open Discord" { spawn "dolphin"; }
     Mod+Shift+N hotkey-overlay-title="Open Obsidian" { spawn "obsidian"; }

@@ -18,5 +18,6 @@ packages:
   - mako # Notification daemon
   - waybar # Status bar
   - sway-audio-idle-inhibit-git # Prevent idle during audio
+  - swayidle # Idle management
 
 conflicts: []

@@ -1,0 +1,5 @@
+description: "DankGreeter packages"
+
+packages:
+  - greetd
+  - greetd-dms-greeter-git

@@ -1,0 +1,11 @@
+description: Packages Needed for Theming
+
+# List of packages in this module
+packages:
+  - aether
+
+# Modules that conflict with this one
+conflicts: []
+
+# Script to run after installing packages (optional)
+post_install_hook: ""
