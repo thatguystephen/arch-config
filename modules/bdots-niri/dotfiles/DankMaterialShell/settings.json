@@ -1,13 +1,7 @@
 {
-  "currentThemeName": "custom",
-  "currentThemeCategory": "registry",
+  "currentThemeName": "cat-mauve",
+  "currentThemeCategory": "catppuccin",
   "customThemeFile": "/home/don/.config/DankMaterialShell/themes/catppuccin/theme.json",
-  "registryThemeVariants": {
-    "catppuccin": {
-      "flavor": "mocha",
-      "accent": "mauve"
-    }
-  },
   "matugenScheme": "scheme-rainbow",
   "runUserMatugenTemplates": true,
   "matugenTargetMonitor": "",
@@ -109,13 +103,11 @@
   "maxWorkspaceIcons": 2,
   "workspacesPerMonitor": true,
   "showOccupiedWorkspacesOnly": false,
-  "reverseScrolling": false,
   "dwlShowAllTags": true,
   "workspaceNameIcons": {},
   "waveProgressEnabled": true,
   "scrollTitleEnabled": true,
   "audioVisualizerEnabled": true,
-  "audioScrollEnabled": true,
   "clockCompactMode": false,
   "focusedWindowCompactMode": false,
   "runningAppsCompactMode": true,
@@ -193,7 +185,6 @@
   "matugenTemplateQt6ct": true,
   "matugenTemplateFirefox": true,
   "matugenTemplatePywalfox": true,
-  "matugenTemplateZenBrowser": true,
   "matugenTemplateVesktop": true,
   "matugenTemplateEquibop": true,
   "matugenTemplateGhostty": true,

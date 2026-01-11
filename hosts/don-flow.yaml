@@ -1,10 +1,11 @@
 host: don-flow
-description: Packages specific to don-eos
+description: Packages specific to don-flow
 import: []
 module_processing: sequential
 enabled_modules:
   - bdots-hypr
   - asus/asus
+  - cli-tools/webapp-tool
   - login-managers/sddm-enable
   - package-mods/main-apps
   - package-mods/content-creation
