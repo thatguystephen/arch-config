@@ -16,12 +16,13 @@ enabled_modules:
 - zen-catppuccin
 - login-managers/dms-greeter
 - cli-tools/webapp-tool
-- ricing/theming-apps
 packages: []
 exclude: []
 additional_packages: []
 flatpak_scope: user
 auto_prune: true
+module_processing: sequential
+strict_package_order: true
 config_backups:
   enabled: true
   max_backups: 5
@@ -32,7 +33,36 @@ system_backups:
   tool: snapper
   snapper_config: root
 services:
-  enabled: []
+  enabled:
+  - NetworkManager
+  - NetworkManager-dispatcher
+  - NetworkManager-wait-online
+  - ananicy-cpp
+  - avahi-daemon
+  - bluetooth
+  - getty@
+  - greetd
+  - grub-btrfsd
+  - nvidia-hibernate
+  - nvidia-resume
+  - nvidia-suspend
+  - tailscaled
+  - ufw
   disabled: []
+update_hooks:
+  pre_update: null
+  post_update: null
+  behavior: ask
+default_apps:
+  scope: system
+  browser: null
+  text_editor: null
+  file_manager: null
+  terminal: null
+  video_player: null
+  audio_player: null
+  image_viewer: null
+  pdf_viewer: null
+  mime_types: {}
 editor: helix
 aur_helper: yay

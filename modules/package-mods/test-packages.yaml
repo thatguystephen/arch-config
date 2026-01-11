@@ -1,0 +1,5 @@
+description: Module number 1 for testing purposes.
+
+packages:
+  - ghostty
+  - hwatch

@@ -33,6 +33,7 @@ binds {
     Mod+Shift+Z hotkey-overlay-title="Open Zed Editor" { spawn "sh" "-c" "$HOME/.config/niri/Scripts/zed-resize-fix.sh"; }
     Mod+S hotkey-overlay-title="Open Steam" { spawn "steam"; }
     Mod+Ctrl+C hotkey-overlay-title="Open OpenCode" { spawn "kitty" "opencode"; }
+    Mod+Ctrl+P hotkey-overlay-title="Open Perplexity" { spawn "perplexity"; }
     Mod+Ctrl+Return { spawn "kitty" "--class=floating-kitty"; }
     Mod+Shift+O hotkey-overlay-title="Open OBS Studio" { spawn "flatpak" "run" "com.obsproject.Studio"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }

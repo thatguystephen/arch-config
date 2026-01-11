@@ -1,0 +1,5 @@
+description: Module number 2 for testing purposes.
+
+packages:
+  - hurl
+  - hyperfine

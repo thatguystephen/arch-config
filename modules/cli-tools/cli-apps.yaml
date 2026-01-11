@@ -16,6 +16,7 @@ packages:
   - lolcat
   - micro
   - pipes.sh
+  - perplexity
 
 # Modules that conflict with this one
 conflicts: []

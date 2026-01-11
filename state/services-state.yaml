@@ -1,4 +1,4 @@
-last_updated: 2026-01-10T23:57:53.409429758Z
+last_updated: 2026-01-11T21:24:54.000732155Z
 enabled_services:
 - NetworkManager
 - NetworkManager-dispatcher
@@ -7,6 +7,11 @@ enabled_services:
 - avahi-daemon
 - bluetooth
 - getty@
+- greetd
+- grub-btrfsd
+- nvidia-hibernate
+- nvidia-resume
+- nvidia-suspend
 - tailscaled
 - ufw
 disabled_services: []
