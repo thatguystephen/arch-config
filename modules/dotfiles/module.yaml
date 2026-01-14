@@ -1,0 +1,6 @@
+description: "Dotfiles for my WM themes"
+# Optional: Dotfiles Sync
+dotfiles_sync: true
+
+package_files:
+  - packages.yaml

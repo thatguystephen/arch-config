@@ -1,21 +1,23 @@
-last_updated: 2026-01-11T21:24:53.999759945Z
+last_updated: 2026-01-14T14:01:42.965282252Z
 completed_modules:
-  - ricing/theming-apps
-  - cli-tools/webapp-tool
-  - package-mods/main-apps
-  - package-mods/test-packages-2
-  - bdots-hypr
-  - asus/asus
-  - login-managers/dms-greeter
-  - zen-catppuccin
-  - gaming/gaming-packages
-  - package-mods/test-packages
-  - package-mods/content-creation
-  - bdots-hypr/qs-hyprview
-  - cli-tools/cli-apps
-  - dev/development
-  - gaming/controller-support
-  - login-managers/sddm-enable
-  - gaming/sunshine
-  - bdots-niri
-  - editors/helix-catppuccin-mocha
+- bd-niri
+- dev/development
+- package-mods/test-packages-2
+- cli-tools/webapp-tool
+- package-mods/test-packages
+- editors/helix-catppuccin-mocha
+- bdots-niri
+- asus/asus
+- package-mods/main-apps
+- login-managers/dms-greeter
+- ricing/theming-apps
+- gaming/sunshine
+- login-managers/sddm-enable
+- gaming/controller-support
+- package-mods/content-creation
+- bdots-hypr
+- gaming/gaming-packages
+- bdots-hypr/qs-hyprview
+- dotfiles
+- cli-tools/cli-apps
+- zen-catppuccin

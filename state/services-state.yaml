@@ -1,17 +1,17 @@
-last_updated: 2026-01-11T21:24:54.000732155Z
+last_updated: 2026-01-14T14:01:42.966466183Z
 enabled_services:
-  - NetworkManager
-  - NetworkManager-dispatcher
-  - NetworkManager-wait-online
-  - ananicy-cpp
-  - avahi-daemon
-  - bluetooth
-  - getty@
-  - greetd
-  - grub-btrfsd
-  - nvidia-hibernate
-  - nvidia-resume
-  - nvidia-suspend
-  - tailscaled
-  - ufw
+- NetworkManager
+- NetworkManager-dispatcher
+- NetworkManager-wait-online
+- ananicy-cpp
+- avahi-daemon
+- bluetooth
+- getty@
+- greetd
+- grub-btrfsd
+- nvidia-hibernate
+- nvidia-resume
+- nvidia-suspend
+- tailscaled
+- ufw
 disabled_services: []

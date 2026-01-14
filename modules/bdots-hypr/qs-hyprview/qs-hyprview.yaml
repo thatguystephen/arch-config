@@ -1,9 +1,0 @@
-# QS Hyprview - Workspace overview for Hyprland
-# Beautiful window switcher and workspace overview using Quickshell
-
-description: QS Hyprview workspace overview
-
-packages:
-  - quickshell
-
-conflicts: []

@@ -1,21 +1,21 @@
 host: don-desktop
-description: ''
+description: ""
 import: []
 enabled_modules:
-- bdots-hypr
-- package-mods/main-apps
-- editors/helix-catppuccin-mocha
-- gaming/gaming-packages
-- gaming/controller-support
-- cli-tools/cli-apps
-- login-managers/sddm-enable
-- package-mods/content-creation
-- dev/development
-- bdots-niri
-- gaming/sunshine
-- zen-catppuccin
-- login-managers/dms-greeter
-- cli-tools/webapp-tool
+  - package-mods/main-apps
+  - editors/helix-catppuccin-mocha
+  - gaming/gaming-packages
+  - gaming/controller-support
+  - cli-tools/cli-apps
+  - login-managers/sddm-enable
+  - package-mods/content-creation
+  - dev/development
+  - bd-niri
+  - gaming/sunshine
+  - zen-catppuccin
+  - login-managers/dms-greeter
+  - cli-tools/webapp-tool
+  - dotfiles
 packages: []
 exclude: []
 additional_packages: []
@@ -34,20 +34,20 @@ system_backups:
   snapper_config: root
 services:
   enabled:
-  - NetworkManager
-  - NetworkManager-dispatcher
-  - NetworkManager-wait-online
-  - ananicy-cpp
-  - avahi-daemon
-  - bluetooth
-  - getty@
-  - greetd
-  - grub-btrfsd
-  - nvidia-hibernate
-  - nvidia-resume
-  - nvidia-suspend
-  - tailscaled
-  - ufw
+    - NetworkManager
+    - NetworkManager-dispatcher
+    - NetworkManager-wait-online
+    - ananicy-cpp
+    - avahi-daemon
+    - bluetooth
+    - getty@
+    - greetd
+    - grub-btrfsd
+    - nvidia-hibernate
+    - nvidia-resume
+    - nvidia-suspend
+    - tailscaled
+    - ufw
   disabled: []
 update_hooks:
   pre_update: null
