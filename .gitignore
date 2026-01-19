@@ -1,5 +1,6 @@
 # Host-specific configuration (each machine has its own)
 config.yaml
+config.lua
 
 # Auto-generated state files
 system-packages.yaml
@@ -21,3 +22,16 @@ modules/declared-packages.yaml
 !packages/modules/bdots-hypr/themes-hypr/**/settings.json
 !packages/modules/bdots-hypr/dotfiles/**/settings.json
 !**/package.json
+
+# Large app caches - exclude from dotfiles
+**/vesktop/sessionData/
+**/vesktop/Cache*/
+**/vesktop/GPUCache/
+**/vesktop/Code Cache/
+**/zen/*/storage/
+**/zen/*/cache*/
+**/zen/*/Cache*/
+**/zen/**/datareporting/
+**/zen/**/crashes/
+**/obsidian/**/cache/
+**/obsidian/**/GPUCache/

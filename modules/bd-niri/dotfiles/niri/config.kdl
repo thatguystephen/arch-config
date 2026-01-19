@@ -272,7 +272,11 @@ layout {
 // See the binds section below for more spawn examples.
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
-
+// Set the overview wallpaper on the backdrop.
+layer-rule {
+  match namespace="^noctalia-overview*"
+  place-within-backdrop true
+}
 overview {
     // Set the backdrop color behind workspaces in the overview
     backdrop-color "#1e1e2e"
@@ -308,3 +312,6 @@ include "windowrules.kdl"
 include "binds.kdl"
 include "outputs.kdl"
 include "startup.kdl"
+include "env.kdl"
+
+include "./noctalia.kdl"

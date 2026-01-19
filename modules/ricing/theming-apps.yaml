@@ -3,6 +3,9 @@ description: Packages Needed for Theming
 # List of packages in this module
 packages:
   - aether
+  - nwg-look
+  - adw-gtk3
+  - python-pwal
 
 # Modules that conflict with this one
 conflicts: []

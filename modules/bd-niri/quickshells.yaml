@@ -5,6 +5,6 @@ description: Shell components for Niri
 
 packages:
   - dms-shell-git # DankMaterialShell (bar, notifications, launcher, lock)
-  - quickshell # DMS dependency
-
+  - quickshell-git # DMS dependency
+  - noctalia-shell-git # NoctaliaShell (bar, notifications, launcher, lock)
 conflicts: []

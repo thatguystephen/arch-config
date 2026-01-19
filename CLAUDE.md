@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-This is **Don's personal arch-config repository** - a declarative package management system for Arch Linux inspired by NixOS. It uses `dcli` (https://gitlab.com/theblackdon/dcli) to manage system packages through YAML configuration files.
+This is **Don's personal arch-config repository** - a declarative package management system for Arch Linux inspired by NixOS. It uses `dcli` (https://gitlab.com/theblackdon/dcli) to manage system packages through YAML and Lua configuration files.
 
 **Important**: This is a reference/example repository. Users should run `dcli init` to create their own fresh configuration, not clone this directly.
 
@@ -17,22 +17,25 @@ The system provides NixOS-style declarative package management on Arch Linux wit
 
 The configuration uses a host-based structure with modular package management:
 
-1. **Host files** (`hosts/{hostname}.yaml`) - Main configuration for each machine
-2. **Modules** (`modules/*.yaml` or `modules/*/module.yaml`) - Reusable package collections
+1. **Host files** (`hosts/{hostname}.yaml` or `hosts/{hostname}.lua`) - Main configuration for each machine
+2. **Modules** (`modules/*.yaml`, `modules/*.lua`, or `modules/*/module.yaml`) - Reusable package collections
 3. **Config pointer** (`config.yaml`) - Points to active host configuration
 
 ### Key Files
 
 - **config.yaml**: Points to the active host configuration file
-- **hosts/{hostname}.yaml**: Machine-specific configuration including enabled modules, packages, services, and settings
-- **modules/*.yaml**: Optional module collections that can be enabled/disabled
-- **state/installed.yaml**: Auto-generated tracking file (do not edit manually)
-- **state/hook-status.yaml**: Tracks which post-install hooks have been run
-- **state/dotfiles-synced.yaml**: Tracks synced dotfiles
+- **hosts/{hostname}.yaml** or **hosts/{hostname}.lua**: Machine-specific configuration including enabled modules, packages, services, and settings
+- **modules/*.yaml** or **modules/*.lua**: Optional module collections that can be enabled/disabled
+- **modules/*/module.yaml** or **modules/*/module.lua**: Directory-based modules with packages, scripts, and dotfiles
+- **state/packages.yaml**: Auto-generated tracking file (do not edit manually)
+- **state/hooks.yaml**: Tracks which post-install hooks have been run
+- **state/services-state.yaml**: Tracks enabled/disabled services
 
 ### Host Configuration Structure
 
-Each host YAML file contains:
+Host files can be YAML or Lua. Lua files allow dynamic configuration based on hardware detection.
+
+**YAML Host File** (`hosts/{hostname}.yaml`):
 ```yaml
 host: hostname
 description: Human-readable description
@@ -90,45 +93,94 @@ dotfiles:
   - hypr  # Shorthand for dotfiles/hypr → ~/.config/hypr
 ```
 
+**Lua Host File** (`hosts/{hostname}.lua`):
+```lua
+-- Dynamic host configuration with hardware detection
+local packages = { "firefox", "neovim" }
+local modules = { "base", "cli-tools" }
+
+-- Add GPU drivers based on detected hardware
+if dcli.hardware.has_nvidia() then
+    table.insert(modules, "nvidia-drivers")
+elseif dcli.hardware.has_amd_gpu() then
+    table.insert(modules, "amd-drivers")
+end
+
+-- Enable docker if we have enough RAM
+if dcli.system.memory_total_mb() >= 16000 then
+    table.insert(modules, "docker")
+end
+
+return {
+    host = dcli.system.hostname(),
+    description = "Workstation with auto-detected hardware",
+    enabled_modules = modules,
+    packages = packages,
+    flatpak_scope = "user",
+    aur_helper = "paru",
+}
+```
+
 ### Module Structure
 
-Each module YAML file contains:
+Modules can be YAML, Lua, or directory-based.
+
+**Simple YAML Module** (`modules/gaming.yaml`):
 ```yaml
-description: Human-readable description
+description: Gaming packages
 
 packages:
-  - package-one
-  - package-two
-  - flatpak:com.example.App
-  - name: org.example.AnotherApp
-    type: flatpak
+  - steam
+  - lutris
+  - wine
+  - gamemode
 
 conflicts:
-  - other-module-name
+  - server-only
 
-post_install_hook: scripts/script-name.sh  # Optional
+post_install_hook: scripts/setup-gaming.sh
 hook_behavior: ask  # ask | always | once | skip
 ```
 
-**Module Features**:
+**Lua Module** (`modules/gpu-drivers.lua`):
+```lua
+-- Hardware-conditional GPU drivers
+local packages = {}
+
+if dcli.hardware.has_nvidia() then
+    table.insert(packages, "nvidia")
+    table.insert(packages, "nvidia-utils")
+elseif dcli.hardware.has_amd_gpu() then
+    table.insert(packages, "mesa")
+    table.insert(packages, "vulkan-radeon")
+end
+
+return {
+    description = "GPU drivers (auto-detected)",
+    packages = packages,
+}
+```
+
+**Directory-Based Module** (`modules/hyprland/`):
+```
+modules/hyprland/
+├── module.yaml              # or module.lua
+├── packages.yaml            # Main packages
+├── packages-optional.yaml   # Optional packages
+├── scripts/
+│   └── setup.sh            # Post-install hook
+└── dotfiles/               # Configuration files
+    ├── hypr/
+    └── waybar/
+```
+
+### Module Features
+
 - **Conflicts**: Modules can declare conflicts with other modules
 - **Post-install hooks**: Bash scripts that run after module installation
-- **Directory-based modules**: Complex modules can use `modules/{name}/module.yaml` structure
-- **Dotfiles support**: Modules can include `dotfiles/` directory or `dotfiles.yaml` for configuration files
-
-### Directory-Based Modules
-
-For complex modules, use a directory structure:
-```
-modules/
-└── hyprland/
-    ├── module.yaml          # Main module definition
-    ├── packages.yaml        # Package list
-    ├── dotfiles.yaml        # Dotfiles configuration
-    └── dotfiles/            # Configuration files to sync
-        ├── hypr/
-        └── waybar/
-```
+- **Directory-based modules**: Complex modules with multiple package files, scripts, and dotfiles
+- **Lua support**: Dynamic modules with hardware detection and conditional logic
+- **Nested modules**: Organize modules in subdirectories (e.g., `modules/dev/python/`)
 
 ## Common Commands
 
@@ -152,6 +204,7 @@ dcli module enable             # Interactive selection (TUI)
 dcli module enable <name>      # Enable specific module
 dcli module disable            # Interactive selection (TUI)
 dcli module disable <name>     # Disable specific module
+dcli module run-hook <name>    # Run module's post-install hook
 ```
 
 ### Package Synchronization
@@ -161,6 +214,8 @@ dcli sync                      # Install missing packages (creates backup first)
 dcli sync --dry-run            # Preview changes without applying
 dcli sync --prune              # Also remove unmanaged packages
 dcli sync --force-dotfiles     # Force re-sync dotfiles
+dcli sync --no-hooks           # Skip post-install hooks
+dcli sync --no-backup          # Skip automatic backup
 ```
 
 ### Configuration
@@ -168,6 +223,7 @@ dcli sync --force-dotfiles     # Force re-sync dotfiles
 ```bash
 dcli status                    # Show current configuration and sync status
 dcli validate                  # Check config integrity
+dcli validate --check-packages # Also verify packages exist
 dcli edit                      # Interactive file editor (TUI)
 dcli migrate                   # Migrate to new structure
 ```
@@ -184,14 +240,16 @@ dcli restore-config            # Interactive restore (TUI)
 ```bash
 dcli backup                    # Create system snapshot
 dcli backup list               # List snapshots
-dcli restore                   # Interactive restore (TUI)
+dcli backup delete <id>        # Delete snapshot
+dcli backup check              # Check backup status
+dcli restore [<id>]            # Interactive restore (TUI)
 ```
 
 ### Hooks
 
 ```bash
 dcli hooks list                # Show all hooks and status
-dcli hooks run                 # Interactive selection (TUI)
+dcli hooks run [<module>]      # Interactive selection (TUI)
 dcli hooks skip <module>       # Mark hook as skipped
 dcli hooks reset <module>      # Reset hook to run again
 ```
@@ -213,6 +271,78 @@ dcli self-update               # Update dcli itself
 dcli help                      # Show help
 dcli <command> --json          # JSON output for scripting
 ```
+
+## Lua API
+
+dcli provides a comprehensive Lua API for dynamic configuration. Available in both host files and modules.
+
+### Hardware Detection
+
+```lua
+dcli.hardware.cpu_vendor()        -- "intel", "amd", or "unknown"
+dcli.hardware.gpu_vendors()       -- Array of GPU vendors
+dcli.hardware.has_nvidia()        -- Check for NVIDIA GPU
+dcli.hardware.has_amd_gpu()       -- Check for AMD GPU
+dcli.hardware.has_intel_gpu()     -- Check for Intel GPU
+dcli.hardware.is_laptop()         -- Check if system is a laptop
+dcli.hardware.chassis_type()      -- "desktop", "laptop", "server", etc.
+```
+
+### System Information
+
+```lua
+dcli.system.hostname()            -- Current hostname
+dcli.system.memory_total_mb()     -- Total RAM in MB
+dcli.system.cpu_cores()           -- Number of CPU cores
+dcli.system.kernel_version()      -- Kernel version string
+dcli.system.arch()                -- "x86_64", "aarch64", etc.
+```
+
+### Package Queries
+
+```lua
+dcli.package.is_installed("vim")  -- Check if package installed
+dcli.package.is_available("pkg")  -- Check if package available
+```
+
+### Service Detection
+
+```lua
+dcli.service.is_active("sshd")    -- Check if service is running
+dcli.service.is_enabled("sshd")   -- Check if service is enabled
+```
+
+### File Operations
+
+```lua
+dcli.file.exists("/path/to/file") -- Check file existence
+dcli.file.is_dir("/path/to/dir")  -- Check if path is directory
+```
+
+### Environment Variables
+
+```lua
+dcli.env.home()                   -- User home directory
+dcli.env.get("VAR")               -- Get environment variable
+```
+
+### Utility Functions
+
+```lua
+dcli.util.contains(table, value)  -- Check if table contains value
+dcli.util.merge(t1, t2)           -- Merge two tables
+```
+
+### Logging
+
+```lua
+dcli.log.info("message")          -- Info log
+dcli.log.warn("message")          -- Warning log
+dcli.log.error("message")         -- Error log
+dcli.log.debug("message")         -- Debug log
+```
+
+See `.Documentation/DCLI-LUA-API.md` for complete API reference.
 
 ## Dotfiles Management
 
@@ -281,6 +411,8 @@ dcli merge --services --dry-run # Preview first
 
 Services sync automatically during `dcli sync`.
 
+**Important**: When using `dcli merge --services`, system-critical services (systemd-*, dbus, getty, etc.) are automatically filtered out. See `.Documentation/SERVICES.md` for details.
+
 ## Flatpak Support
 
 Two ways to declare flatpak packages:
@@ -302,10 +434,39 @@ flatpak_scope: user  # "user" (default) or "system"
 
 ### Creating New Modules
 
-1. Create file in `modules/<module-name>.yaml` or `modules/<module-name>/module.yaml`
-2. Add description, packages, and optional conflicts
-3. If complex setup is needed, create a post-install hook script in `scripts/`
-4. For dotfiles, create `dotfiles/` directory or `dotfiles.yaml`
+**Simple Module:**
+1. Create file in `modules/<module-name>.yaml` or `modules/<module-name>.lua`
+2. Add description and packages
+3. Optionally add conflicts, hooks, or services
+
+**Directory Module:**
+1. Create directory `modules/<module-name>/`
+2. Add `module.yaml` or `module.lua` manifest
+3. Add `packages.yaml` or multiple `packages-*.yaml` files
+4. Optionally add `scripts/` and `dotfiles/` directories
+
+**Lua Module (Hardware-Conditional):**
+```lua
+-- modules/laptop-power.lua
+if not dcli.hardware.is_laptop() then
+    return {
+        description = "Laptop power management (skipped - not a laptop)",
+        packages = {},
+    }
+end
+
+return {
+    description = "Laptop power management",
+    packages = {
+        "tlp",
+        "powertop",
+        "acpi",
+    },
+    services = {
+        enabled = { "tlp.service" },
+    },
+}
+```
 
 ### Post-Install Hooks
 
@@ -364,12 +525,14 @@ system_backups:
 
 Backups are created automatically before `dcli sync` and `dcli update` operations when enabled.
 
-## YAML Format Requirements
+## Configuration Format Requirements
 
 - All package arrays use vertical formatting (one package per line) for easy git management
 - Modules use `conflicts` array for declaring incompatibilities
-- Post-install hooks reference scripts with path relative to repo root
+- Post-install hooks reference scripts with path relative to module root
 - Both simple string format and object format are supported for packages
+- Lua files must return a table with the configuration
+- Service names can be with or without `.service` suffix
 
 ## Migration
 
@@ -392,17 +555,18 @@ All commands support JSON for scripting:
 dcli status --json
 dcli module list --json
 dcli find vim --json
+dcli hooks list --json
 ```
 
 ## Current System Configuration
 
-**Hostname**: don-asus
+**Hostname**: don-desktop
 **Enabled Modules**: Check with `dcli status` or `dcli module list`
-**Configuration**: See `~/.config/arch-config/hosts/don-asus.yaml`
+**Configuration**: See `~/.config/arch-config/hosts/don-desktop.yaml`
 
 ## Important Notes
 
-- **State tracking**: `state/installed.yaml` tracks dcli-managed packages for safe pruning
+- **State tracking**: `state/packages.yaml` tracks dcli-managed packages for safe pruning
 - **Automatic backups**: By default, `dcli sync` creates system snapshots before changes
 - **Module conflicts**: System will prompt when enabling conflicting modules
 - **Git integration**: This repo is version controlled; changes should be committed to track configuration evolution
@@ -410,13 +574,26 @@ dcli find vim --json
 - **Services**: Systemd services can be declared alongside packages
 - **Flatpak support**: Seamless integration with flatpak packages
 - **TUI features**: Interactive commands require `fzf` to be installed
+- **Lua support**: Dynamic configuration with hardware detection
+- **Directory modules**: Organize complex modules with multiple files
 
 ## Documentation Files
 
+### Main Documentation
 - **README.md**: Comprehensive user documentation
 - **DOTFILES-SYMLINK-GUIDE.md**: Detailed dotfiles management guide
 - **CONTROLLER_SUPPORT.md**: Example of advanced module with udev rules
-- This file (CLAUDE.md): Developer/AI assistant guidance
+- **CLAUDE.md**: This file - Developer/AI assistant guidance
+
+### Extended Documentation (`.Documentation/`)
+- **CHEAT-SHEET.md**: Quick reference for all dcli commands
+- **DCLI-LUA-API.md**: Complete Lua API reference with examples
+- **LUA-HOSTS.md**: Guide to writing dynamic Lua host configurations
+- **LUA-MODULES.md**: Guide to writing Lua modules with conditionals
+- **DIRECTORY-MODULES.md**: Guide to directory-based module structure
+- **SERVICES.md**: Detailed systemd services management guide
+
+**Tip**: When working with Lua configuration or advanced features, refer to the appropriate guide in `.Documentation/` for comprehensive examples and API reference.
 
 ## AUR Package
 
@@ -426,3 +603,13 @@ yay -S dcli-arch-git
 # or
 paru -S dcli-arch-git
 ```
+
+## Tips for AI Assistants
+
+- **Check for Lua files first**: When looking for host or module configs, check for `.lua` files as they take precedence over `.yaml`
+- **Use hardware detection APIs**: When creating conditional configs, leverage `dcli.hardware.*` and `dcli.system.*` APIs
+- **Directory modules for complexity**: Suggest directory-based modules for anything with multiple package files, scripts, or dotfiles
+- **Reference documentation**: Point users to specific `.Documentation/*.md` files for detailed guides
+- **Validate before sync**: Always suggest `dcli validate` before `dcli sync` to catch errors early
+- **Preview with --dry-run**: Recommend `--dry-run` flag for preview before making changes
+- **JSON for scripting**: Use `--json` flag when parsing command output programmatically

@@ -17,6 +17,7 @@ packages:
   - micro
   - pipes.sh
   - perplexity
+  - ncdu
 
 # Modules that conflict with this one
 conflicts: []

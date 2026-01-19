@@ -1,12 +1,12 @@
-last_updated: 2026-01-11T01:34:37.401352762Z
+last_updated: 2026-01-18T17:03:58.556774111Z
 scope: system
 apps:
-  pdf_viewer: chromium
-  text_editor: dev.zed.Zed
-  file_manager: nemo
   image_viewer: chromium
-  audio_player: mpv
-  terminal: kitty
-  video_player: mpv
+  file_manager: nemo
+  pdf_viewer: chromium
   browser: zen
+  terminal: kitty
+  text_editor: dev.zed.Zed
+  audio_player: mpv
+  video_player: mpv
 custom_mime_types: {}

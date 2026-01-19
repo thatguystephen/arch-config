@@ -1,0 +1,4 @@
+description: "Flatpak module for Arch Linux"
+
+package_files:
+  - dependencies.yaml

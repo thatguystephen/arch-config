@@ -4,3 +4,8 @@ dotfiles_sync: true
 
 package_files:
   - packages.yaml
+
+# Explicit mapping for configs outside ~/.config
+dotfiles:
+  - source: zen
+    target: ~/.zen

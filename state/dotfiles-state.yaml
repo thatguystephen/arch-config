@@ -1,1 +1,5 @@
-backed_up: []
+backed_up:
+- target: /home/don/.config/yazi
+  backup: /home/don/.config/yazi.backup.20260116_195126
+  module: editors/yazi-catppuccin
+  backed_up_at: 2026-01-17T00:51:26.150524631+00:00
