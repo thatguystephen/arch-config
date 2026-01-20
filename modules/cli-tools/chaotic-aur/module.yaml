@@ -1,7 +1,0 @@
-description: "Main Module file for chaotic aur module"
-author: "theblackdon"
-version: "1.0.0"
-category: "system"
-
-package_files:
-  - chaotic-aur.yaml

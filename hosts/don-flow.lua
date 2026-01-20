@@ -1,0 +1,76 @@
+return {
+    host = "don-flow",
+    description = "Packages specific to don-flow",
+    import = {},
+
+    enabled_modules = {
+        "bdots-hypr",
+        "asus/asus",
+        "cli-tools/webapp-tool",
+        "login-managers/sddm-enable",
+        "package-mods/main-apps",
+        "package-mods/content-creation",
+        "editors/helix-catppuccin-mocha",
+        "dev/development",
+        "zen-catppuccin",
+        "bdots-niri",
+    },
+
+    packages = {},
+    exclude = {},
+    additional_packages = {},
+
+    flatpak_scope = "user",
+    auto_prune = true,
+    module_processing = "sequential",
+
+    config_backups = {
+        enabled = true,
+        max_backups = 5,
+    },
+
+    system_backups = {
+        enabled = true,
+        backup_on_sync = true,
+        backup_on_update = true,
+        tool = nil,
+        snapper_config = "root",
+    },
+
+    services = {
+        enabled = {
+            "NetworkManager",
+            "NetworkManager-dispatcher",
+            "NetworkManager-wait-online",
+            "ananicy-cpp",
+            "avahi-daemon",
+            "bluetooth",
+            "getty@",
+            "tailscaled",
+            "ufw",
+        },
+        disabled = {},
+    },
+
+    update_hooks = {
+        pre_update = nil,
+        post_update = nil,
+        behavior = "ask",
+    },
+
+    default_apps = {
+        scope = "system",
+        browser = "zen",
+        text_editor = "dev.zed.Zed",
+        file_manager = "nemo",
+        terminal = "kitty",
+        video_player = "mpv",
+        audio_player = "mpv",
+        image_viewer = "chromium",
+        pdf_viewer = "chromium",
+        mime_types = {},
+    },
+
+    editor = "helix",
+    aur_helper = "yay",
+}

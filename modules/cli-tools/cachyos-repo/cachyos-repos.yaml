@@ -1,8 +1,0 @@
-# CachyOS repositories
-
-description: Install CachyOS repositories
-
-packages: []
-
-conflicts: []
-post_install_hook: scripts/install-cachyos-repos.sh

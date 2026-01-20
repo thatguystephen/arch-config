@@ -1,5 +1,0 @@
-description: "Yazi file manager with Catppuccin Mocha theme"
-conflicts: []
-dotfiles_sync: true
-package_files:
-  - packages.yaml

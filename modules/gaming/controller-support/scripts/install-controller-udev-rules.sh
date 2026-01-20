@@ -13,7 +13,7 @@ NC='\033[0m' # No Color
 
 UDEV_RULES_DIR="/etc/udev/rules.d"
 ARCH_CONFIG_DIR="${ARCH_CONFIG_DIR:-/home/${SUDO_USER:-$USER}/.config/arch-config}"
-SOURCE_RULES="${ARCH_CONFIG_DIR}/udev-rules/60-controller-support.rules"
+SOURCE_RULES="${ARCH_CONFIG_DIR}/modules/gaming/controller-support/udev-rules/60-controller-support.rules"
 DEST_RULES="${UDEV_RULES_DIR}/60-controller-support.rules"
 
 echo -e "${BLUE}Installing controller udev rules...${NC}"
