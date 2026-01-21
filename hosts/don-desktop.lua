@@ -5,17 +5,13 @@ return {
 
     enabled_modules = {
         "package-mods/main-apps",
-        "editors/helix-catppuccin-mocha",
-        "editors/yazi-catppuccin",
         "gaming/gaming-packages",
         "gaming/controller-support",
         "cli-tools/cli-apps",
-        "login-managers/sddm-enable",
         "package-mods/content-creation",
         "dev/development",
         "bd-niri",
         "gaming/sunshine",
-        "zen-catppuccin",
         "login-managers/dms-greeter",
         "cli-tools/webapp-tool",
         "dotfiles",
@@ -24,6 +20,7 @@ return {
         "ricing/theming-apps",
         "package-mods/test-packages-2",
         "package-mods/test-packages",
+        "system-packages-don-desktop"
     },
 
     packages = {},

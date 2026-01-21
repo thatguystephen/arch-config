@@ -7,7 +7,9 @@ local packages = {
 
 return {
     description = "Web app installer tools for creating desktop entries from URLs",
-    post_install_hook = "webapp-tool/install-webapp-tools.sh",
+    author = "theblackdon",
+    version = "1.0.0",
+    post_install_hook = "scripts/install-webapp-tools.sh",
     hook_behavior = "skip",
     packages = packages,
 }

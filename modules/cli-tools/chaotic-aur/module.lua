@@ -3,9 +3,4 @@ return {
     conflicts = {},
     post_install_hook = "scripts/install-chaotic-aur.sh",
     packages = {},
-    metadata = {
-        author = "theblackdon",
-        version = "1.0.0",
-        category = "system",
-    },
 }

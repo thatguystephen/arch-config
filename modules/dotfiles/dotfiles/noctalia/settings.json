@@ -25,6 +25,7 @@
         ],
         "preferredPlayer": "",
         "visualizerType": "linear",
+        "volumeFeedback": false,
         "volumeOverdrive": false,
         "volumeStep": 5
     },
@@ -33,14 +34,16 @@
         "capsuleOpacity": 1,
         "density": "default",
         "exclusive": true,
-        "floating": false,
+        "floating": true,
         "hideOnOverview": false,
-        "marginHorizontal": 4,
-        "marginVertical": 4,
+        "marginHorizontal": 18,
+        "marginVertical": 7,
         "monitors": [
         ],
         "outerCorners": false,
         "position": "top",
+        "screenOverrides": [
+        ],
         "showCapsule": false,
         "showOutline": false,
         "useSeparateOpacity": true,
@@ -189,9 +192,10 @@
     },
     "colorSchemes": {
         "darkMode": true,
+        "generationMethod": "tonal-spot",
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
-        "matugenSchemeType": "scheme-tonal-spot",
+        "monitorForColors": "",
         "predefinedScheme": "Noctalia (default)",
         "schedulingMode": "off",
         "useWallpaperColors": true
@@ -252,7 +256,7 @@
                         "showBackground": true,
                         "useCustomFont": true,
                         "usePrimaryColor": true,
-                        "x": 12,
+                        "x": 18,
                         "y": 52
                     }
                 ]
@@ -261,24 +265,28 @@
     },
     "dock": {
         "animationSpeed": 1,
-        "backgroundOpacity": 1,
+        "backgroundOpacity": 0.86,
         "colorizeIcons": false,
-        "deadOpacity": 0.6,
+        "deadOpacity": 0.8300000000000001,
         "displayMode": "exclusive",
-        "enabled": false,
-        "floatingRatio": 0.87,
+        "enabled": true,
+        "floatingRatio": 0.66,
         "inactiveIndicators": true,
         "monitors": [
-            "DP-1",
-            "DP-2"
+            "DP-1"
         ],
         "onlySameOutput": false,
         "pinnedApps": [
+            "kitty",
+            "nemo",
             "zen",
-            "org.telegram.desktop"
+            "dev.zed.Zed",
+            "vesktop",
+            "org.telegram.desktop",
+            "steam"
         ],
         "pinnedStatic": true,
-        "position": "right",
+        "position": "bottom",
         "size": 1.27
     },
     "general": {
@@ -289,11 +297,13 @@
         "boxRadiusRatio": 1,
         "compactLockScreen": false,
         "dimmerOpacity": 0.5,
+        "enableLockScreenCountdown": true,
         "enableShadows": true,
         "forceBlackScreenCorners": false,
         "iRadiusRatio": 0.3,
         "language": "",
         "lockOnSuspend": true,
+        "lockScreenCountdownDuration": 10000,
         "radiusRatio": 0,
         "scaleRatio": 1,
         "screenRadiusRatio": 0,
@@ -351,6 +361,7 @@
         "backgroundOpacity": 0.9,
         "criticalUrgencyDuration": 15,
         "enableKeyboardLayoutToast": true,
+        "enableMediaToast": false,
         "enabled": true,
         "location": "top_right",
         "lowUrgencyDuration": 3,
@@ -436,7 +447,7 @@
         "showHeader": true,
         "showNumberLabels": true
     },
-    "settingsVersion": 40,
+    "settingsVersion": 42,
     "systemMonitor": {
         "cpuCriticalThreshold": 90,
         "cpuPollingInterval": 3000,
@@ -455,6 +466,8 @@
         "memPollingInterval": 3000,
         "memWarningThreshold": 80,
         "networkPollingInterval": 3000,
+        "swapCriticalThreshold": 90,
+        "swapWarningThreshold": 80,
         "tempCriticalThreshold": 90,
         "tempPollingInterval": 3000,
         "tempWarningThreshold": 80,
@@ -512,7 +525,7 @@
                 "id": "zenBrowser"
             }
         ],
-        "enableUserTemplates": false
+        "enableUserTheming": false
     },
     "ui": {
         "bluetoothDetailsViewMode": "grid",
@@ -530,7 +543,8 @@
         "wifiDetailsViewMode": "grid"
     },
     "wallpaper": {
-        "directory": "/home/don/.config/arch-config/wallpapers",
+        "automationEnabled": false,
+        "directory": "/home/don/Pictures/Wallpapers",
         "enableMultiMonitorDirectories": false,
         "enabled": true,
         "fillColor": "#000000",
@@ -540,7 +554,6 @@
         ],
         "overviewEnabled": true,
         "panelPosition": "follow_bar",
-        "randomEnabled": false,
         "randomIntervalSec": 300,
         "recursiveSearch": false,
         "setWallpaperOnAllMonitors": true,

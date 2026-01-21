@@ -1,8 +1,7 @@
 local packages = {
     "aether",
     "nwg-look",
-    "adw-gtk3",
-    "python-pwal",
+    "python-pywal",
 }
 
 return {

@@ -15,8 +15,5 @@ local packages = {
 return {
     description = "Dotfiles for my WM themes",
     dotfiles_sync = true,
-    dotfiles = {
-        { source = "zen", target = "~/.zen" },
-    },
     packages = packages,
 }
