@@ -5,7 +5,6 @@ return {
 
     enabled_modules = {
         "bdots-hypr",
-        "asus/asus",
         "cli-tools/webapp-tool",
         "login-managers/sddm-enable",
         "package-mods/main-apps",
@@ -14,6 +13,7 @@ return {
         "dev/development",
         "zen-catppuccin",
         "bdots-niri",
+        "hardware",
     },
 
     packages = {},

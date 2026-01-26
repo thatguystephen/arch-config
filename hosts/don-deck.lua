@@ -1,9 +1,13 @@
+---@diagnostic disable: undefined-global -- dcli globals are provided by dcli runtime
+
 return {
     host = "don-deck",
     description = "Packages specific to don-deck",
     import = {},
 
-    enabled_modules = {},
+    enabled_modules = {
+        "hardware",
+    },
 
     packages = {},
     exclude = {},

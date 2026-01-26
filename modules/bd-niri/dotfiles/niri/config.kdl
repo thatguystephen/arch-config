@@ -322,3 +322,9 @@ include "startup.kdl"
 include "env.kdl"
 
 include "./noctalia.kdl"
+
+// Shell Switcher - Auto-generated include
+include "shell-switcher-startup.kdl"
+
+// Shell Switcher - Auto-generated include
+include "shell-switcher-binds.kdl"

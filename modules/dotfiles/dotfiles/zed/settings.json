@@ -7,6 +7,15 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "agent_servers": {
+    "codex": {
+      "favorite_models": [
+        "gpt-5.2-codex/xhigh"
+      ],
+      "default_config_options": {},
+      "favorite_config_option_values": {}
+    }
+  },
   "terminal": {
     "shell": {
       "program": "/usr/bin/fish"

@@ -1,7 +1,7 @@
 // Start up Commands
 
 //spawn-at-startup "dms" "run"
-spawn-at-startup "qs" "-c" "noctalia-shell"
+// spawn-at-startup "qs" "-c" "noctalia-shell" // Commented by shell-switcher
 spawn-at-startup "sunshine"
 spawn-at-startup "swayidle" "-w" "timeout" "1800" "qs -c noctalia-shell ipc call lockscreen lock"
 spawn-at-startup "sway-audio-idle-inhibit"
