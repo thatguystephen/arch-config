@@ -17,6 +17,7 @@
     }
   },
   "terminal": {
+    "dock": "right",
     "shell": {
       "program": "/usr/bin/fish"
     }

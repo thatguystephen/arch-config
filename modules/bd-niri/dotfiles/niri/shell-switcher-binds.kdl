@@ -10,6 +10,7 @@ binds {
     Mod+Space hotkey-overlay-title="Open Noctalia Shell Launcher" {
         spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle";
     }
+    Mod+E hotkey-overlay-title="Open Noctalia Shell Emoji Launcher" { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "emoji"; }
 
     // Shell Switcher
     Ctrl+Shift+S hotkey-overlay-title="Switch Desktop Shell" {

@@ -4,21 +4,13 @@ return {
     import = {},
 
     enabled_modules = {
-<<<<<<< HEAD
-        "bdots-hypr",
-=======
         "asus/asus",
->>>>>>> 8bb638d (stuff)
+        "bd-niri",
+        "dotfiles",
         "cli-tools/webapp-tool",
         "package-mods/main-apps",
         "dev/development",
-<<<<<<< HEAD
-        "zen-catppuccin",
-        "bdots-niri",
-        "hardware",
-=======
         "cli-tools/cli-apps",
->>>>>>> 8bb638d (stuff)
     },
 
     packages = {},
@@ -56,12 +48,12 @@ return {
 
     default_apps = {
         scope = "system",
-        browser = "firefox",
+        browser = "chromium",
         text_editor = "helix",
         video_player = "mpv",
         audio_player = "mpv",
-        image_viewer = "firefox",
-        pdf_viewer = "firefox",
+        image_viewer = "chromium",
+        pdf_viewer = "chromium",
         mime_types = {},
     },
 
