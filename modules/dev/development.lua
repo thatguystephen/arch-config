@@ -19,6 +19,8 @@ local packages = {
     "yazi",
     "opencode",
     "tmux",
+    "ollama",
+    "fish",
 }
 
 return {

@@ -24,7 +24,7 @@ ueberzug_offset = [0, 0, 0, 0]
 
 [opener]
 edit = [
-    { run = '${EDITOR:-hx} "$@"', desc = "Edit with $EDITOR", block = true, for = "unix" },
+    { run = 'kitty @ launch --location=vsplit --cwd=current hx "$@"', desc = "Edit in kitty pane", for = "unix" },
 ]
 open = [
     { run = 'xdg-open "$@"', desc = "Open", for = "linux" },

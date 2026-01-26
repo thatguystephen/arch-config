@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 last_updated: 2026-01-23T16:57:33.612972629Z
 scope: system
 apps:
@@ -9,4 +10,15 @@ apps:
   audio_player: mpv
   pdf_viewer: chromium
   image_viewer: chromium
+=======
+last_updated: 2026-01-25T01:21:03.858351327Z
+scope: system
+apps:
+  video_player: mpv
+  image_viewer: firefox
+  pdf_viewer: firefox
+  text_editor: helix
+  audio_player: mpv
+  browser: firefox
+>>>>>>> 8bb638d (stuff)
 custom_mime_types: {}

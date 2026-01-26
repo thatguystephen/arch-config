@@ -4,16 +4,21 @@ return {
     import = {},
 
     enabled_modules = {
+<<<<<<< HEAD
         "bdots-hypr",
+=======
+        "asus/asus",
+>>>>>>> 8bb638d (stuff)
         "cli-tools/webapp-tool",
-        "login-managers/sddm-enable",
         "package-mods/main-apps",
-        "package-mods/content-creation",
-        "editors/helix-catppuccin-mocha",
         "dev/development",
+<<<<<<< HEAD
         "zen-catppuccin",
         "bdots-niri",
         "hardware",
+=======
+        "cli-tools/cli-apps",
+>>>>>>> 8bb638d (stuff)
     },
 
     packages = {},
@@ -23,6 +28,7 @@ return {
     flatpak_scope = "user",
     auto_prune = true,
     module_processing = "sequential",
+    strict_package_order = true,
 
     config_backups = {
         enabled = true,
@@ -38,17 +44,7 @@ return {
     },
 
     services = {
-        enabled = {
-            "NetworkManager",
-            "NetworkManager-dispatcher",
-            "NetworkManager-wait-online",
-            "ananicy-cpp",
-            "avahi-daemon",
-            "bluetooth",
-            "getty@",
-            "tailscaled",
-            "ufw",
-        },
+        enabled = {},
         disabled = {},
     },
 
@@ -60,14 +56,12 @@ return {
 
     default_apps = {
         scope = "system",
-        browser = "zen",
-        text_editor = "dev.zed.Zed",
-        file_manager = "nemo",
-        terminal = "kitty",
+        browser = "firefox",
+        text_editor = "helix",
         video_player = "mpv",
         audio_player = "mpv",
-        image_viewer = "chromium",
-        pdf_viewer = "chromium",
+        image_viewer = "firefox",
+        pdf_viewer = "firefox",
         mime_types = {},
     },
 
