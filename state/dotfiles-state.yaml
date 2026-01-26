@@ -39,3 +39,7 @@ backed_up:
   backup: /home/don/.config/zed.backup.20260125_231638
   module: dotfiles
   backed_up_at: 2026-01-26T04:16:38.521194323+00:00
+- target: /home/don/.config/opencode
+  backup: /home/don/.config/opencode.backup.20260126_012009
+  module: dotfiles
+  backed_up_at: 2026-01-26T06:20:09.284748938+00:00

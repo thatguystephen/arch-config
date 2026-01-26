@@ -7,8 +7,6 @@ local packages = {
     "cliphist",
     "brightnessctl",
     "fuzzel",
-    "mako",
-    "waybar",
     "sway-audio-idle-inhibit-git",
     "swayidle",
 

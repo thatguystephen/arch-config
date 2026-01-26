@@ -1,18 +1,27 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "theme": "noctalia",
+  "editor": "helix"
   "provider": {
     "ollama": {
-      "npm": "@ai-sdk/openai-compatible",
+      "models": {
+        "glm-4.7-flash:latest": {
+          "name": "glm-4.7-flash:latest [Ollama]"
+        },
+        "qwen2.5-coder:0.5b": {
+          "name": "qwen2.5-coder:0.5b [Ollama]"
+        },
+        "qwen3-coder:latest": {
+          "name": "qwen3-coder:latest [Ollama]"
+        }
+      },
       "name": "Ollama (local)",
+      "npm": "@ai-sdk/openai-compatible",
       "options": {
         "baseURL": "http://localhost:11434/v1"
-      },
-      "models": {
-        "gpt-oss:latest": {
-          "name": "Ollama (Local)"
-        }
       }
     }
-  }
+  },
+  "theme": "noctalia"
 }
+
+u

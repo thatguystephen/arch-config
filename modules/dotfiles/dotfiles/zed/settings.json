@@ -7,6 +7,21 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "language_models": {
+    "openai": {
+      "api_url": "http://localhost:11434/v1",
+      "available_models": [
+        {
+          "name": "glm-4.7-flash:latest",
+          "display_name": "GLM 4.7 Flash",
+          "max_tokens": 8192
+        }
+      ]
+    }
+  },
+  "title_bar": {
+    "show_sign_in": false
+  },
   "agent_servers": {
     "codex": {
       "favorite_models": [
@@ -25,6 +40,35 @@
   "agent": {
     "default_profile": "lets-get-it!!",
     "profiles": {
+      "ollama-glm": {
+        "default_model": {
+          "provider": "openai",
+          "model": "glm-4.7-flash:latest"
+        },
+        "name": "Ollama GLM Flash",
+        "tools": {
+          "web_search": true,
+          "thinking": true,
+          "terminal": true,
+          "save_file": true,
+          "restore_file_from_disk": true,
+          "read_file": true,
+          "open": true,
+          "now": true,
+          "move_path": true,
+          "list_directory": true,
+          "grep": true,
+          "find_path": true,
+          "fetch": true,
+          "edit_file": true,
+          "diagnostics": true,
+          "delete_path": true,
+          "create_directory": true,
+          "copy_path": true
+        },
+        "enable_all_context_servers": false,
+        "context_servers": {}
+      },
       "lets-get-it!!": {
         "default_model": {
           "provider": "zed.dev",

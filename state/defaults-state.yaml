@@ -1,10 +1,10 @@
-last_updated: 2026-01-26T04:19:27.906706754Z
+last_updated: 2026-01-26T06:31:44.961775925Z
 scope: system
 apps:
-  text_editor: helix
-  audio_player: mpv
   pdf_viewer: chromium
   image_viewer: chromium
   video_player: mpv
+  text_editor: helix
+  audio_player: mpv
   browser: chromium
 custom_mime_types: {}
