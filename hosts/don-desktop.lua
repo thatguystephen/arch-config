@@ -20,7 +20,8 @@ return {
         "ricing/theming-apps",
         "package-mods/test-packages-2",
         "package-mods/test-packages",
-        "system-packages-don-desktop"
+        "system-packages-don-desktop",
+        "winapps",
     },
 
     packages = {},

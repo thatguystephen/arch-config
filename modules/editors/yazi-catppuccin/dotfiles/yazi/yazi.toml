@@ -2,7 +2,7 @@
 # https://yazi-rs.github.io/docs/configuration/yazi
 
 [manager]
-ratio          = [1, 4, 3]
+ratio          = [1, 6, 0]
 sort_by        = "natural"
 sort_sensitive = false
 sort_reverse   = false
@@ -24,7 +24,7 @@ ueberzug_offset = [0, 0, 0, 0]
 
 [opener]
 edit = [
-    { run = 'kitty @ launch --location=vsplit --cwd=current hx "$@"', desc = "Edit in kitty pane", for = "unix" },
+    { run = 'helix "$@"', block = true, desc = "Edit with Helix", for = "unix" },
 ]
 open = [
     { run = 'xdg-open "$@"', desc = "Open", for = "linux" },
@@ -69,6 +69,10 @@ image_bound      = [0, 0]
 suppress_preload = false
 
 [plugin]
+prepend_fetchers = [
+    { id = "git", url = "*", run = "git" },
+    { id = "git", url = "*/", run = "git" },
+]
 preloaders = [
     { name = "*", cond = "!mime", run = "mime", multi = true, prio = "high" },
     { mime = "image/*", run = "image" },

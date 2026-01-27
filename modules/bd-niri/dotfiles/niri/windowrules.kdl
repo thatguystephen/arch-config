@@ -153,3 +153,10 @@ window-rule {
     match app-id=r#"^Perplexity$"# is-focused=false
     opacity 0.85
 }
+
+// Lofi generator web app - use full screen height
+window-rule {
+    match app-id=r#"^chrome-lofigenerator\.com__-Default$"#
+    min-height 1
+    max-height 10000
+}

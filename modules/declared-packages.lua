@@ -10,5 +10,6 @@ return {
         "zoom",
         "dcli-arch-git",
         "eza",
+        "lazygit",
     },
 }
