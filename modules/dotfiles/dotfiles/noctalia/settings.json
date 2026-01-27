@@ -39,6 +39,7 @@
         "marginHorizontal": 18,
         "marginVertical": 7,
         "monitors": [
+            "DP-1"
         ],
         "outerCorners": false,
         "position": "top",

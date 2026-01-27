@@ -29,6 +29,7 @@ modules/declared-packages.yaml
 **/vesktop/Cache*/
 **/vesktop/GPUCache/
 **/vesktop/Code Cache/
+**/vesktop/Singleton*
 **/zen/*/storage/
 **/zen/*/cache*/
 **/zen/*/Cache*/
