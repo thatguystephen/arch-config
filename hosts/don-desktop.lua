@@ -24,6 +24,7 @@ return {
         "virtualization/winapps",
         "virtualization/virt-app",
         "inir-shell",
+        "niri-outputs",
     },
 
     packages = {},

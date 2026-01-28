@@ -1,11 +1,14 @@
 {
     "appLauncher": {
         "autoPasteClipboard": false,
+        "clipboardWatchImageCommand": "wl-paste --type image --watch cliphist store",
+        "clipboardWatchTextCommand": "wl-paste --type text --watch cliphist store",
         "clipboardWrapText": true,
         "customLaunchPrefix": "",
         "customLaunchPrefixEnabled": false,
         "enableClipPreview": true,
         "enableClipboardHistory": false,
+        "enableSettingsSearch": true,
         "iconMode": "native",
         "ignoreMouseInput": false,
         "pinnedApps": [
@@ -31,19 +34,29 @@
     },
     "bar": {
         "backgroundOpacity": 0.9,
+        "barType": "floating",
         "capsuleOpacity": 1,
         "density": "default",
         "exclusive": true,
         "floating": true,
+        "frameRadius": 12,
+        "frameThickness": 8,
         "hideOnOverview": false,
         "marginHorizontal": 18,
         "marginVertical": 7,
         "monitors": [
-            "DP-1"
+            "DP-1",
+            "eDP-1"
         ],
         "outerCorners": false,
         "position": "top",
         "screenOverrides": [
+            {
+                "density": "spacious",
+                "enabled": true,
+                "name": "eDP-1",
+                "position": "bottom"
+            }
         ],
         "showCapsule": false,
         "showOutline": false,
@@ -62,14 +75,19 @@
                 {
                     "characterCount": 2,
                     "colorizeIcons": false,
+                    "emptyColor": "secondary",
                     "enableScrollWheel": true,
+                    "focusedColor": "primary",
                     "followFocusedScreen": false,
                     "groupedBorderOpacity": 1,
                     "hideUnoccupied": false,
                     "iconScale": 0.8,
                     "id": "Workspace",
                     "labelMode": "index",
+                    "occupiedColor": "secondary",
+                    "reverseScroll": false,
                     "showApplications": false,
+                    "showBadge": true,
                     "showLabelsOnlyWhenOccupied": true,
                     "unfocusedIconsOpacity": 1
                 },
@@ -310,8 +328,10 @@
     },
     "general": {
         "allowPanelsOnScreenWithoutBar": true,
+        "allowPasswordWithFprintd": false,
         "animationDisabled": false,
         "animationSpeed": 0.85,
+        "autoStartAuth": false,
         "avatarImage": "/home/don/.config/arch-config/modules/dotfiles/images/blackdonlogo.png",
         "boxRadiusRatio": 1,
         "compactLockScreen": false,
@@ -343,6 +363,7 @@
         "screenLock": "",
         "screenUnlock": "",
         "session": "",
+        "startup": "",
         "wallpaperChange": ""
     },
     "location": {
@@ -382,7 +403,7 @@
         "enableKeyboardLayoutToast": true,
         "enableMediaToast": false,
         "enabled": true,
-        "location": "top_right",
+        "location": "bottom_right",
         "lowUrgencyDuration": 3,
         "monitors": [
         ],
@@ -466,7 +487,7 @@
         "showHeader": true,
         "showNumberLabels": true
     },
-    "settingsVersion": 42,
+    "settingsVersion": 46,
     "systemMonitor": {
         "cpuCriticalThreshold": 90,
         "cpuPollingInterval": 3000,
@@ -521,10 +542,6 @@
             },
             {
                 "enabled": true,
-                "id": "telegram"
-            },
-            {
-                "enabled": true,
                 "id": "kcolorscheme"
             },
             {
@@ -542,6 +559,10 @@
             {
                 "enabled": true,
                 "id": "zenBrowser"
+            },
+            {
+                "enabled": true,
+                "id": "telegram"
             }
         ],
         "enableUserTheming": false
@@ -574,14 +595,15 @@
         "overviewEnabled": true,
         "panelPosition": "follow_bar",
         "randomIntervalSec": 300,
-        "recursiveSearch": false,
         "setWallpaperOnAllMonitors": true,
+        "showHiddenFiles": false,
         "solidColor": "#1a1a2e",
         "transitionDuration": 1500,
         "transitionEdgeSmoothness": 0.05,
         "transitionType": "random",
         "useSolidColor": false,
         "useWallhaven": false,
+        "viewMode": "single",
         "wallhavenApiKey": "",
         "wallhavenCategories": "111",
         "wallhavenOrder": "desc",

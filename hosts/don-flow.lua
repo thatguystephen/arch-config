@@ -11,6 +11,8 @@ return {
         "package-mods/main-apps",
         "dev/development",
         "cli-tools/cli-apps",
+        "niri-outputs",
+        "login-managers/sddm-enable",
     },
 
     packages = {},

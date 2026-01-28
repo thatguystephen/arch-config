@@ -24,7 +24,6 @@ local packages = {
     "nemo",
 
     -- Shell components
-    "dms-shell-git",
     "quickshell-git",
     "noctalia-shell-git",
 }
