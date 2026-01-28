@@ -8,6 +8,9 @@ end
 # Alias for opencode
 alias op='opencode'
 
+# Alias for Claude
+alias cc='sudo claude'
+
 # Alias for yazi
 alias y='yazi'
 

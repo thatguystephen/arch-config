@@ -1,10 +1,9 @@
 # Drop noisy user data and caches from version control
 obsidian/
-obs-studio/
-telegram-desktop/
+obs-studio/logs
+obs-studio/profiler_data
 
 # Generated/volatile files
-fish/fish_variables
 kitty/kitty.conf.bak
 gtk-3.0/*.bak
 gtk-4.0/*.bak
