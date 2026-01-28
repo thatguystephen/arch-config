@@ -4,6 +4,7 @@ config.lua
 
 # Auto-generated state files
 state/
+state/*.yaml
 system-packages.yaml
 state/installed.yaml
 state/hooks-executed.yaml

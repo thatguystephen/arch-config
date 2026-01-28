@@ -220,7 +220,6 @@ local packages = {
     "usb_modeswitch",
     "usbutils",
     "uwsm",
-    "vi",
     "vlc-plugins-all",
     "wget",
     "which",

@@ -1,0 +1,31 @@
+dotfiles:
+  - source: DankMaterialShell
+    target: ~/.config/DankMaterialShell
+  - source: btop
+    target: ~/.config/btop
+  - source: fastfetch
+    target: ~/.config/fastfetch
+  - source: fish
+    target: ~/.config/fish
+  - source: gtk-3.0
+    target: ~/.config/gtk-3.0
+  - source: gtk-4.0
+    target: ~/.config/gtk-4.0
+  - source: helix
+    target: ~/.config/helix
+  - source: kitty
+    target: ~/.config/kitty
+  - source: noctalia
+    target: ~/.config/noctalia
+  - source: opencode
+    target: ~/.config/opencode
+  - source: qt5ct
+    target: ~/.config/qt5ct
+  - source: qt6ct
+    target: ~/.config/qt6ct
+  - source: vesktop
+    target: ~/.config/vesktop
+  - source: yazi
+    target: ~/.config/yazi
+  - source: zed
+    target: ~/.config/zed
