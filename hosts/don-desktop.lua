@@ -21,7 +21,9 @@ return {
         "package-mods/test-packages-2",
         "package-mods/test-packages",
         "system-packages-don-desktop",
-        "winapps",
+        "virtualization/winapps",
+        "virtualization/virt-app",
+        "inir-shell",
     },
 
     packages = {},
