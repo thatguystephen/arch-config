@@ -33,7 +33,7 @@ return {
         enabled = true,
         backup_on_sync = true,
         backup_on_update = true,
-        tool = nil,
+        tool = "snapper",
         snapper_config = "root",
     },
 
