@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 local hostname = dcli.system.hostname()
 
 local dotfiles = {}

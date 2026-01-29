@@ -13,6 +13,7 @@ return {
         "cli-tools/cli-apps",
         "niri-outputs",
         "login-managers/sddm-enable",
+        "hardware",
     },
 
     packages = {},
