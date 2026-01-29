@@ -7,8 +7,9 @@ return {
         "cli-tools/cachyos-repo",
         "cli-tools/chaotic-aur",
         "login-managers/sddm-enable",
-        "bd-niri",
+        "window-managers/bd-niri",
         "dotfiles",
+        "hosts-configs/noctalia-ui",
     },
 
     packages = {},

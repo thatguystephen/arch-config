@@ -5,13 +5,14 @@ return {
 
     enabled_modules = {
         "asus/asus",
-        "bd-niri",
+        "window-managers/bd-niri",
         "dotfiles",
         "cli-tools/webapp-tool",
         "package-mods/main-apps",
         "dev/development",
         "cli-tools/cli-apps",
-        "niri-outputs",
+        "hosts-configs/niri-outputs",
+        "hosts-configs/noctalia-ui",
         "login-managers/sddm-enable",
         "hardware",
     },
