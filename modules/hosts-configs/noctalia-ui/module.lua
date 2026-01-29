@@ -17,13 +17,13 @@ local desktop_map = {
     ["cosmic-xero"] = "cosmic",
 }
 
-local host_defaults = {
-    ["don-desktop"] = "niri",
-    ["don-flow"] = "niri",
+local host_variants = {
+    ["don-desktop"] = "niri-desktop",
+    ["don-flow"] = "niri-flow",
     ["don-vm"] = "niri",
 }
 
-local variant = desktop_map[desktop] or host_defaults[hostname] or "niri"
+local variant = host_variants[hostname] or desktop_map[desktop] or "niri"
 
 local dotfiles = {
     {
@@ -32,8 +32,8 @@ local dotfiles = {
     },
 }
 
-if variant == "niri" and desktop_map[desktop] == nil and host_defaults[hostname] == nil then
-    dcli.log.warn("noctalia-ui: unknown desktop, defaulting to niri variant")
+if host_variants[hostname] == nil and desktop_map[desktop] == nil then
+    dcli.log.warn("noctalia-ui: unknown host/desktop, defaulting to niri variant")
 end
 
 return {
