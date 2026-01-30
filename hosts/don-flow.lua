@@ -15,6 +15,7 @@ return {
         "hosts-configs/noctalia-ui",
         "login-managers/sddm-enable",
         "hardware",
+        "gaming/moonlight",
     },
 
     packages = {},
