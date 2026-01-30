@@ -13,6 +13,7 @@ return {
     -- Declaratively enable tailscale service (replaces systemctl enable)
     services = {
         enabled = { "tailscaled" },
+        disabled = {},
     },
 
     -- Post-install hook for tailscale up and IP capture

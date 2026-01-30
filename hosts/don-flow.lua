@@ -9,6 +9,7 @@ return {
         "cli-tools/webapp-tool",
         "package-mods/main-apps",
         "dev/development",
+        "dev/flutter",
         "gaming/gaming-packages",
         "cli-tools/cli-apps",
         "hosts-configs/niri-outputs",

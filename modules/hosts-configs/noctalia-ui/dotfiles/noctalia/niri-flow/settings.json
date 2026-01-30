@@ -55,7 +55,155 @@
                 "density": "spacious",
                 "enabled": true,
                 "name": "eDP-1",
-                "position": "bottom"
+                "position": "bottom",
+                "widgets": {
+                    "center": [
+                        {
+                            "customFont": "",
+                            "formatHorizontal": "h:mm AP ddd, MMM dd",
+                            "formatVertical": "HH mm - dd MM",
+                            "id": "Clock",
+                            "tooltipFormat": "HH:mm ddd, MMM dd",
+                            "useCustomFont": false,
+                            "usePrimaryColor": false
+                        },
+                        {
+                            "characterCount": 2,
+                            "colorizeIcons": false,
+                            "emptyColor": "secondary",
+                            "enableScrollWheel": true,
+                            "focusedColor": "primary",
+                            "followFocusedScreen": false,
+                            "groupedBorderOpacity": 1,
+                            "hideUnoccupied": false,
+                            "iconScale": 0.8,
+                            "id": "Workspace",
+                            "labelMode": "index",
+                            "occupiedColor": "secondary",
+                            "reverseScroll": false,
+                            "showApplications": false,
+                            "showBadge": true,
+                            "showLabelsOnlyWhenOccupied": true,
+                            "unfocusedIconsOpacity": 1
+                        },
+                        {
+                            "colorName": "primary",
+                            "hideWhenIdle": false,
+                            "id": "AudioVisualizer",
+                            "width": 140
+                        }
+                    ],
+                    "left": [
+                        {
+                            "colorizeDistroLogo": false,
+                            "colorizeSystemIcon": "none",
+                            "customIconPath": "/home/don/.config/arch-config/modules/dotfiles/images/donarch (192 x 192 px).png",
+                            "enableColorization": false,
+                            "icon": "noctalia",
+                            "id": "ControlCenter",
+                            "useDistroLogo": false
+                        },
+                        {
+                            "compactMode": true,
+                            "diskPath": "/",
+                            "id": "SystemMonitor",
+                            "showCpuTemp": true,
+                            "showCpuUsage": true,
+                            "showDiskUsage": false,
+                            "showGpuTemp": false,
+                            "showLoadAverage": false,
+                            "showMemoryAsPercent": false,
+                            "showMemoryUsage": true,
+                            "showNetworkStats": false,
+                            "showSwapUsage": false,
+                            "useMonospaceFont": true,
+                            "usePrimaryColor": false
+                        },
+                        {
+                            "colorizeIcons": false,
+                            "hideMode": "hidden",
+                            "id": "ActiveWindow",
+                            "maxWidth": 145,
+                            "scrollingMode": "hover",
+                            "showIcon": true,
+                            "useFixedWidth": false
+                        },
+                        {
+                            "compactMode": false,
+                            "compactShowAlbumArt": true,
+                            "compactShowVisualizer": false,
+                            "hideMode": "hidden",
+                            "hideWhenIdle": false,
+                            "id": "MediaMini",
+                            "maxWidth": 145,
+                            "panelShowAlbumArt": true,
+                            "panelShowVisualizer": true,
+                            "scrollingMode": "hover",
+                            "showAlbumArt": true,
+                            "showArtistFirst": true,
+                            "showProgressRing": true,
+                            "showVisualizer": false,
+                            "useFixedWidth": false,
+                            "visualizerType": "linear"
+                        },
+                        {
+                            "displayMode": "onhover",
+                            "id": "Brightness"
+                        }
+                    ],
+                    "right": [
+                        {
+                            "defaultSettings": {
+                                "currentIconName": "world-download",
+                                "hideOnZero": false,
+                                "updateIntervalMinutes": 30,
+                                "updateTerminalCommand": "foot -e"
+                            },
+                            "id": "plugin:update-count"
+                        },
+                        {
+                            "defaultSettings": {
+                                "autoHeight": true,
+                                "cheatsheetData": [
+                                ],
+                                "columnCount": 3,
+                                "detectedCompositor": "",
+                                "editorData": null,
+                                "hyprlandConfigPath": "~/.config/hypr/hyprland.conf",
+                                "modKeyVariable": "$mainMod",
+                                "niriConfigPath": "~/.config/niri/config.kdl",
+                                "windowHeight": 0,
+                                "windowWidth": 1400
+                            },
+                            "id": "plugin:keybind-cheatsheet"
+                        },
+                        {
+                            "blacklist": [
+                            ],
+                            "colorizeIcons": false,
+                            "drawerEnabled": true,
+                            "hidePassive": false,
+                            "id": "Tray",
+                            "pinned": [
+                                "steam"
+                            ]
+                        },
+                        {
+                            "id": "WallpaperSelector"
+                        },
+                        {
+                            "hideWhenZero": false,
+                            "hideWhenZeroUnread": false,
+                            "id": "NotificationHistory",
+                            "showUnreadBadge": true
+                        },
+                        {
+                            "displayMode": "onhover",
+                            "id": "Volume",
+                            "middleClickCommand": "pwvucontrol || pavucontrol"
+                        }
+                    ]
+                }
             }
         ],
         "showCapsule": false,

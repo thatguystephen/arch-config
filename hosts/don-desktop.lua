@@ -23,6 +23,7 @@ return {
         "virtualization/winapps",
         "virtualization/virt-app",
         "quickshells/inir-shell",
+        "dev/flutter",
         "hosts-configs/niri-outputs",
         "hosts-configs/noctalia-ui",
     },
