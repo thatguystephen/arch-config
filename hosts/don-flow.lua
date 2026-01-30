@@ -4,16 +4,16 @@ return {
     import = {},
 
     enabled_modules = {
-        "asus/asus",
         "window-managers/bd-niri",
         "dotfiles",
         "cli-tools/webapp-tool",
         "package-mods/main-apps",
         "dev/development",
+        "gaming/gaming-packages",
         "cli-tools/cli-apps",
         "hosts-configs/niri-outputs",
         "hosts-configs/noctalia-ui",
-        "login-managers/sddm-enable",
+        "login-managers/sddm-cat-enable",
         "hardware",
         "gaming/moonlight",
     },
@@ -53,12 +53,12 @@ return {
 
     default_apps = {
         scope = "system",
-        browser = "chromium",
+        browser = "zen",
         text_editor = "helix",
         video_player = "mpv",
         audio_player = "mpv",
-        image_viewer = "chromium",
-        pdf_viewer = "chromium",
+        image_viewer = "zen",
+        pdf_viewer = "zen",
         mime_types = {},
     },
 

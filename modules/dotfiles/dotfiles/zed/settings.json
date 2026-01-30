@@ -23,6 +23,14 @@
     "show_sign_in": false
   },
   "agent_servers": {
+    "opencode": {
+      "type": "extension",
+      "favorite_models": [
+        "opencode/kimi-k2.5-free"
+      ],
+      "default_config_options": {},
+      "favorite_config_option_values": {}
+    },
     "codex": {
       "favorite_models": [
         "gpt-5.2-codex/xhigh"

@@ -1,6 +1,7 @@
 local packages = {
     -- Niri window manager
     "niri",
+    "xwayland-satellite",
     "xdg-desktop-portal-gnome",
     "wl-clipboard",
     "wl-clip-persist",
