@@ -13,7 +13,7 @@ return {
         "cli-tools/cli-apps",
         "hosts-configs/niri-outputs",
         "hosts-configs/noctalia-ui",
-        "login-managers/sddm-cat-enable",
+        "login-managers/sddm-astronaut-enable",
         "hardware",
         "gaming/moonlight",
     },

@@ -13,7 +13,7 @@ return {
         "window-managers/bd-niri",
         "window-managers/bd-mango",
         "gaming/sunshine",
-        "login-managers/sddm-cat-enable",
+        "login-managers/sddm-astronaut-enable",
         "cli-tools/webapp-tool",
         "dotfiles",
         "flapak",
