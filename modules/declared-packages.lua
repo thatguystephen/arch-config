@@ -11,5 +11,7 @@ return {
         "dcli-arch-git",
         "eza",
         "lazygit",
+        "ranger",
+        "superfile",
     },
 }
