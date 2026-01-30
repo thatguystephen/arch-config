@@ -3,7 +3,6 @@ local packages = {
     "bibata-cursor-theme-bin",
     "brightnessctl",
     "cliphist",
-    "crystal-dock-bin",
     "grim",
     "mangowc-git",
     "satty",
@@ -21,14 +20,14 @@ local packages = {
     "kitty",
 
     -- Shell components
-    "dms-shell-git",
-    "quickshell",
+    "noctalia-shell-git",
+    "quickshell-git",
 }
 
 return {
     description = "MangoWC window manager and related tools",
     conflicts = { "bdots-kde" },
     doftiles_sync = true,
-    post_install_hook = "scripts/install-mangowc-dotfiles.sh",
+    post_install_hook = "",
     packages = packages,
 }

@@ -13,8 +13,8 @@ systemctl --user start xdg-desktop-portal-wlr.service >/dev/null 2>&1 &
 echo "Xft.dpi: 96" | xrdb -merge #dpi缩放
 # xrdb merge ~/.Xresources >/dev/null 2>&1
 
-# dms shell
-QT_WAYLAND_FORCE_DPI=96 dms run >/dev/null 2>&1 &
+# noctalia shell
+QT_WAYLAND_FORCE_DPI=96 qs -c noctalia-shell >/dev/null 2>&1 &
 
 # ime input
 fcitx5 --replace -d >/dev/null 2>&1 &

@@ -10,5 +10,6 @@ return {
         "login-managers/lightdm-enable",
     },
     post_install_hook = "scripts/enable-sddm.sh",
+    hook_behavior = "skip",
     packages = packages,
 }

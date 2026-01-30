@@ -40,7 +40,9 @@
         "marginVertical": 7,
         "monitors": [
             "DP-1",
-            "eDP-1"
+            "eDP-1",
+            "DP-3",
+            "DP-2"
         ],
         "outerCorners": false,
         "position": "top",
@@ -50,6 +52,259 @@
                 "enabled": true,
                 "name": "eDP-1",
                 "position": "bottom"
+            },
+            {
+                "enabled": true,
+                "name": "DP-3",
+                "position": "right",
+                "widgets": {
+                    "center": [
+                        {
+                            "characterCount": 2,
+                            "colorizeIcons": false,
+                            "enableScrollWheel": true,
+                            "followFocusedScreen": false,
+                            "groupedBorderOpacity": 1,
+                            "hideUnoccupied": false,
+                            "iconScale": 0.8,
+                            "id": "Workspace",
+                            "labelMode": "index",
+                            "showApplications": false,
+                            "showLabelsOnlyWhenOccupied": true,
+                            "unfocusedIconsOpacity": 1
+                        },
+                        {
+                            "colorName": "primary",
+                            "hideWhenIdle": false,
+                            "id": "AudioVisualizer",
+                            "width": 140
+                        }
+                    ],
+                    "left": [
+                        {
+                            "colorizeDistroLogo": false,
+                            "colorizeSystemIcon": "none",
+                            "customIconPath": "/home/don/.config/arch-config/modules/dotfiles/images/donarch (192 x 192 px).png",
+                            "enableColorization": false,
+                            "icon": "noctalia",
+                            "id": "ControlCenter",
+                            "useDistroLogo": false
+                        },
+                        {
+                            "compactMode": true,
+                            "diskPath": "/",
+                            "id": "SystemMonitor",
+                            "showCpuTemp": true,
+                            "showCpuUsage": true,
+                            "showDiskUsage": false,
+                            "showGpuTemp": false,
+                            "showLoadAverage": false,
+                            "showMemoryAsPercent": false,
+                            "showMemoryUsage": true,
+                            "showNetworkStats": false,
+                            "showSwapUsage": false,
+                            "useMonospaceFont": true,
+                            "usePrimaryColor": false
+                        },
+                        {
+                            "colorizeIcons": false,
+                            "hideMode": "hidden",
+                            "id": "ActiveWindow",
+                            "maxWidth": 145,
+                            "scrollingMode": "hover",
+                            "showIcon": true,
+                            "useFixedWidth": false
+                        },
+                        {
+                            "compactMode": false,
+                            "compactShowAlbumArt": true,
+                            "compactShowVisualizer": false,
+                            "hideMode": "hidden",
+                            "hideWhenIdle": false,
+                            "id": "MediaMini",
+                            "maxWidth": 145,
+                            "panelShowAlbumArt": true,
+                            "panelShowVisualizer": true,
+                            "scrollingMode": "hover",
+                            "showAlbumArt": true,
+                            "showArtistFirst": true,
+                            "showProgressRing": true,
+                            "showVisualizer": false,
+                            "useFixedWidth": false,
+                            "visualizerType": "linear"
+                        }
+                    ],
+                    "right": [
+                        {
+                            "defaultSettings": {
+                                "autoHeight": true,
+                                "cheatsheetData": [
+                                ],
+                                "columnCount": 3,
+                                "detectedCompositor": "",
+                                "editorData": null,
+                                "hyprlandConfigPath": "~/.config/hypr/hyprland.conf",
+                                "modKeyVariable": "$mainMod",
+                                "niriConfigPath": "~/.config/niri/config.kdl",
+                                "windowHeight": 0,
+                                "windowWidth": 1400
+                            },
+                            "id": "plugin:keybind-cheatsheet"
+                        },
+                        {
+                            "blacklist": [
+                            ],
+                            "colorizeIcons": false,
+                            "drawerEnabled": true,
+                            "hidePassive": false,
+                            "id": "Tray",
+                            "pinned": [
+                                "steam"
+                            ]
+                        },
+                        {
+                            "id": "WallpaperSelector"
+                        },
+                        {
+                            "hideWhenZero": false,
+                            "hideWhenZeroUnread": false,
+                            "id": "NotificationHistory",
+                            "showUnreadBadge": true
+                        },
+                        {
+                            "displayMode": "onhover",
+                            "id": "Volume",
+                            "middleClickCommand": "pwvucontrol || pavucontrol"
+                        }
+                    ]
+                }
+            },
+            {
+                "density": "mini",
+                "enabled": true,
+                "name": "DP-2",
+                "position": "left",
+                "widgets": {
+                    "center": [
+                        {
+                            "characterCount": 2,
+                            "colorizeIcons": false,
+                            "enableScrollWheel": true,
+                            "followFocusedScreen": false,
+                            "groupedBorderOpacity": 1,
+                            "hideUnoccupied": false,
+                            "iconScale": 0.8,
+                            "id": "Workspace",
+                            "labelMode": "index",
+                            "showApplications": false,
+                            "showLabelsOnlyWhenOccupied": true,
+                            "unfocusedIconsOpacity": 1
+                        },
+                        {
+                            "colorName": "primary",
+                            "hideWhenIdle": false,
+                            "id": "AudioVisualizer",
+                            "width": 140
+                        }
+                    ],
+                    "left": [
+                        {
+                            "colorizeDistroLogo": false,
+                            "colorizeSystemIcon": "none",
+                            "customIconPath": "/home/don/.config/arch-config/modules/dotfiles/images/donarch (192 x 192 px).png",
+                            "enableColorization": false,
+                            "icon": "noctalia",
+                            "id": "ControlCenter",
+                            "useDistroLogo": false
+                        },
+                        {
+                            "compactMode": true,
+                            "diskPath": "/",
+                            "id": "SystemMonitor",
+                            "showCpuTemp": true,
+                            "showCpuUsage": true,
+                            "showDiskUsage": false,
+                            "showGpuTemp": false,
+                            "showLoadAverage": false,
+                            "showMemoryAsPercent": false,
+                            "showMemoryUsage": true,
+                            "showNetworkStats": false,
+                            "showSwapUsage": false,
+                            "useMonospaceFont": true,
+                            "usePrimaryColor": false
+                        },
+                        {
+                            "colorizeIcons": false,
+                            "hideMode": "hidden",
+                            "id": "ActiveWindow",
+                            "maxWidth": 145,
+                            "scrollingMode": "hover",
+                            "showIcon": true,
+                            "useFixedWidth": false
+                        },
+                        {
+                            "compactMode": false,
+                            "compactShowAlbumArt": true,
+                            "compactShowVisualizer": false,
+                            "hideMode": "hidden",
+                            "hideWhenIdle": false,
+                            "id": "MediaMini",
+                            "maxWidth": 145,
+                            "panelShowAlbumArt": true,
+                            "panelShowVisualizer": true,
+                            "scrollingMode": "hover",
+                            "showAlbumArt": true,
+                            "showArtistFirst": true,
+                            "showProgressRing": true,
+                            "showVisualizer": false,
+                            "useFixedWidth": false,
+                            "visualizerType": "linear"
+                        }
+                    ],
+                    "right": [
+                        {
+                            "defaultSettings": {
+                                "autoHeight": true,
+                                "cheatsheetData": [
+                                ],
+                                "columnCount": 3,
+                                "detectedCompositor": "",
+                                "editorData": null,
+                                "hyprlandConfigPath": "~/.config/hypr/hyprland.conf",
+                                "modKeyVariable": "$mainMod",
+                                "niriConfigPath": "~/.config/niri/config.kdl",
+                                "windowHeight": 0,
+                                "windowWidth": 1400
+                            },
+                            "id": "plugin:keybind-cheatsheet"
+                        },
+                        {
+                            "blacklist": [
+                            ],
+                            "colorizeIcons": false,
+                            "drawerEnabled": true,
+                            "hidePassive": false,
+                            "id": "Tray",
+                            "pinned": [
+                                "steam"
+                            ]
+                        },
+                        {
+                            "id": "WallpaperSelector"
+                        },
+                        {
+                            "hideWhenZero": false,
+                            "hideWhenZeroUnread": false,
+                            "id": "NotificationHistory",
+                            "showUnreadBadge": true
+                        },
+                        {
+                            "displayMode": "onhover",
+                            "id": "Volume",
+                            "middleClickCommand": "pwvucontrol || pavucontrol"
+                        }
+                    ]
+                }
             }
         ],
         "showCapsule": false,
@@ -299,8 +554,8 @@
                         "showBackground": true,
                         "useCustomFont": false,
                         "usePrimaryColor": true,
-                        "x": 13,
-                        "y": 15
+                        "x": 1736,
+                        "y": 20
                     }
                 ]
             }

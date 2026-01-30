@@ -32,7 +32,7 @@ local packages = {
 
     -- Shell components (DankMaterialShell)
     "dms-shell-git",
-    "quickshell",
+    "quickshell-git",
 }
 
 return {
