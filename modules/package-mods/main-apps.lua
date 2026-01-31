@@ -1,18 +1,20 @@
 local packages = {
+    -- Terminal
     "kitty",
     "fastfetch",
+    -- File Management
+    "xplr",
+    "felix-rs",
     "nemo",
-    "thunar",
-    "wl-clipboard",
-    "cliphist",
-    "python-pywal",
+    -- Comms
     "telegram-desktop",
     "vesktop",
     "discord",
-    "virt-manager",
-    "obs-studio",
+    -- Browser
     "zen-browser-bin",
+    -- Notes
     "obsidian",
+    -- Editor
     "zed",
 }
 

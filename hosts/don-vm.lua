@@ -18,7 +18,7 @@ return {
     flatpak_scope = "user",
     auto_prune = false,
     module_processing = "sequential",
-    strict_package_order = true,
+    strict_package_order = false,
     aur_helper = "yay",
 
     config_backups = {

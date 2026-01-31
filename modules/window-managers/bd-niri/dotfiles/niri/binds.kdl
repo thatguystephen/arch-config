@@ -33,6 +33,7 @@ binds {
     Mod+D hotkey-overlay-title="Open Discord" { spawn "vesktop"; }
     Mod+F hotkey-overlay-title="Open Discord" { spawn "nemo"; }
     Mod+Y hotkey-overlay-title="Open Yazi" { spawn "kitty" "yazi"; }
+    Mod+Alt+F hotkey-overlay-title="Open Felix" { spawn "kitty" "felix"; }
     Mod+Shift+A hotkey-overlay-title="Open btop" { spawn "kitty" "btop"; }
     Mod+Shift+N hotkey-overlay-title="Open Obsidian" { spawn "obsidian"; }
     Mod+G hotkey-overlay-title="Open Telegram" { spawn "Telegram"; }
@@ -43,7 +44,6 @@ binds {
     Mod+Ctrl+P hotkey-overlay-title="Open Perplexity" { spawn "perplexity"; }
     Mod+Ctrl+Return { spawn "kitty" "--class=floating-kitty"; }
     Mod+Shift+O hotkey-overlay-title="Open OBS Studio" { spawn "flatpak" "run" "com.obsproject.Studio"; }
-    Mod+Alt+F hotkey-overlay-title="Toggle DP-1 Monitor Scale" { spawn "sh" "-c" "$HOME/.config/niri/scripts/toggle-dp1-scale.sh"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
