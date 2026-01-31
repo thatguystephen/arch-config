@@ -548,14 +548,14 @@
                     {
                         "clockStyle": "minimal",
                         "customFont": "",
-                        "format": "HH:mm\\nd MMMM yyyy",
+                        "format": "h:mm AP ddd MMM d",
                         "id": "Clock",
                         "roundedCorners": true,
                         "showBackground": true,
                         "useCustomFont": false,
                         "usePrimaryColor": true,
-                        "x": 1736,
-                        "y": 20
+                        "x": 1619,
+                        "y": 15
                     }
                 ]
             }
