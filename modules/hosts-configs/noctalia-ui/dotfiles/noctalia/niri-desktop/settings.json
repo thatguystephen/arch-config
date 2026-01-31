@@ -56,7 +56,7 @@
             {
                 "enabled": true,
                 "name": "DP-3",
-                "position": "right",
+                "position": "bottom",
                 "widgets": {
                     "center": [
                         {
@@ -183,7 +183,7 @@
                 "density": "mini",
                 "enabled": true,
                 "name": "DP-2",
-                "position": "left",
+                "position": "bottom",
                 "widgets": {
                     "center": [
                         {
