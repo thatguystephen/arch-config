@@ -2,6 +2,9 @@
 config.yaml
 config.lua
 
+# Allow files
+!dotfiles/felix/config.yaml
+
 # Auto-generated state files
 state/
 state/*.yaml
