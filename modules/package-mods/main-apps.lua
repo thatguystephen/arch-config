@@ -10,7 +10,7 @@ local packages = {
     "telegram-desktop",
     "vesktop",
     "discord",
-    -- Browser
+    -- Browsers
     "zen-browser-bin",
     -- Notes
     "obsidian",

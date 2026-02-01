@@ -29,6 +29,10 @@
           "desc": "Open Yazi"
         },
         {
+          "keys": "Super + Alt + F",
+          "desc": "Open Felix"
+        },
+        {
           "keys": "Super + Shift + A",
           "desc": "Open btop"
         },
@@ -67,10 +71,6 @@
         {
           "keys": "Super + Shift + O",
           "desc": "Open OBS Studio"
-        },
-        {
-          "keys": "Super + Alt + F",
-          "desc": "Toggle DP-1 Monitor Scale"
         },
         {
           "keys": "Super + Alt + L",

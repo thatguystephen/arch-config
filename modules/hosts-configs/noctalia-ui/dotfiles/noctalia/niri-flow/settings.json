@@ -485,8 +485,7 @@
             "zen",
             "org.gnome.Boxes",
             "vesktop",
-            "org.telegram.desktop",
-            "steam"
+            "org.telegram.desktop"
         ],
         "pinnedStatic": true,
         "position": "bottom",
