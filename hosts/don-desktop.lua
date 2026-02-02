@@ -1,6 +1,7 @@
 return {
     host = "don-desktop",
     description = "",
+    sync_sudo = "true",
     import = {},
 
     enabled_modules = {

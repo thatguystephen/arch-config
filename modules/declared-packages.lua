@@ -13,5 +13,6 @@ return {
         "lazygit",
         "ranger",
         "superfile",
+        "browsh",
     },
 }

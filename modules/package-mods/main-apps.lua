@@ -12,6 +12,7 @@ local packages = {
     "discord",
     -- Browsers
     "zen-browser-bin",
+    "qutebrowser",
     -- Notes
     "obsidian",
     -- Editor

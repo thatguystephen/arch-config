@@ -575,14 +575,15 @@
         ],
         "onlySameOutput": false,
         "pinnedApps": [
-            "kitty",
             "nemo",
             "dev.zed.Zed",
-            "zen",
             "org.gnome.Boxes",
+            "zen",
+            "org.qutebrowser.qutebrowser",
             "vesktop",
             "org.telegram.desktop",
-            "steam"
+            "steam",
+            "kitty"
         ],
         "pinnedStatic": true,
         "position": "bottom",

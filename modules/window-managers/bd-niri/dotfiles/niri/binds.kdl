@@ -38,6 +38,7 @@ binds {
     Mod+Shift+N hotkey-overlay-title="Open Obsidian" { spawn "obsidian"; }
     Mod+G hotkey-overlay-title="Open Telegram" { spawn "Telegram"; }
     Mod+B hotkey-overlay-title="Open Zen Browser" { spawn "zen-browser"; }
+    Mod+Shift+B hotkey-overlay-title="Open Qutebrowser" { spawn "qutebrowser"; }
     Mod+Shift+Z hotkey-overlay-title="Open Zed Editor" { spawn "sh" "-c" "$HOME/.config/niri/scripts/zed-resize-fix.sh"; }
     Mod+S hotkey-overlay-title="Open Steam" { spawn "steam"; }
     Mod+Ctrl+C hotkey-overlay-title="Open OpenCode" { spawn "kitty" "opencode"; }
