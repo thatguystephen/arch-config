@@ -53,13 +53,15 @@ function hardware.get_gpu_packages()
 
     if dcli.hardware.has_nvidia() then
         if is_desktop then
-            -- Desktop: Use open drivers tied to CachyOS kernels
-            table.insert(packages, "linux-cachyos-nvidia-open")
-            table.insert(packages, "linux-cachyos-lts-nvidia-open")
+            -- Desktop (stock Arch kernels): use DKMS so it works with linux/linux-lts/linux-zen and custom kernels
+            table.insert(packages, "nvidia-open-dkms") -- or "nvidia-dkms" if you prefer the proprietary module
+            table.insert(packages, "dkms")
+            table.insert(packages, "linux-headers")
         elseif is_laptop then
-            -- Laptop/Deck: Use DKMS + PRIME switching (avoids installing desktop-only opens)
-            table.insert(packages, "nvidia-dkms")
-            table.insert(packages, "nvidia-prime") -- For GPU switching
+            -- Laptop/Deck: Use DKMS + PRIME switching
+            table.insert(packages, "nvidia-open-dkms") -- or "nvidia-dkms"
+            table.insert(packages, "dkms")
+            table.insert(packages, "nvidia-prime")     -- For GPU switching
         end
         table.insert(packages, "nvidia-utils")
         table.insert(packages, "nvidia-settings")
