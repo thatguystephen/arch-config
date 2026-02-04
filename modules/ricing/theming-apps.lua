@@ -1,5 +1,4 @@
 local packages = {
-    "aether",
     "nwg-look",
     "python-pywal",
 }

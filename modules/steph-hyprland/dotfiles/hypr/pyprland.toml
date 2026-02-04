@@ -1,0 +1,19 @@
+# Pyprland Configuration
+# https://hyprland-community.github.io/pyprland/
+
+[pyprland]
+plugins = [
+    "scratchpads"
+]
+
+# ==================
+# SCRATCHPADS
+# ==================
+[scratchpads.term]
+animation = "fromTop"
+command = "kitty --class kitty-dropterm"
+class = "kitty-dropterm"
+size = "75% 60%"
+margin = 50
+lazy = true
+

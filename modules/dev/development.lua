@@ -17,10 +17,8 @@ local packages = {
     "helix",
     "claude-code",
     "yazi",
-    "opencode",
     "tmux",
     "ollama",
-    "fish",
     "gnome-boxes",
 }
 

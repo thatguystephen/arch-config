@@ -1,0 +1,6 @@
+@import "~/.cache/wal/colors-rofi-dark.rasi"
+
+* {
+active: #C5773E;
+urgent: #906C2B;
+}

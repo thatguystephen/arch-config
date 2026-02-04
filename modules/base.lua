@@ -3,7 +3,7 @@ local packages = {
     "base-devel",
     "linux-firmware",
     "networkmanager",
-    "vim",
+    "neovim",
     "git",
     "htop",
     "man-db",

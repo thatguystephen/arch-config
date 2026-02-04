@@ -17,26 +17,31 @@ BINDS_FILE="$HYPR_DIR/current_shell_binds.conf"
 # If we write to BINDS_FILE while it's still a symlink, we will overwrite shell_default.conf.
 # These safeguards ensure BINDS_FILE is always a real file and never clobbers your defaults.
 
-# Default-only components:
-# - In your "default" session, these are started by Hyprland (autostart.conf).
-# - When switching to Noctalia/DMS, we stop them so the shell can manage notifications/wallpaper.
-# - When switching back to Default or to Ax-Shell, we restart them.
-DEFAULT_ONLY_KILL_PATTERNS=("eww" "dunst" "hyprpaper")
+# Default session components:
+# - "default": dunst + hyprpaper + EWW windows (but keep EWW daemon alive across modes)
+# - "noctalia"/"dms": stop dunst/hyprpaper and close EWW windows (daemon stays up)
+# - "ax-shell": stop/keep EWW windows closed, but restart dunst/hyprpaper
+DEFAULT_ONLY_KILL_PATTERNS=("dunst" "hyprpaper")
 
-# How to restart the default-only stack when returning to Default or Ax-Shell.
-# Adjust the EWW windows list if needed.
-DEFAULT_ONLY_RESTART_CMD="dunst & hyprpaper & eww daemon & sleep 1; eww open-many side-bar"
+# EWW behavior: do NOT kill the daemon; just close windows when leaving default.
+EWW_CLOSE_CMD="eww close-all 2>/dev/null || true"
+EWW_DEFAULT_OPEN_CMD="eww daemon >/dev/null 2>&1 || true; sleep 1; eww open-many side-bar"
+
+# Restart commands (guarded to avoid duplicates)
+DEFAULT_RESTART_CMD="(pgrep -x dunst >/dev/null || dunst) & (pgrep -x hyprpaper >/dev/null || hyprpaper) & ${EWW_DEFAULT_OPEN_CMD}"
+AX_RESTART_CMD="(pgrep -x dunst >/dev/null || dunst) & (pgrep -x hyprpaper >/dev/null || hyprpaper) &"
 
 # Shell configuration (easily extensible for future shells)
 declare -A SHELL_START_CMD=(
     ["default"]=""  # default session; no extra shell process
     ["noctalia"]="qs -c noctalia-shell"
     ["dms"]="dms run"
-    ["ax-shell"]="uwsm-app \$(python \"$HOME/.config/Ax-Shell/main.py\")"
+    ["ax-shell"]="uwsm-app python '$HOME/.config/Ax-Shell/main.py'"
 )
 
+# Kill patterns for actual shell processes only (not default components)
 declare -A SHELL_KILL_PATTERN=(
-    ["default"]="$EWW_KILL_PATTERN"
+    ["default"]=""
     ["noctalia"]="qs -c noctalia-shell"
     ["dms"]="dms run"
     ["ax-shell"]="ax-shell"
@@ -121,17 +126,25 @@ TARGET_NAME="${SHELL_DISPLAY_NAME[$TARGET_SHELL]}"
 notify-send "Shell Switcher" "Switching from $CURRENT_NAME to $TARGET_NAME..." -t 2000 -u normal
 sleep 2
 
-# Kill current shell process
+# Kill current shell process (only if there's a pattern configured)
 echo "Killing $CURRENT_NAME shell..."
-pkill -f "${SHELL_KILL_PATTERN[$CURRENT_SHELL]}" 2>/dev/null
+if [ -n "${SHELL_KILL_PATTERN[$CURRENT_SHELL]}" ]; then
+    pkill -f "${SHELL_KILL_PATTERN[$CURRENT_SHELL]}" 2>/dev/null || true
+fi
 sleep 0.5
 
-# If switching INTO a shell that handles wallpaper/notifications, stop default-only components
-# so they don't conflict.
+# If switching INTO a shell that handles wallpaper/notifications, stop default components
+# so they don't conflict, and close EWW windows (do NOT kill daemon).
 if [ "$TARGET_SHELL" = "noctalia" ] || [ "$TARGET_SHELL" = "dms" ]; then
     for p in "${DEFAULT_ONLY_KILL_PATTERNS[@]}"; do
         pkill -f "$p" 2>/dev/null || true
     done
+    bash -c "$EWW_CLOSE_CMD" >/dev/null 2>&1
+fi
+
+# If switching INTO ax-shell, close EWW windows (daemon stays up). Keep/restart dunst+hyprpaper later.
+if [ "$TARGET_SHELL" = "ax-shell" ]; then
+    bash -c "$EWW_CLOSE_CMD" >/dev/null 2>&1
 fi
 
 # Handle Ax-Shell source line toggling
@@ -176,19 +189,15 @@ hyprctl reload
 
 # Start new shell (detached from terminal) unless we're switching to "default"
 if [ "$TARGET_SHELL" = "default" ]; then
-    echo "Activating default session: restarting default-only components..."
-    setsid -f bash -c "$DEFAULT_ONLY_RESTART_CMD" >/dev/null 2>&1
+    echo "Activating default session: restarting dunst/hyprpaper and opening EWW windows..."
+    setsid -f bash -c "$DEFAULT_RESTART_CMD" >/dev/null 2>&1
 else
-    # For non-default shells, ensure EWW is stopped (shells manage their own UI)
-    pkill -f "eww" 2>/dev/null || true
-
     echo "Starting $TARGET_NAME shell..."
     setsid -f bash -c "${SHELL_START_CMD[$TARGET_SHELL]}" >/dev/null 2>&1
 
-    # Ax-Shell should behave like default in terms of wallpaper/notifications (per your request),
-    # so restore default-only components when switching to ax-shell.
+    # Ax-Shell: restore notifications + wallpaper, but do NOT open EWW windows.
     if [ "$TARGET_SHELL" = "ax-shell" ]; then
-        setsid -f bash -c "$DEFAULT_ONLY_RESTART_CMD" >/dev/null 2>&1
+        setsid -f bash -c "$AX_RESTART_CMD" >/dev/null 2>&1
     fi
 fi
 

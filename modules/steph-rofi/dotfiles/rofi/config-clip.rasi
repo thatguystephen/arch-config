@@ -1,0 +1,6 @@
+@import "~/.config/rofi/launchers/type-4/style-9.rasi"
+
+/* ---- Entry ---- */
+entry {
+  width: 45%;
+}

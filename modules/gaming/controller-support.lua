@@ -10,6 +10,6 @@ local packages = {
 
 return {
     description = "Game controller drivers and tools for various gaming controllers",
-    post_install_hook = "controller-support/scripts/install-controller-udev-rules.sh",
+    post_install_hook = "",
     packages = packages,
 }

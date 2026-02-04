@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# Variables
+SELECTED_WALLPAPER=$1
+WALLPAPER_DIR="$HOME/wallpapers"
+GTK_UPDATE_SCRIPT="/home/steph/scripts/gtk_wal.sh"
+BROWSER_COLOR_SCRIPT="/home/steph/scripts/browser-theme.sh"
+
+# Ensure the wallpaper exists
+if [ ! -f "$WALLPAPER_DIR/$SELECTED_WALLPAPER.jpg" ]; then
+    echo "Error: Wallpaper not found: $SELECTED_WALLPAPER"
+    exit 1
+fi
+
+# Apply pywal colors
+wal -i "$WALLPAPER_DIR/$SELECTED_WALLPAPER.jpg" || { echo "Error: pywal failed"; exit 1; }
+
+sleep 2
+
+# Update browser colors according to pywal palette
+if [[ -x "$BROWSER_COLOR_SCRIPT" ]]; then
+  "$BROWSER_COLOR_SCRIPT" || echo "Warning: Browser color update script failed"
+
+  sleep 1
+else
+  echo "Warning: Browser color update script not found or not executable"
+fi
+
+# Update GTK colors from pywal cache
+if [[ -x "$GTK_UPDATE_SCRIPT" ]]; then
+    "$GTK_UPDATE_SCRIPT" || { echo "Error: GTK color update script failed"; exit 1; }
+else
+    echo "Warning: GTK update script not found or not executable: $GTK_UPDATE_SCRIPT"
+fi
+
+# Reload eww
+killall eww || echo "Warning: No eww process found"
+eww open-many side-bar notifications
+
+# Restart hyprpaper
+killall hyprpaper || echo "Warning: No hyprpaper process found"
+hyprpaper &
+

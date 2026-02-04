@@ -3,16 +3,14 @@ local packages = {
     "kitty",
     "fastfetch",
     -- File Management
-    "xplr",
-    "felix-rs",
-    "nemo",
+    "nautilus",
+    "thunar",
     -- Comms
-    "telegram-desktop",
     "vesktop",
     "discord",
     -- Browsers
     "zen-browser-bin",
-    "qutebrowser",
+    "helium-browser-bin",
     -- Notes
     "obsidian",
     -- Editor

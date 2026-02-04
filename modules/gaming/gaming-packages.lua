@@ -1,8 +1,5 @@
 local packages = {
     "steam",
-    "gamescope",
-    "mangohud",
-    "gamemode",
     "protonup-qt",
 }
 
