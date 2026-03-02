@@ -1,0 +1,226 @@
+@use "./theme" as *;
+@use "./windows/bar/Bar.scss";
+@use "./windows/notification_popups/NotificationPopups.scss";
+@use "./windows/osd/OSD.scss";
+@use "./windows/media_popup/MediaPopup.scss";
+@use "./windows/volume_popup/VolumePopup.scss";
+@use "./windows/calendar_popup/CalendarPopup.scss";
+
+// ═══════════════════════════════════════════════════════════
+// GLOBAL RESET & BASE STYLES
+// ═══════════════════════════════════════════════════════════
+
+// Universal reset — GTK widgets start with no inherited chrome
+* {
+  all: unset;
+  font-family: $font-primary, $font-fallback;
+  font-size: $font-size;
+  font-weight: $font-weight-normal;
+}
+
+// ─── Focus ───────────────────────────────────────────────
+button:focus,
+menubutton:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+// ─── Global Transitions ──────────────────────────────────
+// Smooth transitions on interactive elements globally
+button,
+menubutton,
+label,
+image,
+box,
+revealer {
+  transition: all $transition-normal $ease-default;
+}
+
+// ─── Scrollbar Styling ───────────────────────────────────
+// Minimal scrollbars inspired by angad43/ArchEclipse
+scrollbar {
+  border-radius: $radius-sm;
+  background: transparent;
+  min-width: 6px;
+  min-height: 6px;
+
+  trough {
+    background: transparent;
+    border-radius: $radius-sm;
+  }
+
+  slider {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: $radius-sm;
+    min-width: 4px;
+    min-height: 4px;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.25);
+    }
+  }
+}
+
+// ─── Separator ───────────────────────────────────────────
+separator {
+  background-color: $border-color;
+  min-height: 1px;
+  min-width: 1px;
+  margin: $space-xs 0;
+}
+
+// ─── Tooltip Styling ─────────────────────────────────────
+tooltip {
+  background-color: var(--surface, $bg2);
+  border: $border-width solid $border-color;
+  border-radius: $radius-sm;
+  padding: $space-xs $space-md;
+  box-shadow: $shadow-md;
+  color: var(--fg, $fg1);
+  font-size: $font-size-sm;
+}
+
+// ─── Scale / Slider Base ─────────────────────────────────
+scale {
+  padding: 0;
+
+  trough {
+    background-color: var(--surface-variant, $surface2);
+    border-radius: $radius-sm;
+    min-height: 8px;
+
+    slider {
+      all: unset;
+      min-height: 0;
+      min-width: 0;
+      background-color: transparent;
+      border: none;
+      opacity: 0;
+    }
+
+    highlight {
+      all: unset;
+      background-color: var(--primary, $accent);
+      border-radius: $radius-sm;
+    }
+  }
+}
+
+// ─── Level Bar Base ──────────────────────────────────────
+levelbar {
+  trough {
+    background-color: var(--surface-variant, $surface2);
+    border-radius: $radius-xs;
+    min-height: 8px;
+  }
+
+  block.filled {
+    background-color: var(--primary, $accent);
+    border-radius: $radius-xs;
+    min-height: 8px;
+  }
+
+  block.empty {
+    background-color: var(--surface-variant, $surface2);
+    border-radius: $radius-xs;
+    min-height: 8px;
+  }
+}
+
+// ─── Entry Base ──────────────────────────────────────────
+entry {
+  all: unset;
+  padding: $space-md $space-lg;
+  border-radius: $radius-sm;
+  color: var(--fg, $fg1);
+  background-color: var(--surface-variant, $surface2);
+  border: $border-width solid $border-color;
+
+  &:focus {
+    border-color: var(--primary, $accent);
+    box-shadow: none;
+  }
+}
+
+// ─── Switch Base ─────────────────────────────────────────
+switch {
+  background-color: var(--surface-variant, $surface2);
+  border-radius: $radius-pill;
+  padding: $space-xxs;
+
+  slider {
+    background-color: var(--fg, $fg2);
+    border-radius: $radius-round;
+    min-width: 16px;
+    min-height: 16px;
+  }
+
+  &:checked {
+    background-color: var(--primary, $accent);
+
+    slider {
+      background-color: var(--on-primary, $bg1);
+    }
+  }
+}
+
+// ─── Calendar Base ───────────────────────────────────────
+calendar {
+  all: unset;
+  background-color: transparent;
+  border-radius: $radius-md;
+  color: var(--fg, $fg1);
+  font-size: $font-size-sm;
+  padding: $space-md;
+
+  .header {
+    background-color: transparent;
+  }
+
+  .highlight {
+    background-color: transparent;
+    color: var(--primary, $accent);
+  }
+
+  :selected {
+    color: var(--tertiary, $error);
+    background-color: transparent;
+  }
+
+  :indeterminate {
+    color: var(--secondary, $info);
+  }
+
+  .button {
+    background-color: transparent;
+    color: var(--primary, $accent);
+  }
+}
+
+// ─── Popover Base ────────────────────────────────────────
+popover {
+  arrow {
+    background-color: var(--surface, $bg2);
+  }
+
+  contents {
+    padding: $space-xs;
+    background-color: var(--surface, $bg2);
+    border: $border-width solid $border-color;
+    border-radius: $radius-md;
+    box-shadow: $shadow-lg;
+
+    button {
+      @include bar-button;
+      border-radius: $radius-sm;
+      padding: $space-md $space-lg;
+    }
+  }
+}
+
+// ─── Window Transparency ─────────────────────────────────
+// All overlay/popup windows should be transparent by default
+// Individual window classes handle their own backgrounds
+window {
+  background-color: transparent;
+}

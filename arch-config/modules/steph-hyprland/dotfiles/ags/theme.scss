@@ -1,0 +1,481 @@
+@use "sass:string";
+@use "sass:color";
+
+// ═══════════════════════════════════════════════════════════
+// THEME CONFIGURATION
+// Comprehensive design tokens, mixins, and color system
+// Inspired by: angad43, kibertod, ArchEclipse, OkPanel, uday-sudo
+// ═══════════════════════════════════════════════════════════
+
+// ─── Fallback Color Palette ──────────────────────────────
+// Used when Matugen CSS variables are not loaded
+// YUU-inspired dark theme with clean, minimal aesthetic
+$bg1: #0f1116;
+$bg2: #181a22;
+$bg3: #1e2029;
+$fg1: #dfe3e7;
+$fg2: #a0a8b6;
+$fg3: #6b7280;
+$accent: #7dc4e4;
+$accent2: #a6da95;
+$warning: #eed49f;
+$error: #ed8796;
+$success: #a6da95;
+$info: #8aadf4;
+
+// Semantic surface colors (dark layering system)
+$surface0: #141620;
+$surface1: #1e2030;
+$surface2: #282a3c;
+$surface3: #363a4f;
+
+// ─── YUU Bar Colors ──────────────────────────────────────
+// Clean, minimalist island aesthetic using Matugen variables
+// These are fallbacks; actual colors come from var(--surface-container-*) etc.
+$yuu-bg-base: $bg1; // Base bar background → uses --bg
+$yuu-island-bg: $bg2; // Island section background → uses --surface-container
+$yuu-island-hover: $bg3; // Island hover state → uses --surface-container-high
+$yuu-border: rgba(
+  255,
+  255,
+  255,
+  0.04
+); // Subtle borders → uses --outline-variant
+$yuu-accent: $accent; // Primary accent color → uses --primary
+$yuu-accent-muted: rgba(
+  125,
+  196,
+  228,
+  0.15
+); // Subtle accent bg → uses --primary-container
+$yuu-text-primary: $fg1; // Main text → uses --on-surface
+$yuu-text-secondary: $fg2; // Secondary text → uses --on-surface-variant
+$yuu-text-muted: $fg3; // Muted text → uses --on-surface-variant (dimmed)
+
+// ─── Typography ──────────────────────────────────────────
+$font-primary: "JetBrainsMono Nerd Font";
+$font-fallback: sans-serif;
+$font-size-xs: 11px;
+$font-size-sm: 12px;
+$font-size: 14px;
+$font-size-lg: 16px;
+$font-size-xl: 20px;
+$font-size-icon: 18px;
+$font-size-icon-lg: 22px;
+$font-weight-normal: 500;
+$font-weight-bold: 700;
+
+// ─── Spacing ─────────────────────────────────────────────
+$space-xxs: 2px;
+$space-xs: 4px;
+$space-sm: 6px;
+$space-md: 8px;
+$space-lg: 12px;
+$space-xl: 16px;
+$space-xxl: 24px;
+
+// ─── Border Radius ───────────────────────────────────────
+$radius-xs: 4px;
+$radius-sm: 8px;
+$radius-md: 12px;
+$radius-lg: 16px;
+$radius-xl: 20px;
+$radius-pill: 50px;
+$radius-round: 50%;
+
+// ─── Borders ─────────────────────────────────────────────
+$border-width: 1px;
+$border-color: rgba(255, 255, 255, 0.06);
+$border-subtle: rgba(255, 255, 255, 0.03);
+$border-hover: rgba(255, 255, 255, 0.1);
+$border-accent: rgba(125, 196, 228, 0.3);
+
+// ─── Shadows ─────────────────────────────────────────────
+$shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+$shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+$shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+$shadow-xl: 0 12px 48px rgba(0, 0, 0, 0.6);
+$shadow-inset: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+
+// ─── Transitions ─────────────────────────────────────────
+$transition-fast: 150ms;
+$transition-normal: 200ms;
+$transition-slow: 300ms;
+$transition-slower: 500ms;
+$ease-default: ease;
+$ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+$ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.35);
+
+// ─── Bar Specific ────────────────────────────────────────
+$bar-height: 36px;
+$bar-margin: 4px;
+$bar-padding-h: 8px;
+$bar-gap: 4px;
+
+// ─── YUU Island Specific ─────────────────────────────────
+// Curved notch and island styling
+$island-radius: 16px; // Main island corner radius
+$island-padding: 8px 14px; // Island internal padding
+$island-gap: 8px; // Gap between islands
+$island-notch-size: 12px; // Size of curved notches
+$island-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+// ─── Glass / Semi-transparent Backgrounds ────────────────
+$glass-bg: rgba(255, 255, 255, 0.05);
+$glass-bg-hover: rgba(255, 255, 255, 0.08);
+$glass-bg-active: rgba(255, 255, 255, 0.12);
+$glass-border: rgba(255, 255, 255, 0.06);
+
+// ─── Opacity Levels ──────────────────────────────────────
+$opacity-muted: 0.5;
+$opacity-subtle: 0.7;
+$opacity-normal: 0.9;
+
+// ═══════════════════════════════════════════════════════════
+// GTK HELPER FUNCTIONS
+// ═══════════════════════════════════════════════════════════
+
+/// GTK alpha helper — generates `alpha(color, opacity)` for GTK CSS
+@function gtkalpha($c, $a) {
+  @return string.unquote("alpha(#{$c}, #{$a})");
+}
+
+// ═══════════════════════════════════════════════════════════
+// MIXINS
+// ═══════════════════════════════════════════════════════════
+
+// ─── Base Module ─────────────────────────────────────────
+// Foundation styling for any bar/panel element
+// Inspired by ArchEclipse's @mixin module
+@mixin module($bg: transparent, $radius: $radius-md) {
+  background-color: $bg;
+  color: var(--fg, $fg1);
+  font-size: $font-size;
+  font-weight: $font-weight-normal;
+  text-shadow: none;
+  border: none;
+  box-shadow: none;
+  min-height: 1px;
+  border-radius: $radius;
+  margin: 0;
+  padding: $space-xs $space-md;
+
+  &,
+  * {
+    transition: all $transition-normal $ease-default;
+  }
+}
+
+// ─── Pill Shape ──────────────────────────────────────────
+// Rounded pill container for grouped elements
+// Inspired by angad43's pill containers
+@mixin pill($bg: $glass-bg) {
+  @include module($bg, $radius-pill);
+  padding: $space-xs $space-lg;
+}
+
+// ─── Interactive Button ──────────────────────────────────
+// Clickable element with hover/active/checked states
+// Inspired by ArchEclipse's @mixin button and uday-sudo's panel-button
+@mixin bar-button($bg: transparent) {
+  @include module($bg, $radius-sm);
+  padding: $space-xs $space-md;
+  min-width: 0;
+
+  &:hover {
+    background-color: $glass-bg-hover;
+    border-radius: $radius-sm;
+  }
+
+  &:active {
+    background-color: $glass-bg-active;
+  }
+
+  &:checked,
+  &.active {
+    background-color: var(--primary, $accent);
+    color: var(--on-primary, $bg1);
+  }
+}
+
+// ─── Accent Pill ─────────────────────────────────────────
+// Highlighted pill (e.g., clock) with accent background
+// Inspired by angad43's clock style
+@mixin accent-pill() {
+  background-color: var(--primary, $accent);
+  color: var(--on-primary, $bg1);
+  padding: $space-xs $space-lg;
+  border-radius: $radius-md;
+  font-weight: $font-weight-bold;
+
+  &,
+  * {
+    transition: all $transition-normal $ease-smooth;
+  }
+}
+
+// ─── Indicator Icon ──────────────────────────────────────
+// System indicator with icon and optional label
+@mixin indicator() {
+  background-color: var(--surface-container, $yuu-island-bg);
+  border: 1px solid var(--outline-variant, $yuu-border); // Added border
+  box-shadow: $island-shadow; // Added shadow
+  padding: 4px 12px; // Adjusted padding to match pills
+  border-radius: $radius-pill;
+  color: var(--fg, $fg1);
+
+  &,
+  * {
+    transition: all $transition-normal $ease-default;
+  }
+
+  &:hover {
+    background-color: var(
+      --surface-container-high,
+      $yuu-island-hover
+    ); // Match hover state
+    border-color: var(
+      --outline,
+      rgba(255, 255, 255, 0.08)
+    ); // Match border hover
+  }
+
+  image {
+    font-size: $font-size-icon;
+    color: var(--fg, $fg2);
+  }
+}
+
+// ─── Floating Card ───────────────────────────────────────
+// Popup/overlay card (notifications, OSD, quick settings)
+// Inspired by angad43/uday-sudo notification cards
+@mixin floating-card($min-width: 300px) {
+  background-color: var(--surface, $bg2);
+  border: $border-width solid $border-color;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-lg;
+  min-width: $min-width;
+  padding: $space-xl;
+
+  &,
+  * {
+    transition: all $transition-normal $ease-default;
+  }
+}
+
+// ─── Floating Pill ───────────────────────────────────────
+// Floating OSD-style rounded container
+// Inspired by angad43's OSD and ArchEclipse's OSD
+@mixin floating-pill($min-width: 280px) {
+  background-color: var(--surface, $bg2);
+  border: $border-width solid $border-color;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-lg;
+  min-width: $min-width;
+  padding: $space-lg $space-xxl;
+}
+
+// ─── Progress Bar / Slider ───────────────────────────────
+// Clean progress bar with no visible thumb
+// Inspired by angad43's gradient sliders
+@mixin clean-progress() {
+  trough {
+    background-color: var(--surface-variant, $surface2);
+    border-radius: $radius-xs;
+    min-height: 8px;
+  }
+
+  block.filled {
+    background-color: var(--primary, $accent);
+    border-radius: $radius-xs;
+    min-height: 8px;
+  }
+
+  block.empty {
+    background-color: var(--surface-variant, $surface2);
+    border-radius: $radius-xs;
+    min-height: 8px;
+  }
+}
+
+@mixin clean-slider() {
+  trough {
+    background-color: var(--surface-variant, $surface2);
+    border-radius: $radius-sm;
+    min-height: 8px;
+
+    slider {
+      all: unset;
+      min-height: 0;
+      min-width: 0;
+      background-color: transparent;
+      border: none;
+      opacity: 0;
+    }
+
+    highlight {
+      all: unset;
+      background-color: var(--primary, $accent);
+      border-radius: $radius-sm;
+    }
+  }
+}
+
+// ─── Close / Dismiss Button ─────────────────────────────
+// X button for notifications, popups
+// Inspired by uday-sudo's close-button
+@mixin close-button() {
+  padding: $space-xxs $space-sm;
+  border-radius: $radius-sm;
+  color: var(--fg, $fg2);
+  min-width: 0;
+  min-height: 0;
+  background-color: transparent;
+
+  &:hover {
+    background-color: rgba($error, 0.4);
+    color: $fg1;
+  }
+
+  &:active {
+    background-color: $error;
+    color: $bg1;
+  }
+}
+
+// ─── Section Group ───────────────────────────────────────
+// Groups bar widgets into a subtle background container
+// Inspired by ArchEclipse's empty bar section grouping
+@mixin bar-section($bg: $glass-bg) {
+  background-color: $bg;
+  border-radius: $radius-md;
+  padding: $space-xxs $space-xs;
+  margin: $space-xxs;
+
+  &,
+  * {
+    transition: all $transition-normal $ease-default;
+  }
+}
+
+// ─── YUU Island ──────────────────────────────────────────
+// Curved island container with subtle shadows
+// Core aesthetic element of the yuu bar design
+@mixin yuu-island() {
+  background-color: var(--surface-container, $yuu-island-bg);
+  border-radius: $island-radius;
+  padding: $island-padding;
+  margin: 0 $space-xs;
+  box-shadow: $island-shadow;
+  border: 1px solid var(--outline-variant, $yuu-border);
+
+  &,
+  * {
+    transition: all $transition-normal $ease-smooth;
+  }
+
+  &:hover {
+    background-color: var(--surface-container-high, $yuu-island-hover);
+    border-color: var(--outline-variant, rgba(255, 255, 255, 0.06));
+  }
+}
+
+// ─── YUU System Stat ─────────────────────────────────────
+// Individual system monitoring widget (CPU, RAM, Disk)
+@mixin yuu-system-stat() {
+  padding: $space-xs $space-md;
+  border-radius: $radius-sm;
+  color: var(--on-surface-variant, $yuu-text-secondary);
+  font-size: $font-size-sm;
+
+  .stat-icon {
+    font-size: $font-size-icon;
+    color: var(--primary, $yuu-accent);
+    margin-right: $space-xs;
+  }
+
+  .stat-value {
+    font-weight: $font-weight-bold;
+    color: var(--on-surface, $yuu-text-primary);
+  }
+
+  .stat-label {
+    font-size: $font-size-xs;
+    color: var(--on-surface-variant, $yuu-text-muted);
+    margin-left: $space-xxs;
+    opacity: $opacity-subtle;
+  }
+
+  &:hover {
+    background-color: var(--primary-container, $yuu-accent-muted);
+
+    .stat-icon,
+    .stat-value,
+    .stat-label {
+      color: var(--primary, $yuu-accent);
+      opacity: 1;
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// ANIMATIONS
+// ═══════════════════════════════════════════════════════════
+
+// Workspace focus transitions (inspired by ArchEclipse)
+@keyframes workspace-focus-in {
+  from {
+    background-color: transparent;
+    min-width: 8px;
+  }
+  to {
+    background-color: var(--primary, $accent);
+    min-width: 24px;
+  }
+}
+
+@keyframes workspace-focus-out {
+  from {
+    background-color: var(--primary, $accent);
+    min-width: 24px;
+  }
+  to {
+    background-color: transparent;
+    min-width: 8px;
+  }
+}
+
+// Notification slide-in
+@keyframes slide-in-right {
+  from {
+    margin-right: -400px;
+    opacity: 0;
+  }
+  to {
+    margin-right: 0;
+    opacity: 1;
+  }
+}
+
+// OSD fade
+@keyframes fade-in-up {
+  from {
+    margin-bottom: 0;
+    opacity: 0;
+  }
+  to {
+    margin-bottom: $space-xxl;
+    opacity: 1;
+  }
+}
+
+// Subtle pulse for active states
+@keyframes subtle-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}

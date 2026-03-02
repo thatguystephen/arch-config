@@ -1,0 +1,256 @@
+@use "../../theme" as *;
+
+// ═══════════════════════════════════════════════════════════
+// MEDIA PLAYER POPUP
+// Floating card with cover art, track info, position slider,
+// and playback controls. Drops down from the bar.
+// Inspired by: angad43 (cover art + gradient slider),
+//              ArchEclipse (player widget), kibertod (player card)
+// ═══════════════════════════════════════════════════════════
+
+// ─── Window ──────────────────────────────────────────────
+window.MediaPopup {
+  background-color: transparent;
+}
+
+// ═══════════════════════════════════════════════════════════
+// POPUP CONTAINER
+// ═══════════════════════════════════════════════════════════
+
+.media-popup-container {
+  @include floating-card(300px);
+  margin-top: $bar-height + $bar-margin + $space-md;
+  padding: $space-xl;
+  border-radius: $radius-lg;
+  background-color: var(--surface, $bg2);
+  border: $border-width solid $border-color;
+  box-shadow: $shadow-xl, $shadow-inset;
+
+  animation: popup-fade-in $transition-slow $ease-smooth;
+}
+
+// ═══════════════════════════════════════════════════════════
+// CONTENT LAYOUT
+// ═══════════════════════════════════════════════════════════
+
+.media-popup-content {
+  min-width: 260px;
+}
+
+// ─── Cover Art ───────────────────────────────────────────
+.media-popup-cover {
+  margin-bottom: $space-sm;
+
+  .cover-image {
+    border-radius: $radius-md;
+    box-shadow: $shadow-md;
+  }
+}
+
+// ─── Track Info ──────────────────────────────────────────
+
+.media-popup-info {
+  margin-bottom: $space-xs;
+}
+
+.media-popup-title {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  color: var(--fg, $fg1);
+}
+
+.media-popup-artist {
+  font-size: $font-size;
+  font-weight: $font-weight-normal;
+  color: var(--primary, $accent);
+  opacity: $opacity-subtle;
+}
+
+.media-popup-album {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-normal;
+  color: var(--fg, $fg3);
+  opacity: $opacity-muted;
+}
+
+// ═══════════════════════════════════════════════════════════
+// POSITION / PROGRESS BAR
+// Inspired by: angad43 (gradient slider, hidden thumb)
+// ═══════════════════════════════════════════════════════════
+
+.media-popup-position {
+  margin: $space-xs 0;
+}
+
+.position-slider {
+  @include clean-slider;
+
+  trough {
+    min-height: 6px;
+    border-radius: $radius-xs;
+    background-color: var(--surface-variant, $surface2);
+
+    highlight {
+      background-color: var(--primary, $accent);
+      border-radius: $radius-xs;
+      min-height: 6px;
+    }
+
+    slider {
+      all: unset;
+      min-height: 0;
+      min-width: 0;
+      opacity: 0;
+    }
+  }
+
+  &:hover trough {
+    min-height: 8px;
+
+    highlight {
+      min-height: 8px;
+    }
+  }
+}
+
+.position-times {
+  padding: 0 $space-xxs;
+}
+
+.position-current,
+.position-length {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-normal;
+  color: var(--fg, $fg3);
+  opacity: $opacity-muted;
+}
+
+// ═══════════════════════════════════════════════════════════
+// PLAYBACK CONTROLS
+// Inspired by: angad43 (media-controls-vertical),
+//              kibertod (player-prev/play/next bordered buttons)
+// ═══════════════════════════════════════════════════════════
+
+.media-popup-controls {
+  margin-top: $space-xs;
+}
+
+.control-btn {
+  padding: $space-sm $space-md;
+  border-radius: $radius-sm;
+  background-color: transparent;
+  min-width: 0;
+  min-height: 0;
+
+  label {
+    font-size: $font-size-xl;
+    color: var(--fg, $fg2);
+  }
+
+  &:hover {
+    background-color: $glass-bg-hover;
+
+    label {
+      color: var(--primary, $accent);
+    }
+  }
+
+  &:active {
+    background-color: $glass-bg-active;
+  }
+
+  // ─── Play/Pause (larger, accent) ──────────────────────
+  &.play-btn {
+    padding: $space-md $space-lg;
+    border-radius: $radius-md;
+    background-color: var(--primary, $accent);
+
+    label {
+      font-size: $font-size-xl + 4px;
+      color: var(--on-primary, $bg1);
+    }
+
+    &:hover {
+      background-color: var(--primary, $accent);
+      opacity: $opacity-normal;
+
+      label {
+        color: var(--on-primary, $bg1);
+      }
+    }
+
+    &:active {
+      opacity: 1;
+    }
+
+    &.paused {
+      background-color: var(--surface-variant, $surface3);
+
+      label {
+        color: var(--primary, $accent);
+      }
+
+      &:hover {
+        background-color: $glass-bg-hover;
+
+        label {
+          color: var(--primary, $accent);
+        }
+      }
+    }
+  }
+
+  // ─── Shuffle / Loop (subtle toggle style) ─────────────
+  &.shuffle-btn,
+  &.loop-btn {
+    padding: $space-xs $space-sm;
+
+    label {
+      font-size: $font-size-icon;
+      color: var(--fg, $fg3);
+      opacity: $opacity-muted;
+    }
+
+    &:hover label {
+      color: var(--primary, $accent);
+      opacity: 1;
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// EMPTY STATE (no player)
+// ═══════════════════════════════════════════════════════════
+
+.media-popup-empty {
+  min-width: 260px;
+  min-height: 180px;
+  padding: $space-xxl;
+}
+
+.empty-icon {
+  font-size: 48px;
+  color: var(--fg, $fg3);
+  opacity: $opacity-muted;
+}
+
+.empty-label {
+  font-size: $font-size;
+  color: var(--fg, $fg3);
+  opacity: $opacity-muted;
+}
+
+// ═══════════════════════════════════════════════════════════
+// ANIMATION
+// ═══════════════════════════════════════════════════════════
+
+@keyframes popup-fade-in {
+  0% {
+    opacity: 0;
+    margin-top: $bar-height + $bar-margin;
+  }
+  100% {
+    opacity: 1;
+    margin-top: $bar-height + $bar-margin + $space-md;
+  }
+}

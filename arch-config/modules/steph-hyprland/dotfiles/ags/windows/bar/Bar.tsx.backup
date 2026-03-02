@@ -1,0 +1,53 @@
+import Gdk from "gi://Gdk?version=4.0"
+import Astal from "gi://Astal?version=4.0"
+import app from "ags/gtk4/app"
+
+import Clock from "@widgets/Clock/Clock"
+import Workspaces from "@widgets/Workspaces/Workspaces"
+import ActiveWindow from "@widgets/ActiveWindow/ActiveWindow"
+import SysTray from "@widgets/SysTray/SysTray"
+import NetworkIndicator from "@widgets/NetworkIndicator/NetworkIndicator"
+import BatteryIndicator from "@widgets/BatteryIndicator/BatteryIndicator"
+import BluetoothIndicator from "@widgets/BluetoothIndicator/BluetoothIndicator"
+import VolumeIndicator from "@widgets/VolumeIndicator/VolumeIndicator"
+import MediaPlayer from "@widgets/MediaPlayer/MediaPlayer"
+import SystemStats from "@widgets/SystemStats/SystemStats"
+
+export default function Bar(monitor: Gdk.Monitor) {
+  const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
+
+  return (
+    <window
+      name="Bar"
+      namespace="bar"
+      class="Bar"
+      visible
+      gdkmonitor={monitor}
+      exclusivity={Astal.Exclusivity.EXCLUSIVE}
+      application={app}
+      layer={Astal.Layer.TOP}
+      anchor={TOP | LEFT | RIGHT}
+    >
+      <centerbox>
+        <box $type="start" class="bar-left" spacing={8}>
+          <Workspaces />
+          <ActiveWindow />
+        </box>
+        <box $type="center" class="bar-center">
+          <Clock />
+        </box>
+        <box $type="end" class="bar-right" spacing={4}>
+          <MediaPlayer />
+          <SystemStats />
+          <SysTray />
+          <box class="indicator-group" spacing={2}>
+            <VolumeIndicator />
+            <NetworkIndicator />
+            <BluetoothIndicator />
+            <BatteryIndicator />
+          </box>
+        </box>
+      </centerbox>
+    </window>
+  )
+}

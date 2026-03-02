@@ -1,0 +1,624 @@
+@use "../../theme" as *;
+
+// ═══════════════════════════════════════════════════════════
+// BAR WINDOW - YUU AESTHETIC
+// Clean island-based bar with curved notches and minimal design
+// Inspired by: yuu bar (curved islands), angad43 (pills/gradients),
+//              ArchEclipse (sections), OkPanel (per-widget borders)
+// ═══════════════════════════════════════════════════════════
+
+// ─── Bar Window ──────────────────────────────────────────
+window {
+  &.Bar {
+    background-color: transparent;
+  }
+}
+
+// ─── Bar Container (CenterBox) ───────────────────────────
+// YUU-style floating bar with island sections
+.Bar > centerbox {
+  background-color: transparent;
+  color: var(--on-surface, $yuu-text-primary);
+  margin: $bar-margin $bar-margin + 2px;
+  padding: $space-sm $space-md;
+  min-height: $bar-height;
+  transition: all $transition-normal $ease-smooth;
+}
+
+// ─── Section Groups ──────────────────────────────────────
+// Left / Center / Right areas - minimal spacing for islands
+.bar-left,
+.bar-center,
+.bar-right {
+  margin: 0;
+  padding: 0;
+}
+
+.bar-left,
+.bar-right {
+  > * {
+    margin: 0 0;
+  }
+}
+
+.bar-left {
+  margin-left: 0;
+}
+
+.bar-right {
+  margin-right: 0;
+}
+
+// ═══════════════════════════════════════════════════════════
+// WORKSPACES - YUU ISLAND
+// Clean dot indicators in curved island container
+// Inspired by: yuu bar (island style), uday-sudo (dots)
+// ═══════════════════════════════════════════════════════════
+
+.workspaces {
+  @include yuu-island;
+  padding: 4px 12px;
+
+  .workspace-btn {
+    all: unset;
+    min-height: 24px;
+    min-width: 24px;
+    border-radius: $radius-sm;
+    background-color: transparent;
+    margin: 0 $space-xxs;
+    padding: 0;
+    transition: all $transition-slow $ease-smooth;
+
+    .workspace-label {
+      font-size: $font-size-sm;
+      color: var(--on-surface-variant, $yuu-text-muted);
+      opacity: 0.6;
+      transition: all $transition-normal $ease-smooth;
+    }
+
+    &:hover {
+      background-color: var(--primary-container, $yuu-accent-muted);
+
+      .workspace-label {
+        color: var(--on-surface, $yuu-text-primary);
+        opacity: 1;
+      }
+    }
+
+    // ─── Active/Focused workspace ────────────────────────
+    &.focused {
+      background-color: var(--primary, $yuu-accent);
+      border-radius: $radius-sm;
+      box-shadow: 0 0 12px var(--primary, rgba($yuu-accent, 0.4));
+
+      .workspace-label {
+        font-size: $font-size-sm;
+        color: var(--on-primary, $yuu-bg-base);
+        opacity: 1;
+        font-weight: $font-weight-bold;
+      }
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// ACTIVE WINDOW TITLE - YUU ISLAND
+// Subtle text showing the focused window in island style
+// ═══════════════════════════════════════════════════════════
+
+.active-window {
+  background-color: var(--surface-container, $yuu-island-bg);
+  border-radius: $radius-pill;
+  border: 1px solid var(--outline-variant, $yuu-border);
+  box-shadow: $island-shadow;
+  transition: all $transition-normal $ease-smooth;
+  margin-left: $space-md;
+  padding: 4px 8px;
+  min-height: 24px;
+  transition: all $transition-normal $ease-default;
+
+  .active-window-icon {
+    font-size: 14px;
+    color: var(--primary, $accent);
+    margin-right: 4px;
+  }
+
+  .active-window-label {
+    font-size: 11px;
+    font-weight: $font-weight-normal;
+    color: var(--on-surface-variant, $fg2);
+    transition: color $transition-normal $ease-default;
+  }
+
+  &:hover {
+    background-color: var(--surface-container-high, $glass-bg-hover);
+    border-color: var(--outline, $border-hover);
+
+    .active-window-label {
+      color: var(--primary, $accent);
+    }
+  }
+
+  // When no window is focused
+  &.empty {
+    opacity: $opacity-muted;
+    background-color: transparent;
+    border-color: transparent;
+
+    .active-window-icon {
+      color: var(--on-surface-variant, $fg3);
+    }
+
+    .active-window-label {
+      color: var(--on-surface-variant, $fg3);
+    }
+
+    &:hover {
+      opacity: $opacity-subtle;
+      background-color: var(--surface-container, $glass-bg);
+    }
+  }
+
+  // When a window is focused
+  &.has-window {
+    .active-window-icon {
+      color: var(--primary, $accent);
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// CLOCK - YUU ISLAND (ACCENT)
+// Accent-colored island with time display
+// Inspired by: yuu bar (island style), angad43 (accent bg)
+// ═══════════════════════════════════════════════════════════
+
+.clock {
+  @include yuu-island;
+  background-color: var(--primary, $accent);
+  color: var(--on-primary, $bg1);
+  padding: 4px 20px;
+  box-shadow: 0 0 12px var(--primary, rgba($accent, 0.3));
+  letter-spacing: 0.5px;
+
+  &:hover {
+    background-color: var(--primary, $accent);
+    opacity: $opacity-normal;
+    box-shadow: 0 0 16px var(--primary, rgba($accent, 0.4));
+  }
+
+  &:active {
+    opacity: 1;
+  }
+
+  .clock-time {
+    // Time row with digit stacks
+  }
+
+  .digit-stack {
+    min-width: 10px;
+    font-weight: $font-weight-bold;
+  }
+
+  .clock-separator {
+    margin: 0 1px;
+    opacity: $opacity-subtle;
+    font-weight: $font-weight-bold;
+    color: var(--on-primary, $bg1);
+  }
+
+  .clock-date {
+    font-size: $font-size-xs - 1px;
+    font-weight: $font-weight-normal;
+    color: var(--on-primary, $bg1);
+    opacity: $opacity-muted;
+    letter-spacing: 0.3px;
+    margin-top: -1px;
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// SYSTEM TRAY - YUU ISLAND
+// Grouped tray icons in island container
+// Inspired by: yuu bar (island style), ArchEclipse (grouped tray)
+// ═══════════════════════════════════════════════════════════
+
+.systray {
+  background-color: var(--surface-container, $yuu-island-bg);
+  border-radius: $radius-pill;
+  border: 1px solid var(--outline-variant, $yuu-border);
+  box-shadow: $island-shadow;
+  transition: all $transition-normal $ease-smooth;
+  padding: 4px 6px;
+  min-height: 24px;
+
+  .tray-item {
+    margin: 0 1px;
+    padding: 0;
+    border-radius: $radius-sm;
+    transition: all $transition-normal $ease-default;
+
+    &:hover {
+      background-color: var(--surface-container-high, $glass-bg-hover);
+    }
+
+    &:active {
+      background-color: var(--surface-container-highest, $glass-bg-active);
+    }
+
+    image {
+      font-size: 14px;
+      color: var(--on-surface, $fg1);
+      transition: color $transition-normal $ease-default;
+    }
+
+    &:hover image {
+      color: var(--primary, $accent);
+    }
+
+    // ─── Drag & Drop States ──────────────────────────────
+    &.dragging {
+      opacity: $opacity-muted;
+      background-color: var(--surface-container-highest, $glass-bg-active);
+      border-radius: $radius-md;
+      box-shadow: 0 0 0 1px var(--outline-variant, $border-color);
+    }
+
+    &.drop-hover {
+      background-color: var(--primary-container, rgba($accent, 0.2));
+      border-radius: $radius-md;
+      box-shadow: 0 0 0 2px var(--primary, $accent);
+
+      image {
+        color: var(--on-primary-container, $accent);
+      }
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// SYSTEM INDICATORS
+// Network, Battery, Bluetooth, Volume
+// Grouped icons with hover effects
+// Inspired by: angad43 (system-status-pill), OkPanel (per-widget)
+// ═══════════════════════════════════════════════════════════
+
+.network-indicator {
+  @include indicator;
+  margin: 0 $space-xxs;
+
+  image {
+    font-size: $font-size-icon;
+    color: var(--on-surface-variant, $fg2);
+  }
+
+  &:hover image {
+    color: var(--primary, $accent);
+  }
+}
+
+.battery-indicator {
+  @include indicator;
+  margin: 0 $space-xxs;
+
+  image {
+    font-size: $font-size-icon;
+    color: var(--on-surface-variant, $fg2);
+  }
+
+  label {
+    font-size: $font-size-sm;
+    color: var(--on-surface-variant, $fg2);
+    margin-right: $space-xxs;
+  }
+
+  // Low battery warning state
+  &.low {
+    image {
+      color: $error;
+    }
+
+    label {
+      color: $error;
+    }
+  }
+
+  // Charging state
+  &.charging {
+    image {
+      color: $success;
+    }
+
+    label {
+      color: $success;
+    }
+  }
+
+  &:hover {
+    image,
+    label {
+      color: var(--primary, $accent);
+    }
+  }
+}
+
+.bluetooth-indicator {
+  @include indicator;
+  margin: 0 $space-xxs;
+  color: var(--primary, $accent);
+
+  label {
+    font-size: $font-size-icon;
+    color: var(--primary, $accent);
+  }
+
+  &:hover label {
+    color: var(--fg, $fg1);
+  }
+}
+
+.volume-indicator {
+  // COPY OF system-stat-pill STYLES to guarantee consistency
+  background-color: var(--surface-container, $yuu-island-bg);
+  border-radius: $radius-pill;
+  padding: 4px 12px;
+  margin: 0 $space-xxs;
+  border: 1px solid var(--outline-variant, $yuu-border);
+  box-shadow: $island-shadow;
+  transition: all $transition-normal $ease-smooth;
+  color: var(--on-surface-variant, $fg2); // Ensure text color matches too
+
+  image {
+    font-size: $font-size-icon;
+    color: var(--on-surface-variant, $fg2);
+    margin-right: 4px; // Spacing for icon
+  }
+
+  label {
+    font-size: $font-size-sm;
+    color: var(--on-surface-variant, $fg2);
+    font-weight: $font-weight-bold; // Match pill bold weight
+  }
+
+  // Muted state
+  &.muted {
+    image,
+    label {
+      color: $error;
+      opacity: $opacity-muted;
+    }
+  }
+
+  &:hover {
+    background-color: var(--surface-container-high, $yuu-island-hover);
+    border-color: var(--outline, rgba(255, 255, 255, 0.08));
+
+    image,
+    label {
+      color: var(--primary, $accent);
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// MEDIA PLAYER - YUU ISLAND
+// Compact player info in island container
+// Inspired by: yuu bar (island style), angad43 (player pill)
+// ═══════════════════════════════════════════════════════════
+
+.media-player {
+  background-color: var(--surface-container, $yuu-island-bg);
+  border-radius: $radius-pill;
+  border: 1px solid var(--outline-variant, $yuu-border);
+  box-shadow: $island-shadow;
+  transition: all $transition-normal $ease-smooth;
+  padding: 4px 8px;
+  min-height: 24px;
+
+  // ─── Play/Pause icon in the bar ────────────────────────
+  .media-player-icon {
+    font-size: 14px;
+    color: var(--primary, $accent);
+    min-width: 14px;
+  }
+
+  label {
+    font-size: 11px;
+    color: var(--on-surface, $fg1);
+    font-weight: $font-weight-normal;
+  }
+
+  .paused {
+    opacity: $opacity-muted;
+    font-style: italic;
+    color: var(--on-surface-variant, $fg3);
+  }
+
+  .playing {
+    color: var(--primary, $accent);
+    font-weight: $font-weight-bold;
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// INDICATOR GROUP - YUU ISLAND
+// Grouped system indicators (volume, network, bluetooth, battery)
+// in a curved island container
+// Inspired by: yuu bar (island style), ArchEclipse (grouped sections)
+// ═══════════════════════════════════════════════════════════
+
+.indicator-group {
+  @include yuu-island;
+  padding: 4px 12px;
+}
+
+// ═══════════════════════════════════════════════════════════
+// Subtle vertical divider between island groups
+// Inspired by: yuu bar minimal aesthetic
+// ═══════════════════════════════════════════════════════════
+
+.island-separator {
+  min-width: 1px;
+  min-height: 20px;
+  background-color: var(--outline-variant, $yuu-border);
+  opacity: 0.4;
+  margin: 0 $space-sm;
+  transition: opacity $transition-normal $ease-default;
+
+  &:hover {
+    opacity: 0.6;
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// SYSTEM STATS - YUU STYLE
+// CPU, RAM, and Disk monitoring - each in individual pill
+// Inspired by: yuu bar system widgets
+// ═══════════════════════════════════════════════════════════
+
+.system-stats {
+  padding: 0;
+  margin: 0;
+
+  .system-stat-pill {
+    background-color: var(--surface-container, $yuu-island-bg);
+    border-radius: $radius-pill;
+    padding: 4px 12px;
+    margin: 0;
+    border: 1px solid var(--outline-variant, $yuu-border);
+    box-shadow: $island-shadow;
+    transition: all $transition-normal $ease-smooth;
+
+    .stat-icon {
+      font-size: $font-size-sm;
+      color: var(--primary, $yuu-accent);
+      min-width: 16px;
+    }
+
+    .stat-value {
+      font-size: $font-size-sm;
+      font-weight: $font-weight-bold;
+      color: var(--on-surface, $yuu-text-primary);
+    }
+
+    &:hover {
+      background-color: var(--surface-container-high, $yuu-island-hover);
+      border-color: var(--outline, rgba(255, 255, 255, 0.08));
+
+      .stat-icon,
+      .stat-value {
+        color: var(--primary, $yuu-accent);
+      }
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// YUU ISLANDS WITH CAIRO NOTCHES
+// Exact styling from yuu bar (gitKhym/dotfiles)
+// ═══════════════════════════════════════════════════════════
+
+box.island {
+  background-color: transparent;
+
+  > box.content {
+    background-color: var(--surface-container-lowest, $yuu-bg-base);
+    padding: 10px 25px;
+  }
+}
+
+box.left-island {
+  > box.content {
+    border-radius: 0 0 1.7rem 0; // Bottom-right rounded
+  }
+}
+
+box.right-island {
+  > box.content {
+    border-radius: 0 0 0 1.7rem; // Bottom-left rounded
+  }
+}
+
+box.center-island {
+  > box.content {
+    border-radius: 0 0 1.7rem 1.7rem; // Both bottom corners rounded
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// YUU NOTCH STYLING
+// Background color for Cairo notches
+// ═══════════════════════════════════════════════════════════
+
+drawingarea {
+  background-color: var(--surface-container-lowest, $yuu-bg-base);
+}
+
+// ═══════════════════════════════════════════════════════════
+// YUU NOTCH STYLING
+// Background color for Cairo notches - must match bar background
+// ═══════════════════════════════════════════════════════════
+
+drawingarea.notch-canvas {
+  // This is the color that shows in the notch "cutout"
+  // It should match your bar's main background
+  background-color: var(--surface-container-lowest, #0f1116);
+}
+
+// ═══════════════════════════════════════════════════════════
+
+// ═══════════════════════════════════════════════════════════
+// INDICATOR PILLS - MATCHING SYSTEM STATS STYLE
+// Volume, Network, Bluetooth, Battery as individual slim pills
+// ═══════════════════════════════════════════════════════════
+
+button.volume-indicator,
+button.network-indicator,
+button.battery-indicator,
+button.bluetooth-indicator {
+  all: unset;
+  background-color: var(--surface-container, $yuu-island-bg);
+  border-radius: $radius-pill;
+  padding: 4px 10px;
+  margin: 0;
+  border: 1px solid var(--outline-variant, $yuu-border);
+  box-shadow: $island-shadow;
+  transition: all $transition-normal $ease-smooth;
+  min-height: 24px;
+
+  image {
+    min-width: 14px;
+    min-height: 14px;
+    color: var(--primary, $yuu-accent);
+  }
+
+  .indicator-value {
+    font-size: 11px;
+    font-weight: $font-weight-bold;
+    color: var(--on-surface, $yuu-text-primary);
+  }
+
+  .indicator-icon,
+  label {
+    font-size: 14px;
+    color: var(--primary, $yuu-accent);
+  }
+
+  &:hover {
+    background-color: var(--surface-container-high, $yuu-island-hover);
+    border-color: var(--outline, rgba(255, 255, 255, 0.08));
+  }
+}
+
+// Muted state for volume
+button.volume-indicator.muted {
+  image {
+    color: $error;
+    opacity: $opacity-muted;
+  }
+
+  .indicator-value {
+    color: $error;
+    opacity: $opacity-muted;
+  }
+}

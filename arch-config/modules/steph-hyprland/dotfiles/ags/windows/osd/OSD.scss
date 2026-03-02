@@ -1,0 +1,188 @@
+@use "../../theme" as *;
+
+// ═══════════════════════════════════════════════════════════
+// ON-SCREEN DISPLAY (OSD)
+// Floating pill at the bottom of the screen for volume/brightness
+// Inspired by: angad43 (gradient progress, pill container, shadow),
+//              uday-sudo (bordered pill, fill animation),
+//              ArchEclipse (vertical slider variant, 50px radius)
+// ═══════════════════════════════════════════════════════════
+
+// ─── Window ──────────────────────────────────────────────
+window.OSD,
+window.OSD decoration {
+  background: transparent;
+  background-color: transparent;
+  box-shadow: none;
+  border: none;
+}
+
+// ═══════════════════════════════════════════════════════════
+// OSD CONTAINER
+// Floating pill with shadow, subtle border, and glass effect
+// ═══════════════════════════════════════════════════════════
+
+.osd-container {
+  @include floating-pill(280px);
+  margin-bottom: $space-xxl;
+  padding: $space-lg $space-xxl;
+  border-radius: $radius-xl;
+  background-color: var(--surface, $bg2);
+  border: $border-width solid $border-color;
+  box-shadow: $shadow-lg, $shadow-inset;
+
+  // Fade-in-up animation when appearing
+  animation: osd-fade-in $transition-slow $ease-smooth;
+
+  &,
+  * {
+    transition: all $transition-normal $ease-default;
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// OSD CONTENT
+// Icon + progress bar + percentage value
+// ═══════════════════════════════════════════════════════════
+
+.osd-content {
+  // ─── Volume / Brightness Icon ──────────────────────────
+  .osd-icon {
+    font-size: $font-size-icon-lg;
+    color: var(--primary, $accent);
+    margin-right: $space-xs;
+    min-width: 24px;
+  }
+
+  // ═════════════════════════════════════════════════════════
+  // PROGRESS BAR / LEVEL BAR
+  // Clean gradient-filled bar with no visible thumb
+  // Inspired by: angad43 (gradient highlight, hidden slider),
+  //              uday-sudo (bordered trough, colored fill)
+  // ═════════════════════════════════════════════════════════
+
+  .osd-level {
+    min-height: 8px;
+    min-width: 180px;
+    border-radius: $radius-xs;
+
+    trough {
+      background-color: var(--surface-variant, $surface2);
+      border-radius: $radius-xs;
+      min-height: 8px;
+    }
+
+    block.filled {
+      background-color: var(--primary, $accent);
+      border-radius: $radius-xs;
+      min-height: 8px;
+      transition: min-width $transition-normal $ease-smooth;
+    }
+
+    block.empty {
+      background-color: var(--surface-variant, $surface2);
+      border-radius: $radius-xs;
+      min-height: 8px;
+    }
+  }
+
+  // ─── Scale variant (if using scale instead of levelbar) ─
+  .osd-slider {
+    @include clean-slider;
+    min-width: 180px;
+
+    trough {
+      min-height: 8px;
+      border-radius: $radius-xs;
+    }
+  }
+
+  // ─── Percentage Label ──────────────────────────────────
+  .osd-value {
+    min-width: 42px;
+    color: var(--fg, $fg1);
+    font-size: $font-size-sm;
+    font-weight: $font-weight-bold;
+    margin-left: $space-xs;
+    letter-spacing: 0.3px;
+
+    // Right-align so the text doesn't jump around
+    // as the number changes width (9% vs 100%)
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// OSD STATES
+// Muted state dims the bar, high volume gets a warning tint
+// ═══════════════════════════════════════════════════════════
+
+.osd-container {
+  // ─── Muted State ─────────────────────────────────────
+  &.muted {
+    .osd-icon {
+      color: $error;
+      opacity: $opacity-muted;
+    }
+
+    .osd-level {
+      block.filled {
+        background-color: $error;
+        opacity: $opacity-muted;
+      }
+    }
+
+    .osd-value {
+      color: $error;
+      opacity: $opacity-muted;
+    }
+  }
+
+  // ─── High Volume Warning ─────────────────────────────
+  &.high-volume {
+    .osd-icon {
+      color: $warning;
+    }
+
+    .osd-level {
+      block.filled {
+        background-color: $warning;
+      }
+    }
+
+    .osd-value {
+      color: $warning;
+    }
+  }
+
+  // ─── Brightness variant ──────────────────────────────
+  &.brightness {
+    .osd-icon {
+      color: $warning;
+    }
+
+    .osd-level {
+      block.filled {
+        background-color: $warning;
+      }
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// ANIMATIONS
+// ═══════════════════════════════════════════════════════════
+
+@keyframes osd-fade-in {
+  0% {
+    margin-bottom: $space-lg;
+    opacity: 0;
+  }
+  60% {
+    margin-bottom: $space-xxl + 2px;
+    opacity: 0.85;
+  }
+  100% {
+    margin-bottom: $space-xxl;
+    opacity: 1;
+  }
+}

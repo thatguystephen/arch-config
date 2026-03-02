@@ -1,0 +1,225 @@
+@use "../../theme" as *;
+
+// ═══════════════════════════════════════════════════════════
+// NOTIFICATION POPUPS
+// Floating notification cards with slide-in animation
+// Inspired by: angad43 (card shadows, header layout),
+//              uday-sudo (close button, critical styling),
+//              ArchEclipse (transitions, rounded corners)
+// ═══════════════════════════════════════════════════════════
+
+// ─── Window ──────────────────────────────────────────────
+window.NotificationPopups {
+  background-color: transparent;
+}
+
+// ─── Popup Container ─────────────────────────────────────
+.notification-popups {
+  margin: $space-md;
+  padding: $space-xs;
+}
+
+// ═══════════════════════════════════════════════════════════
+// NOTIFICATION CARD
+// Floating card with layered background, shadow, and border
+// ═══════════════════════════════════════════════════════════
+
+.notification {
+  @include floating-card(340px);
+  padding: 0;
+  margin: $space-md $space-xl $space-sm $space-md;
+  border-radius: $radius-lg;
+  background-color: var(--surface, $bg2);
+  border: $border-width solid $border-color;
+  box-shadow: $shadow-lg, $shadow-inset;
+
+  // Slide-in animation on appear
+  animation: notification-slide-in $transition-slower $ease-smooth;
+
+  &,
+  * {
+    transition: all $transition-normal $ease-default;
+  }
+
+  // ─── Hover State ─────────────────────────────────────
+  &:hover {
+    border-color: $border-hover;
+    box-shadow: $shadow-xl, $shadow-inset;
+
+    .notification-close {
+      opacity: 1;
+    }
+  }
+
+  // ═════════════════════════════════════════════════════════
+  // CRITICAL NOTIFICATION
+  // Red-tinted border and shadow for urgent notifications
+  // Inspired by: angad43 (critical border), uday-sudo (critical glow)
+  // ═════════════════════════════════════════════════════════
+
+  &.critical {
+    border-color: rgba($error, 0.35);
+    box-shadow:
+      $shadow-lg,
+      inset 0 0 12px rgba($error, 0.06);
+
+    .notification-header {
+      .notification-appname {
+        color: $error;
+      }
+    }
+
+    .notification-close:hover {
+      background-color: rgba($error, 0.5);
+    }
+
+    &:hover {
+      border-color: rgba($error, 0.5);
+      box-shadow:
+        $shadow-xl,
+        inset 0 0 16px rgba($error, 0.08);
+    }
+  }
+
+  // ═════════════════════════════════════════════════════════
+  // HEADER
+  // App name + close button row
+  // ═════════════════════════════════════════════════════════
+
+  .notification-header {
+    padding: $space-lg $space-lg $space-sm $space-lg;
+
+    .notification-appname {
+      color: var(--primary, $accent);
+      font-size: $font-size-xs;
+      font-weight: $font-weight-bold;
+      letter-spacing: 0.5px;
+      opacity: $opacity-subtle;
+    }
+
+    // ─── Close / Dismiss Button ──────────────────────────
+    .notification-close {
+      @include close-button;
+      border-radius: $radius-sm;
+      padding: $space-xxs $space-sm;
+      margin-left: $space-xs;
+      opacity: 0.4;
+      min-width: 22px;
+      min-height: 22px;
+
+      label {
+        font-size: $font-size-sm;
+        font-weight: $font-weight-bold;
+      }
+
+      &:hover {
+        opacity: 1;
+        background-color: rgba($error, 0.4);
+        color: $fg1;
+      }
+
+      &:active {
+        background-color: $error;
+        color: $bg1;
+      }
+    }
+  }
+
+  // ═════════════════════════════════════════════════════════
+  // CONTENT
+  // Summary + body text
+  // ═════════════════════════════════════════════════════════
+
+  .notification-summary {
+    font-weight: $font-weight-bold;
+    font-size: $font-size;
+    color: var(--fg, $fg1);
+    padding: 0 $space-lg;
+    margin-bottom: $space-xxs;
+  }
+
+  .notification-body {
+    color: var(--on-surface, $fg2);
+    font-size: $font-size-sm;
+    font-weight: $font-weight-normal;
+    padding: 0 $space-lg;
+    margin-bottom: $space-lg;
+    opacity: $opacity-subtle;
+  }
+
+  // ═════════════════════════════════════════════════════════
+  // IMAGE (if present)
+  // Rounded thumbnail with subtle border
+  // Inspired by: angad43 (image styling)
+  // ═════════════════════════════════════════════════════════
+
+  .notification-image {
+    border: $border-width solid $border-subtle;
+    border-radius: $radius-md;
+    margin: $space-sm $space-lg;
+    min-width: 64px;
+    min-height: 64px;
+    background-size: cover;
+    background-position: center;
+  }
+
+  // ═════════════════════════════════════════════════════════
+  // ACTIONS
+  // Action buttons row at the bottom
+  // Inspired by: uday-sudo (action button styling)
+  // ═════════════════════════════════════════════════════════
+
+  .notification-actions {
+    padding: $space-sm $space-lg $space-lg $space-lg;
+
+    button {
+      @include bar-button($glass-bg);
+      border-radius: $radius-sm;
+      padding: $space-sm $space-lg;
+      margin: 0 $space-xs;
+      font-size: $font-size-sm;
+      font-weight: $font-weight-bold;
+      border: $border-width solid $border-color;
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      &:hover {
+        background-color: $glass-bg-hover;
+        border-color: $border-hover;
+      }
+
+      &:active {
+        background-color: $glass-bg-active;
+      }
+    }
+  }
+
+  // ─── Separator ─────────────────────────────────────────
+  separator {
+    margin: 0 $space-lg;
+    background-color: $border-subtle;
+    min-height: 1px;
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// ANIMATIONS
+// ═══════════════════════════════════════════════════════════
+
+@keyframes notification-slide-in {
+  0% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}

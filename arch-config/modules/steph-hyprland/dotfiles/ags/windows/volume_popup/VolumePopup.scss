@@ -1,0 +1,201 @@
+@use "../../theme" as *;
+
+// ═══════════════════════════════════════════════════════════
+// VOLUME POPUP
+// Floating control card with speaker slider, mute toggle,
+// and microphone section. Drops down from the bar.
+// Inspired by: angad43 (quicksettings sliders),
+//              uday-sudo (volume controls), ArchEclipse (custom revealer)
+// ═══════════════════════════════════════════════════════════
+
+// ─── Window ──────────────────────────────────────────────
+window.VolumePopup {
+  background-color: transparent;
+}
+
+// ═══════════════════════════════════════════════════════════
+// POPUP CONTAINER
+// ═══════════════════════════════════════════════════════════
+
+.volume-popup-container {
+  @include floating-card(280px);
+  margin-top: $bar-height + $bar-margin + $space-md;
+  padding: $space-xl;
+  border-radius: $radius-lg;
+  background-color: var(--surface, $bg2);
+  border: $border-width solid $border-color;
+  box-shadow: $shadow-xl, $shadow-inset;
+
+  animation: volume-popup-fade-in $transition-slow $ease-smooth;
+}
+
+// ═══════════════════════════════════════════════════════════
+// VOLUME SECTION (Speaker / Mic)
+// ═══════════════════════════════════════════════════════════
+
+.volume-section {
+  padding: $space-sm 0;
+}
+
+// ─── Section Header ──────────────────────────────────────
+.volume-section-header {
+  padding: 0 $space-xxs;
+
+  .volume-section-icon {
+    font-size: $font-size-icon;
+    color: var(--primary, $accent);
+    min-width: 24px;
+  }
+
+  .volume-section-label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-bold;
+    color: var(--fg, $fg1);
+  }
+
+  .volume-section-value {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-bold;
+    color: var(--primary, $accent);
+    min-width: 36px;
+  }
+}
+
+// ─── Mic Icon (label-based, not image) ───────────────────
+.mic-icon {
+  font-size: $font-size-icon;
+  color: var(--primary, $accent);
+  min-width: 24px;
+}
+
+// ═══════════════════════════════════════════════════════════
+// VOLUME SLIDER
+// Inspired by: angad43 (gradient slider, hidden thumb),
+//              uday-sudo (qs-slider trough/highlight)
+// ═══════════════════════════════════════════════════════════
+
+.volume-slider-row {
+  padding: $space-xs $space-xxs;
+}
+
+.volume-slider {
+  @include clean-slider;
+
+  trough {
+    min-height: 10px;
+    border-radius: $radius-sm;
+    background-color: var(--surface-variant, $surface2);
+
+    highlight {
+      background-color: var(--primary, $accent);
+      border-radius: $radius-sm;
+      min-height: 10px;
+    }
+
+    slider {
+      all: unset;
+      min-height: 0;
+      min-width: 0;
+      opacity: 0;
+    }
+  }
+
+  &:hover trough {
+    min-height: 12px;
+
+    highlight {
+      min-height: 12px;
+    }
+  }
+}
+
+// ─── Mic slider accent variant ───────────────────────────
+.mic-slider {
+  trough {
+    highlight {
+      background-color: var(--tertiary, $info);
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// MUTE BUTTON
+// Inspired by: kibertod (#speaker-muted active state),
+//              uday-sudo (qs-square-button toggle)
+// ═══════════════════════════════════════════════════════════
+
+.mute-btn {
+  padding: $space-sm $space-lg;
+  border-radius: $radius-sm;
+  background-color: $glass-bg;
+  border: $border-width solid $border-color;
+  margin-top: $space-xs;
+
+  .mute-icon {
+    font-size: $font-size-icon;
+    color: var(--fg, $fg2);
+  }
+
+  .mute-label {
+    font-size: $font-size-sm;
+    color: var(--fg, $fg2);
+  }
+
+  &:hover {
+    background-color: $glass-bg-hover;
+    border-color: $border-hover;
+
+    .mute-icon,
+    .mute-label {
+      color: var(--primary, $accent);
+    }
+  }
+
+  &:active {
+    background-color: $glass-bg-active;
+  }
+
+  // ─── Muted State ─────────────────────────────────────
+  &.muted {
+    background-color: rgba($error, 0.12);
+    border-color: rgba($error, 0.25);
+
+    .mute-icon {
+      color: $error;
+    }
+
+    .mute-label {
+      color: $error;
+    }
+
+    &:hover {
+      background-color: rgba($error, 0.2);
+      border-color: rgba($error, 0.4);
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// SECTION DIVIDER
+// ═══════════════════════════════════════════════════════════
+
+.section-divider {
+  min-height: 1px;
+  background-color: $border-color;
+  margin: $space-sm 0;
+}
+
+// ═══════════════════════════════════════════════════════════
+// ANIMATION
+// ═══════════════════════════════════════════════════════════
+
+@keyframes volume-popup-fade-in {
+  0% {
+    opacity: 0;
+    margin-top: $bar-height + $bar-margin;
+  }
+  100% {
+    opacity: 1;
+    margin-top: $bar-height + $bar-margin + $space-md;
+  }
+}

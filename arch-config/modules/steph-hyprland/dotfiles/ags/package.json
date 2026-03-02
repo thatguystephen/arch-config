@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "gnim": "*",
+    "astal": "file:/usr/share/astal/gjs",
+    "ags": "file:/usr/share/ags/js"
+  },
+  "prettier": {
+    "semi": false,
+    "tabWidth": 2
+  }
+}

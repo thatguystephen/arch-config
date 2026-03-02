@@ -1,0 +1,202 @@
+@use "../../theme" as *;
+
+// ═══════════════════════════════════════════════════════════
+// CALENDAR POPUP
+// Floating card with calendar widget, drops down from clock.
+// Uses Material 3 surface container layers for depth.
+// ═══════════════════════════════════════════════════════════
+
+// ─── Window ──────────────────────────────────────────────
+window.CalendarPopup {
+  background-color: transparent;
+}
+
+// ═══════════════════════════════════════════════════════════
+// POPUP CONTAINER
+// ═══════════════════════════════════════════════════════════
+
+.calendar-popup-container {
+  @include floating-card(280px);
+  margin: $bar-height + $bar-margin + $space-xxs;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+  padding: $space-xl;
+  border-radius: $radius-lg;
+  background-color: var(--surface-container, $bg2);
+  border: $border-width solid var(--outline-variant, $border-color);
+  box-shadow: $shadow-xl, $shadow-inset;
+
+  animation: calendar-fade-in $transition-slow $ease-smooth;
+}
+
+// ═══════════════════════════════════════════════════════════
+// HEADER
+// ═══════════════════════════════════════════════════════════
+
+.calendar-header {
+  padding: 0 $space-xs $space-sm $space-xs;
+  border-bottom: $border-width solid var(--outline-variant, $border-subtle);
+  margin-bottom: $space-xs;
+}
+
+.calendar-month-year {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  color: var(--on-surface, $fg1);
+}
+
+// ═══════════════════════════════════════════════════════════
+// GTK CALENDAR WIDGET
+// Overrides for the built-in GtkCalendar to match Material 3
+// ═══════════════════════════════════════════════════════════
+
+.calendar-widget-container {
+  padding: $space-xs;
+}
+
+.calendar-widget {
+  all: unset;
+  background-color: transparent;
+  color: var(--on-surface, $fg1);
+  font-size: $font-size-sm;
+  padding: $space-sm;
+  border-radius: $radius-md;
+
+  // ─── Header (month/year navigation) ────────────────────
+  header {
+    background-color: transparent;
+    padding: $space-xs 0;
+    margin-bottom: $space-sm;
+
+    button {
+      padding: $space-xs $space-sm;
+      border-radius: $radius-sm;
+      color: var(--on-surface-variant, $fg2);
+      background-color: transparent;
+
+      &:hover {
+        background-color: var(--surface-container-high, $glass-bg-hover);
+        color: var(--primary, $accent);
+      }
+
+      &:active {
+        background-color: var(--surface-container-highest, $glass-bg-active);
+      }
+    }
+
+    label {
+      font-weight: $font-weight-bold;
+      font-size: $font-size;
+      color: var(--on-surface, $fg1);
+    }
+  }
+
+  // ─── Day name headers (Mon, Tue, etc.) ─────────────────
+  .day-name {
+    color: var(--on-surface-variant, $fg3);
+    font-size: $font-size-xs;
+    font-weight: $font-weight-bold;
+    opacity: $opacity-subtle;
+    padding: $space-xs $space-sm;
+  }
+
+  // ─── Day number cells ──────────────────────────────────
+  .day-number {
+    color: var(--on-surface, $fg1);
+    font-size: $font-size-sm;
+    font-weight: $font-weight-normal;
+    padding: $space-xs;
+    border-radius: $radius-round;
+    min-width: 32px;
+    min-height: 32px;
+    transition: all $transition-normal $ease-default;
+
+    &:hover {
+      background-color: var(--surface-container-high, $glass-bg-hover);
+      color: var(--primary, $accent);
+    }
+
+    &:active {
+      background-color: var(--primary-container, $glass-bg-active);
+      color: var(--on-primary-container, $accent);
+    }
+  }
+
+  // ─── Selected / Today ──────────────────────────────────
+  :selected {
+    background-color: var(--primary, $accent);
+    color: var(--on-primary, $bg1);
+    font-weight: $font-weight-bold;
+    border-radius: $radius-round;
+  }
+
+  // ─── Other month days (dimmed) ─────────────────────────
+  .other-month {
+    color: var(--on-surface-variant, $fg3);
+    opacity: $opacity-muted;
+
+    &:hover {
+      opacity: $opacity-subtle;
+    }
+  }
+
+  // ─── Marked day (today indicator) ──────────────────────
+  .day-number.marked {
+    background-color: var(--tertiary-container, rgba($accent, 0.15));
+    color: var(--on-tertiary-container, $accent);
+    font-weight: $font-weight-bold;
+    border-radius: $radius-round;
+  }
+
+  // ─── Week numbers column ───────────────────────────────
+  .week-number {
+    color: var(--outline, $fg3);
+    font-size: $font-size-xs;
+    opacity: $opacity-muted;
+    padding: $space-xs;
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// QUICK INFO ROW
+// Week number and day-of-year at the bottom
+// ═══════════════════════════════════════════════════════════
+
+.calendar-quick-info {
+  padding: $space-sm $space-xs 0 $space-xs;
+  border-top: $border-width solid var(--outline-variant, $border-subtle);
+  margin-top: $space-xs;
+}
+
+.quick-info-item {
+  padding: $space-xs $space-md;
+  border-radius: $radius-pill;
+  background-color: var(--surface-container-high, $glass-bg);
+}
+
+.quick-info-icon {
+  font-size: $font-size-icon;
+  color: var(--tertiary, $accent);
+}
+
+.quick-info-text {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-normal;
+  color: var(--on-surface-variant, $fg2);
+}
+
+// ═══════════════════════════════════════════════════════════
+// ANIMATION
+// ═══════════════════════════════════════════════════════════
+
+@keyframes calendar-fade-in {
+  0% {
+    opacity: 0;
+    margin-top: $bar-height + $bar-margin;
+  }
+  100% {
+    opacity: 1;
+    margin-top: $bar-height + $bar-margin + $space-md;
+  }
+}
