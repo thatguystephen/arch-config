@@ -3,14 +3,13 @@ local hostname = dcli.system.hostname()
 
 local dotfiles = {}
 
-if hostname == "don-desktop" then
+if hostname == "spacethenomad" then
+    -- spacethenomad uses Hyprland, Niri outputs not used
+    dcli.log.info("niri-outputs: spacethenomad uses Hyprland, skipping Niri outputs")
+elseif hostname == "steph-vm" then
+    -- VM uses niri-desktop as fallback
     table.insert(dotfiles, {
         source = "dotfiles/niri/outputs-desktop.kdl",
-        target = "~/.config/niri/outputs.kdl",
-    })
-elseif hostname == "don-flow" then
-    table.insert(dotfiles, {
-        source = "dotfiles/niri/outputs-flow.kdl",
         target = "~/.config/niri/outputs.kdl",
     })
 else

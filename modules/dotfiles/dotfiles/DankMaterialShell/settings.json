@@ -1,7 +1,7 @@
 {
   "currentThemeName": "dynamic",
   "currentThemeCategory": "dynamic",
-  "customThemeFile": "/home/don/.config/DankMaterialShell/themes/catppuccin/theme.json",
+  "customThemeFile": "/home/steph/.config/DankMaterialShell/themes/catppuccin/theme.json",
   "registryThemeVariants": {},
   "matugenScheme": "scheme-rainbow",
   "runUserMatugenTemplates": true,
@@ -135,7 +135,7 @@
   "vpnLastConnected": "",
   "iconTheme": "Tela-purple-dark",
   "launcherLogoMode": "custom",
-  "launcherLogoCustomPath": "/home/don/.config/arch-config/modules/dotfiles/images/donarch (192 x 192 px).png",
+  "launcherLogoCustomPath": "/home/steph/.config/arch-config/modules/dotfiles/images/donarch (192 x 192 px).png",
   "launcherLogoColorOverride": "primary",
   "launcherLogoColorInvertOnMode": false,
   "launcherLogoBrightness": 0.5,

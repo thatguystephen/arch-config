@@ -1,15 +1,15 @@
 return {
-    host = "don-vm",
+    host = "steph-vm",
     description = "Minimal VM testing environment",
     import = {},
 
     enabled_modules = {
+        "base",
         "cli-tools/cachyos-repo",
         "cli-tools/chaotic-aur",
-        "login-managers/sddm-enable",
-        "window-managers/bd-niri",
+        "login-managers/sddm-astronaut-enable",
         "dotfiles",
-        "hosts-configs/noctalia-ui",
+        "declared-packages",
     },
 
     packages = {},
@@ -30,7 +30,10 @@ return {
     },
 
     services = {
-        enabled = {},
+        enabled = {
+            "NetworkManager",
+            "sddm",
+        },
         disabled = {},
     },
 }

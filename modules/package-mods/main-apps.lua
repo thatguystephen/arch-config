@@ -6,15 +6,19 @@ local packages = {
     "nautilus",
     "thunar",
     -- Comms
-    "vesktop",
-    "discord",
+    "vesktop-bin",
     -- Browsers
     "zen-browser-bin",
     "helium-browser-bin",
+    "librewolf-bin",
     -- Notes
     "obsidian",
     -- Editor
     "zed",
+    -- Additional daily apps
+    "localsend",
+    "keepassxc",
+    "thunderbird",
 }
 
 return {

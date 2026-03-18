@@ -1,13 +1,12 @@
 return {
-    host = "don-vm",
-    description = "Minimal VM testing environment",
+    host = "steph-vm",
+    description = "Minimal VM test environment (reduced module set)",
     import = {},
 
     enabled_modules = {
-        "login-managers/sddm-enable",
-        "window-managers/bd-niri",
+        "base",
+        "login-managers/sddm-astronaut-enable",
         "dotfiles",
-        "hosts-configs/noctalia-ui",
     },
 
     packages = {},
@@ -28,7 +27,10 @@ return {
     },
 
     services = {
-        enabled = {},
+        enabled = {
+            "NetworkManager",
+            "sddm",
+        },
         disabled = {},
     },
 }

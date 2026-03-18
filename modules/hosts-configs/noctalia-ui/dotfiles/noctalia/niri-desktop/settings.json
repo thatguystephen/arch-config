@@ -84,7 +84,7 @@
                         {
                             "colorizeDistroLogo": false,
                             "colorizeSystemIcon": "none",
-                            "customIconPath": "/home/don/.config/arch-config/modules/dotfiles/images/donarch (192 x 192 px).png",
+                            "customIconPath": "/home/steph/.config/arch-config/modules/dotfiles/images/donarch (192 x 192 px).png",
                             "enableColorization": false,
                             "icon": "noctalia",
                             "id": "ControlCenter",
@@ -211,7 +211,7 @@
                         {
                             "colorizeDistroLogo": false,
                             "colorizeSystemIcon": "none",
-                            "customIconPath": "/home/don/.config/arch-config/modules/dotfiles/images/donarch (192 x 192 px).png",
+                            "customIconPath": "/home/steph/.config/arch-config/modules/dotfiles/images/donarch (192 x 192 px).png",
                             "enableColorization": false,
                             "icon": "noctalia",
                             "id": "ControlCenter",
@@ -346,7 +346,7 @@
                 {
                     "colorizeDistroLogo": false,
                     "colorizeSystemIcon": "none",
-                    "customIconPath": "/home/don/.config/arch-config/modules/dotfiles/images/donarch (192 x 192 px).png",
+                    "customIconPath": "/home/steph/.config/arch-config/modules/dotfiles/images/donarch (192 x 192 px).png",
                     "enableColorization": false,
                     "icon": "noctalia",
                     "id": "ControlCenter",
@@ -593,7 +593,7 @@
         "allowPanelsOnScreenWithoutBar": true,
         "animationDisabled": false,
         "animationSpeed": 0.85,
-        "avatarImage": "/home/don/.config/arch-config/modules/dotfiles/images/blackdonlogo.png",
+        "avatarImage": "/home/steph/.config/arch-config/modules/dotfiles/images/blackdonlogo.png",
         "boxRadiusRatio": 1,
         "compactLockScreen": false,
         "dimmerOpacity": 0.5,
@@ -844,7 +844,7 @@
     },
     "wallpaper": {
         "automationEnabled": false,
-        "directory": "/home/don/.config/arch-config/wallpapers",
+        "directory": "/home/steph/.config/arch-config/wallpapers",
         "enableMultiMonitorDirectories": false,
         "enabled": true,
         "fillColor": "#000000",

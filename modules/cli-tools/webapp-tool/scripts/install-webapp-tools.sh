@@ -11,7 +11,7 @@ YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
 # Get the arch-config directory
-ARCH_CONFIG_DIR="${ARCH_CONFIG_DIR:-/home/${SUDO_USER:-$USER}/.config/arch-config}"
+ARCH_CONFIG_DIR="${ARCH_CONFIG_DIR:-/home/${SUDO_USER:-$USER}/github/arch-config}"
 
 # Check for sudo
 if [ "$EUID" -ne 0 ]; then

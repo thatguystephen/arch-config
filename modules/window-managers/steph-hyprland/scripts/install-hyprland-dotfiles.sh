@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Post-install hook for bdots-hypr module
+# Post-install hook for steph-hyprland module
 # Dotfiles are now handled by dcli's symlink system
 # This script only handles additional configuration that can't be symlinked
 
@@ -28,11 +28,11 @@ echo -e "${BLUE}Applying GTK theme settings...${NC}"
 
 # Run gsettings as the target user
 apply_gsettings() {
-  if [ "$EUID" -eq 0 ]; then
-    sudo -u "$TARGET_USER" DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$(id -u $TARGET_USER)/bus" gsettings "$@" 2>/dev/null || true
-  else
-    gsettings "$@" 2>/dev/null || true
-  fi
+	if [ "$EUID" -eq 0 ]; then
+		sudo -u "$TARGET_USER" DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$(id -u $TARGET_USER)/bus" gsettings "$@" 2>/dev/null || true
+	else
+		gsettings "$@" 2>/dev/null || true
+	fi
 }
 
 # Apply theme settings
@@ -47,7 +47,7 @@ echo ""
 
 # Create .gtkrc-2.0 for GTK2 applications
 echo -e "${BLUE}Creating GTK2 configuration...${NC}"
-cat > "${TARGET_HOME}/.gtkrc-2.0" << 'EOF'
+cat >"${TARGET_HOME}/.gtkrc-2.0" <<'EOF'
 gtk-theme-name="catppuccin-mocha-mauve-standard+default"
 gtk-icon-theme-name="Tela-purple-dark"
 gtk-font-name="Inter Variable 10"
@@ -56,7 +56,7 @@ gtk-cursor-theme-size=24
 EOF
 
 if [ "$EUID" -eq 0 ]; then
-  chown "$TARGET_USER:$TARGET_USER" "${TARGET_HOME}/.gtkrc-2.0"
+	chown "$TARGET_USER:$TARGET_USER" "${TARGET_HOME}/.gtkrc-2.0"
 fi
 
 echo -e "${GREEN}GTK2 configuration created${NC}"
@@ -65,13 +65,13 @@ echo ""
 # Set default cursor theme
 echo -e "${BLUE}Setting default cursor theme...${NC}"
 mkdir -p "${TARGET_HOME}/.icons/default"
-cat > "${TARGET_HOME}/.icons/default/index.theme" << 'EOF'
+cat >"${TARGET_HOME}/.icons/default/index.theme" <<'EOF'
 [Icon Theme]
 Inherits=Bibata-Modern-Ice
 EOF
 
 if [ "$EUID" -eq 0 ]; then
-  chown -R "$TARGET_USER:$TARGET_USER" "${TARGET_HOME}/.icons"
+	chown -R "$TARGET_USER:$TARGET_USER" "${TARGET_HOME}/.icons"
 fi
 
 echo -e "${GREEN}Default cursor theme set${NC}"
@@ -79,13 +79,13 @@ echo ""
 
 # Set cursor in Xresources
 echo -e "${BLUE}Creating Xresources for cursor...${NC}"
-cat > "${TARGET_HOME}/.Xresources" << 'EOF'
+cat >"${TARGET_HOME}/.Xresources" <<'EOF'
 Xcursor.theme: Bibata-Modern-Ice
 Xcursor.size: 24
 EOF
 
 if [ "$EUID" -eq 0 ]; then
-  chown "$TARGET_USER:$TARGET_USER" "${TARGET_HOME}/.Xresources"
+	chown "$TARGET_USER:$TARGET_USER" "${TARGET_HOME}/.Xresources"
 fi
 
 echo -e "${GREEN}Xresources created${NC}"
@@ -102,20 +102,20 @@ mkdir -p "$WALLPAPER_DIR"
 
 # Create symlink to default wallpaper if it exists
 if [ -f "$DEFAULT_WALLPAPER" ]; then
-  ln -sf "$DEFAULT_WALLPAPER" "${WALLPAPER_DIR}/wallpaper.png"
-  if [ "$EUID" -eq 0 ]; then
-    chown -h "$TARGET_USER:$TARGET_USER" "${WALLPAPER_DIR}/wallpaper.png"
-    chown "$TARGET_USER:$TARGET_USER" "$WALLPAPER_DIR"
-  fi
-  echo -e "${GREEN}Wallpaper symlink created${NC}"
+	ln -sf "$DEFAULT_WALLPAPER" "${WALLPAPER_DIR}/wallpaper.png"
+	if [ "$EUID" -eq 0 ]; then
+		chown -h "$TARGET_USER:$TARGET_USER" "${WALLPAPER_DIR}/wallpaper.png"
+		chown "$TARGET_USER:$TARGET_USER" "$WALLPAPER_DIR"
+	fi
+	echo -e "${GREEN}Wallpaper symlink created${NC}"
 else
-  echo -e "${YELLOW}Warning: Default wallpaper not found${NC}"
+	echo -e "${YELLOW}Warning: Default wallpaper not found${NC}"
 fi
 echo ""
 
 echo -e "${GREEN}Hyprland environment configuration complete!${NC}"
 echo ""
-echo -e "${BLUE}Dotfiles are symlinked from arch-config/packages/modules/bdots-hypr/dotfiles/${NC}"
+echo -e "${BLUE}Dotfiles are symlinked from arch-config/modules/window-managers/steph-hyprland/dotfiles/${NC}"
 echo ""
 echo -e "${BLUE}To apply changes:${NC}"
 echo "  - Reload Hyprland: SUPER+SHIFT+R or 'hyprctl reload'"

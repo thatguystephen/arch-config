@@ -1,6 +1,6 @@
 local packages = {
     "android-studio",
-    "code",
+    "vscodium-bin",
     "zed",
     "chromium",
     "clang",

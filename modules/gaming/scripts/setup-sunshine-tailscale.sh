@@ -12,44 +12,44 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 # Get the arch-config directory
-ARCH_CONFIG_DIR="${ARCH_CONFIG_DIR:-/home/don/.config/arch-config}"
+ARCH_CONFIG_DIR="${ARCH_CONFIG_DIR:-/home/steph/github/arch-config}"
 SUNSHINE_MODULE="${ARCH_CONFIG_DIR}/modules/gaming/sunshine.lua"
 
 echo -e "${BLUE}Setting up Tailscale for Sunshine remote gaming...${NC}"
 echo ""
 
 # Check if Tailscale is installed
-if ! command -v tailscale &> /dev/null; then
-    echo -e "${RED}Error: Tailscale is not installed${NC}" >&2
-    echo "This script should be run as a post-install hook after tailscale package is installed"
-    exit 1
+if ! command -v tailscale &>/dev/null; then
+	echo -e "${RED}Error: Tailscale is not installed${NC}" >&2
+	echo "This script should be run as a post-install hook after tailscale package is installed"
+	exit 1
 fi
 
 # Start Tailscale service (enable is handled declaratively in the Lua module)
 echo -e "${BLUE}Starting Tailscale service...${NC}"
 if ! systemctl is-active --quiet tailscaled; then
-    sudo systemctl start tailscaled
-    echo -e "${GREEN}✓ Tailscale service started${NC}"
+	sudo systemctl start tailscaled
+	echo -e "${GREEN}✓ Tailscale service started${NC}"
 else
-    echo -e "${YELLOW}Tailscale service already running${NC}"
+	echo -e "${YELLOW}Tailscale service already running${NC}"
 fi
 
 echo ""
 
 # Check if Tailscale is authenticated
 echo -e "${BLUE}Checking Tailscale authentication status...${NC}"
-if ! tailscale status &> /dev/null; then
-    echo -e "${YELLOW}Tailscale is not authenticated${NC}"
-    echo ""
-    echo -e "${BLUE}Please authenticate Tailscale:${NC}"
-    echo "Run the following command and follow the link to authenticate:"
-    echo ""
-    echo -e "${GREEN}  sudo tailscale up${NC}"
-    echo ""
-    echo "After authentication, run this script again or manually update the tailscale_ip in:"
-    echo "  $SUNSHINE_MODULE"
-    echo ""
-    exit 0
+if ! tailscale status &>/dev/null; then
+	echo -e "${YELLOW}Tailscale is not authenticated${NC}"
+	echo ""
+	echo -e "${BLUE}Please authenticate Tailscale:${NC}"
+	echo "Run the following command and follow the link to authenticate:"
+	echo ""
+	echo -e "${GREEN}  sudo tailscale up${NC}"
+	echo ""
+	echo "After authentication, run this script again or manually update the tailscale_ip in:"
+	echo "  $SUNSHINE_MODULE"
+	echo ""
+	exit 0
 fi
 
 echo -e "${GREEN}✓ Tailscale is authenticated${NC}"
@@ -60,9 +60,9 @@ echo -e "${BLUE}Retrieving Tailscale IP address...${NC}"
 TAILSCALE_IP=$(tailscale ip -4 | head -n1)
 
 if [ -z "$TAILSCALE_IP" ]; then
-    echo -e "${RED}Error: Could not retrieve Tailscale IP address${NC}" >&2
-    echo "Please ensure Tailscale is properly connected"
-    exit 1
+	echo -e "${RED}Error: Could not retrieve Tailscale IP address${NC}" >&2
+	echo "Please ensure Tailscale is properly connected"
+	exit 1
 fi
 
 echo -e "${GREEN}✓ Tailscale IP: ${TAILSCALE_IP}${NC}"

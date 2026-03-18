@@ -18,9 +18,8 @@ local desktop_map = {
 }
 
 local host_variants = {
-    ["don-desktop"] = "niri-desktop",
-    ["don-flow"] = "niri-flow",
-    ["don-vm"] = "niri",
+    ["spacethenomad"] = "niri-desktop",
+    ["steph-vm"] = "niri",
 }
 
 local variant = host_variants[hostname] or desktop_map[desktop] or "niri"
